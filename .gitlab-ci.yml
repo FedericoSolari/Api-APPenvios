@@ -58,7 +58,7 @@ package_job:
 
 deploy_test_job:
   stage: deploy_test
-  image: nicopaez/kubectl:1.22.0
+  image: nicopaez/kubectl:1.26.0
   environment: test
   script:
     - VERSION=$(cat VERSION.txt)
