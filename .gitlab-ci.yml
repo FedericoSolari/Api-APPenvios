@@ -12,7 +12,7 @@ variables:
   TEST_DB_URL: postgres://webapi:Passw0rd!@postgres/db_test
   DB_HOST: postgres
   KUBE_NAMESPACE_PREFIX: cali
-  REGISTRY_URL: registry.gitlab.com/tp2/cali-api
+  REGISTRY_URL: registry.gitlab.com/tp2
 
 stages:
   - build
@@ -58,7 +58,7 @@ package_job:
 
 deploy_test_job:
   stage: deploy_test
-  image: nicopaez/kubectl:1.26.0
+  image: nicopaez/kubectl:1.22.0
   environment: test
   script:
     - VERSION=$(cat VERSION.txt)
