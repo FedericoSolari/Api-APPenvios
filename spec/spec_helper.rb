@@ -18,6 +18,7 @@ SimpleCov.minimum_coverage 75
 SimpleCov.start do
   add_filter '/spec/'
   add_filter '/features/'
+  add_filter '/modelos/'
 end
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

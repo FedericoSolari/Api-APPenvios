@@ -1,9 +1,12 @@
 require 'spec_helper'
+require_relative '../modelos/cliente'
 
 describe 'cliente' do
-  xit 'Se crea exitosamente un cliente al ingresar todos los datos correctamente' do
-    cliente = Cliente.new('Juan', 'Av Las Heras 1232', 'CP: 1425')
+  describe 'valido?' do
+    it 'Se crea exitosamente un cliente al ingresar todos los datos correctamente' do
+      cliente = Cliente.new('Juan', 'Av Las Heras 1232', '1425')
 
-    expect(cliente.valid?).to eq true
+      expect(cliente.valid?).to eq true
+    end
   end
 end
