@@ -73,16 +73,20 @@ class AbstractRepository
   end
 
   def insert_changeset(a_record)
-    changeset_with_timestamps(a_record).merge(created_on: Date.today)
+    changeset(a_record)
   end
 
-  def update_changeset(a_record)
-    changeset_with_timestamps(a_record).merge(updated_on: Date.today)
-  end
-
-  def changeset_with_timestamps(a_record)
-    changeset(a_record).merge(created_on: a_record.created_on, updated_on: a_record.updated_on)
-  end
+  # def insert_changeset(a_record)
+  #   changeset_with_timestamps(a_record).merge(created_on: Date.today)
+  # end
+  #
+  # def update_changeset(a_record)
+  #   changeset_with_timestamps(a_record).merge(updated_on: Date.today)
+  # end
+  #
+  # def changeset_with_timestamps(a_record)
+  #   changeset(a_record).merge(created_on: a_record.created_on, updated_on: a_record.updated_on)
+  # end
 
   def class_name
     self.class.model_class

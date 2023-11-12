@@ -19,9 +19,9 @@ class Configuration
     database_url = ENV['DATABASE_URL']
     case ENV['APP_ENV']
     when 'test'
-      database_url = ENV['TEST_DB_URL'] || 'postgres://postgres:postgres@localhost/webapi_template_test'
+      database_url = ENV['TEST_DB_URL'] || "postgresql://memo2.calii:#{ENV['NEON_API_KEY']}@ep-royal-silence-96815811.us-west-2.aws.neon.tech/Test?sslmode=require"
     when 'development'
-      database_url = ENV['DEV_DB_URL'] || 'postgres://postgres:postgres@localhost/webapi_template_development'
+      database_url = ENV['DEV_DB_URL'] || "postgresql://memo2.calii:#{ENV['NEON_API_KEY']}@ep-royal-silence-96815811.us-west-2.aws.neon.tech/Prod?sslmode=require"
     end
     Sequel::Model.raise_on_save_failure = true
     Sequel.connect(database_url)
