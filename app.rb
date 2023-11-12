@@ -5,6 +5,7 @@ require_relative './config/configuration'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'modelos', '*.rb')].each { |file| require file }
 
 customer_logger = Configuration.logger
 set :logger, customer_logger
@@ -36,4 +37,14 @@ post '/usuarios' do
   RepositorioUsuarios.new.save(usuario)
   status 201
   { id: usuario.id, email: usuario.email }.to_json
+end
+
+post '/registrar' do
+  @body ||= request.body.read
+  parametros_cliente = JSON.parse(@body)
+
+  cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'])
+  RepositorioClientes.new.save(cliente)
+  status 201
+  { id: cliente.id, nombre: cliente.nombre, direccion: cliente.direccion, codigo_postal: cliente.codigo_postal }.to_json
 end

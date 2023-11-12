@@ -6,9 +6,10 @@ class Cliente
 
   validates :nombre, presence: true
 
-  def initialize(nombre, direccion, codigo_postal)
+  def initialize(nombre, direccion, codigo_postal, id = nil)
     @nombre = nombre
     @direccion = direccion
     @codigo_postal = codigo_postal
+    @id = id
   end
 end
