@@ -46,5 +46,5 @@ post '/registrar' do
   cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'])
   RepositorioClientes.new.save(cliente)
   status 201
-  { id: cliente.id, nombre: cliente.nombre, direccion: cliente.direccion, codigo_postal: cliente.codigo_postal }.to_json
+  { text: "Bienvenid@ #{cliente.nombre}" }.to_json
 end
