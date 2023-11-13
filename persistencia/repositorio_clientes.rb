@@ -7,7 +7,7 @@ class RepositorioClientes < AbstractRepository
   protected
 
   def load_object(a_hash)
-    Cliente.new(a_hash[:nombre], a_hash[:direccion], a_hash[:codigo_postal])
+    Cliente.new(a_hash[:nombre], a_hash[:direccion], a_hash[:codigo_postal], a_hash[:id])
   end
 
   def changeset(cliente)
