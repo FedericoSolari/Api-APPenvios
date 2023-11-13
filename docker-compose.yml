@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   web:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.dev
     command: "/bin/bash"
@@ -12,15 +12,15 @@ services:
     expose:
       - 3000
     volumes:
-        - .:/app
+      - .:/app
     environment:
-        APP_ENV: "development"
-        PORT: 3000
-        TEST_DB_URL: "postgres://postgres:example@test_db:5432/postgres"
-        DEV_DB_URL: "postgres://postgres:example@dev_db:5432/postgres"
+      APP_ENV: "development"
+      PORT: 3000
+      TEST_DB_URL: "postgres://postgres:example@test_db:5432/postgres"
+      DEV_DB_URL: "postgres://postgres:example@dev_db:5432/postgres"
     depends_on:
       - test_db
-      - dev_db        
+      - dev_db
 
   test_db:
     image: postgres
@@ -31,3 +31,7 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: example
+
+networks:
+  default:
+    name: localdev
