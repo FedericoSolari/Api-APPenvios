@@ -65,6 +65,7 @@ deploy_test_job:
     - cp ${KUBECONFIG} $HOME/.kube/config
     - kubectl -n ${KUBE_NAMESPACE_PREFIX}-${CI_ENVIRONMENT_NAME} apply -f infra/${CI_ENVIRONMENT_NAME}.configmap.yaml
     - kubectl -n ${KUBE_NAMESPACE_PREFIX}-${CI_ENVIRONMENT_NAME} set image deployment/restapi restapi=$REGISTRY_URL/$CI_PROJECT_NAME:$VERSION
+    - chmod +x smoke_test.sh
     - ./smoke_test.sh https://jobvacancy-test-nicopaez.cloud.okteto.net/ $VERSION
   only:
     - tags
