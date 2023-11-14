@@ -8,7 +8,7 @@ i="0"
 while [ $i -lt 3 ]
 do
   echo "Smoke test"
-  curl -k $TARGET_URL/version | grep $VERSION
+  curl -k $TARGET_URL | grep $VERSION
   if [ "$?" = "0" ];
   then
   	echo "Test:OK"
