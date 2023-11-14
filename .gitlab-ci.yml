@@ -66,7 +66,20 @@ deploy_test_job:
     - kubectl -n ${KUBE_NAMESPACE_PREFIX}-${CI_ENVIRONMENT_NAME} apply -f infra/${CI_ENVIRONMENT_NAME}.configmap.yaml
     - kubectl -n ${KUBE_NAMESPACE_PREFIX}-${CI_ENVIRONMENT_NAME} set image deployment/restapi restapi=$REGISTRY_URL/$CI_PROJECT_NAME:$VERSION
     - chmod +x smoke_test.sh
-    - ./smoke_test.sh https://api.9521.com.ar/cali-test/version $VERSION
+    - ./smoke_test.sh https://jobvacancy-test-nicopaez.cloud.okteto.net/ $VERSION
   only:
     - tags
+
+deploy_prod_job:
+  stage: deploy_prod
+  image: nicopaez/kubectl:1.22.0
+  environment: prod
+  script:
+    - VERSION=$(cat VERSION.txt)
+    - cp ${KUBECONFIG} $HOME/.kube/config
+    - kubectl -n ${KUBE_NAMESPACE_PREFIX}-${CI_ENVIRONMENT_NAME} apply -f infra/${CI_ENVIRONMENT_NAME}.configmap.yaml
+    - kubectl -n ${KUBE_NAMESPACE_PREFIX}-${CI_ENVIRONMENT_NAME} set image deployment/restapi restapi=$REGISTRY_URL/$CI_PROJECT_NAME:$VERSION
+  only:
+    - tags
+  when: manual
 
