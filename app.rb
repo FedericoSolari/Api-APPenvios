@@ -69,6 +69,12 @@ post '/envios' do
   { text: "Se registró tu envio con el ID: #{envio.id}" }.to_json
 end
 
+get '/envios/:id' do
+  envio = RepositorioEnvios.new.find(params['id'])
+  status 201
+  { text: "En proceso de entrega a la dirección: #{envio.direccion}, #{envio.codigo_postal}" }.to_json
+end
+
 put '/envios/asignar' do
   @body ||= request.body.read
   parametros_envio = JSON.parse(@body)
