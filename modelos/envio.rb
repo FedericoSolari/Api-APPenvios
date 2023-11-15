@@ -7,7 +7,7 @@ class Envio
 
   validates :direccion, presence: true
   # rubocop:disable Metrics/ParameterLists
-  def initialize(direccion, codigo_postal, id_cliente, id_cadete = nil, id = nil, estado = 'pendiente')
+  def initialize(direccion, codigo_postal, id_cliente, id_cadete = nil, id = nil, estado = 'pendiente de asignacion')
     @direccion = direccion
     @codigo_postal = codigo_postal
     @id_cliente = id_cliente

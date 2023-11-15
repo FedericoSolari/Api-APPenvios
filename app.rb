@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sequel'
 require 'sinatra/custom_logger'
 require_relative './config/configuration'
+require_relative './modelos/ayudantes/parseador_estado'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
@@ -71,8 +72,14 @@ end
 
 get '/envios/:id' do
   envio = RepositorioEnvios.new.find(params['id'])
-  status 201
-  { text: "En proceso de entrega a la dirección: #{envio.direccion}, #{envio.codigo_postal}" }.to_json
+  if envio.nil?
+    status 400
+    { text: 'No existe el envio' }.to_json
+  else
+    texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado)
+    status 201
+    { text: texto }.to_json
+  end
 end
 
 put '/envios/asignar' do
@@ -81,10 +88,11 @@ put '/envios/asignar' do
 
   envio = RepositorioEnvios.new.find_unassigned
   if envio.nil?
-    status 201
+    status 400
     { text: 'No hay envios disponibles para realizar' }.to_json
   else
     envio.id_cadete = parametros_envio['id_cadete'].to_i
+    envio.estado = 'en proceso'
     RepositorioEnvios.new.save(envio)
     cliente = RepositorioClientes.new.find_by_id(envio.id_cliente)
     status 201
