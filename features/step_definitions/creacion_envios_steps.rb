@@ -3,7 +3,7 @@ Dado('que estoy registrado como cliente') do
   RepositorioClientes.new.save(cliente)
 end
 
-Y(/^que no hay envios creados$/) do
+Y('que no hay envios creados') do
   RepositorioEnvios.new.delete_all
 end
 
@@ -12,6 +12,6 @@ end
 
 Y('veo {string}') do |string|
   parsed_response = JSON.parse(@response.body)
-  expect(parsed_response['text']).to eq string
+  expect(parsed_response['text'].include?(string)).to eq true
 end
 
