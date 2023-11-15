@@ -73,7 +73,7 @@ put '/envios/asignar' do
   @body ||= request.body.read
   parametros_envio = JSON.parse(@body)
 
-  envio = RepositorioEnvios.new.first
+  envio = RepositorioEnvios.new.find_unassigned
   envio.id_cadete = parametros_envio['id_cadete']
   RepositorioEnvios.new.save(envio)
   cliente = RepositorioClientes.new.find_by_id(envio.id_cliente)

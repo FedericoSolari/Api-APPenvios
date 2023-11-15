@@ -3,7 +3,7 @@ class Envio
   include ActiveModel::Validations
 
   attr_accessor :id, :id_cadete
-  attr_reader :direccion, :codigo_postal, :id_cliente
+  attr_accessor :direccion, :codigo_postal, :id_cliente
 
   validates :direccion, presence: true
 
