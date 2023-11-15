@@ -43,7 +43,7 @@ post '/registrar' do
   @body ||= request.body.read
   parametros_cliente = JSON.parse(@body)
 
-  cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'])
+  cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'], parametros_cliente['id_cliente'])
   RepositorioClientes.new.save(cliente)
   status 201
   { text: "Bienvenid@ #{cliente.nombre}" }.to_json
