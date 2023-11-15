@@ -21,10 +21,10 @@ describe ParseadorSolicitudes do
   it 'Debería retornar 5 parámetros al registrar cadete' do
     mensaje = '/registrar_cadete Juan, Moto, 8'
     parametros_esperados = 5
-    expect(described_class.new.parsear(mensaje)).to eq parametros_esperados
+    expect(described_class.new.parsear(mensaje).length).to eq parametros_esperados
   end
 
-  xit 'Debería retornar los parámetros de registrar cadete' do
+  it 'Debería retornar los parámetros de registrar cadete' do
     mensaje = '/registrar_cadete Juan, Moto, 8'
     parametros_esperados = ['/registrar_cadete', 'Juan', 'Moto', '8']
     parametros_obtenidos = described_class.new.parsear(mensaje)

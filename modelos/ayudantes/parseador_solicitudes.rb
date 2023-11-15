@@ -5,7 +5,7 @@ class ParseadorSolicitudes
     when '/registrar'
       regex = %r{^(/registrar)\s+(\w+),\s+(.*?),\s+(CP:\s+\d+),\s+(\d+)$}
     when '/registrar_cadete'
-      return 5
+      regex = %r{^(/registrar_cadete)\s+(\w+),\s+(\w+),\s+(\d+)$}
     end
     mensaje.match(regex)
   end
