@@ -6,5 +6,5 @@ Regla: para registrarse un cadete debe ingresar si su vehiculo es bicicleta, mot
 
 Escenario: Registro exitoso de cadete con comando '/registrar_cadete Pedro, moto'
 Dado que no hay un cadete con el nombre Pedro
-Cuando envio el mensaje '/registrar_cadete Pedro, moto'.
+Cuando envio el mensaje '/registrar_cadete Pedro, moto'
 Entonces deberia ver un mensaje de "Bienvenid@ a la flota Pedro"
