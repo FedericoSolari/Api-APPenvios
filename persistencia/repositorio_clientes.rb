@@ -4,6 +4,13 @@ class RepositorioClientes < AbstractRepository
   self.table_name = :clientes
   self.model_class = 'Cliente'
 
+  def find_by_id(id_cliente)
+    found_record = dataset.first(pk_column => id_cliente)
+    raise ObjectNotFound.new(self.class.model_class, id) if found_record.nil?
+
+    load_object dataset.first(found_record)
+  end
+
   protected
 
   def load_object(a_hash)
