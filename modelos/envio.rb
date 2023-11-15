@@ -2,7 +2,8 @@ require 'active_model'
 class Envio
   include ActiveModel::Validations
 
-  attr_accessor :direccion, :codigo_postal, :id_cliente, :id
+  attr_accessor :id
+  attr_reader :direccion, :codigo_postal, :id_cliente
 
   validates :direccion, presence: true
 

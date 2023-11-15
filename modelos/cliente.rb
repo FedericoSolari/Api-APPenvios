@@ -2,7 +2,8 @@ require 'active_model'
 class Cliente
   include ActiveModel::Validations
 
-  attr_accessor :id, :id_cliente, :nombre, :direccion, :codigo_postal
+  attr_accessor :id
+  attr_reader :id_cliente, :nombre, :direccion, :codigo_postal
 
   validates :nombre, presence: true
 
