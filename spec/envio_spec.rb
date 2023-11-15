@@ -8,5 +8,11 @@ describe 'envio' do
 
       expect(envio.valid?).to eq true
     end
+
+    it 'Se crea exitosamente un envio al ingresarle el id del cadete' do
+      envio = Envio.new('Av Las Heras 1232', '1425', 8, 1)
+
+      expect(envio.valid?).to eq true
+    end
   end
 end
