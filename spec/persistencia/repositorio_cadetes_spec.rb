@@ -4,7 +4,7 @@ require_relative '../../persistencia/repositorio_cadetes'
 
 describe RepositorioCadetes do
   it 'deberia guardar y asignar id al cliente' do
-    pedro = Cadete.new('Pedro', 'auto')
+    pedro = Cadete.new('Pedro', 'auto', 8)
     described_class.new.save(pedro)
     expect(pedro.id).not_to be_nil
   end

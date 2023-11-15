@@ -53,7 +53,7 @@ post '/registrar_cadete' do
   @body ||= request.body.read
   parametros_cadete = JSON.parse(@body)
 
-  cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'])
+  cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
   RepositorioCadetes.new.save(cadete)
   status 201
   { text: "Bienvenid@ a la flota #{cadete.nombre}" }.to_json

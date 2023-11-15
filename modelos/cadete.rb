@@ -2,13 +2,14 @@ require 'active_model'
 class Cadete
   include ActiveModel::Validations
 
-  attr_accessor :id, :nombre, :vehiculo
+  attr_accessor :id, :id_cadete, :nombre, :vehiculo
 
   validates :nombre, presence: true
 
-  def initialize(nombre, vehiculo, id = nil)
+  def initialize(nombre, vehiculo, id_cadete, id = nil)
     @nombre = nombre
     @vehiculo = vehiculo
+    @id_cadete = id_cadete
     @id = id
   end
 end

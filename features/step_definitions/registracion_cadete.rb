@@ -5,7 +5,7 @@ end
 Cuando('envio el mensaje {string}.') do |string|
     regex = %r{^(\/\w+)\s+(\w+),\s+(.*)$}
     parametros = string.match(regex)
-    request_body = {nombre: parametros[2], vehiculo: parametros[3]}.to_json
+    request_body = {nombre: parametros[2], vehiculo: parametros[3], id_cadete: 8}.to_json
     @response = Faraday.post(parametros[1], request_body, { 'Content-Type' => 'application/json' })
 end
 
