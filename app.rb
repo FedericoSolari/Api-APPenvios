@@ -58,3 +58,13 @@ post '/registrar_cadete' do
   status 201
   { text: "Bienvenid@ a la flota #{cadete.nombre}" }.to_json
 end
+
+post '/envios' do
+  @body ||= request.body.read
+  parametros_envio = JSON.parse(@body)
+
+  envio = Envio.new(parametros_envio['direccion'], parametros_envio['codigo_postal'], parametros_envio['id_cliente'])
+  RepositorioEnvios.new.save(envio)
+  status 201
+  { text: "Se registró tu envio con el ID: #{envio.id}" }.to_json
+end
