@@ -5,10 +5,8 @@ class RepositorioClientes < AbstractRepository
   self.model_class = 'Cliente'
 
   def find_by_id(id_cliente)
-    found_record = dataset.first(pk_column => id_cliente)
-    raise ObjectNotFound.new(self.class.model_class, id) if found_record.nil?
-
-    load_object dataset.first(found_record)
+    cliente = dataset.where(id_cliente:).first
+    load_object(cliente)
   end
 
   protected

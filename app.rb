@@ -68,3 +68,15 @@ post '/envios' do
   status 201
   { text: "Se registró tu envio con el ID: #{envio.id}" }.to_json
 end
+
+put '/envios/asignar' do
+  @body ||= request.body.read
+  parametros_envio = JSON.parse(@body)
+
+  envio = RepositorioEnvios.new.first
+  envio.id_cadete = parametros_envio['id_cadete']
+  RepositorioEnvios.new.save(envio)
+  cliente = RepositorioClientes.new.find_by_id(envio.id_cliente)
+  status 201
+  { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{cliente.direccion}, #{cliente.codigo_postal}. Entregar el envio en #{envio.direccion}, #{envio.codigo_postal}" }.to_json
+end

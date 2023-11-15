@@ -32,7 +32,7 @@ class AbstractRepository
   end
 
   def first
-    load_collection dataset.where(is_active: true)
+    load_collection dataset
     load_object dataset.first
   end
 
@@ -80,9 +80,9 @@ class AbstractRepository
   #   changeset_with_timestamps(a_record).merge(created_on: Date.today)
   # end
   #
-  # def update_changeset(a_record)
-  #   changeset_with_timestamps(a_record).merge(updated_on: Date.today)
-  # end
+  def update_changeset(a_record)
+    changeset(a_record)
+  end
   #
   # def changeset_with_timestamps(a_record)
   #   changeset(a_record).merge(created_on: a_record.created_on, updated_on: a_record.updated_on)
