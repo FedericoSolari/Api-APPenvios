@@ -17,6 +17,12 @@ get '/version' do
   { version: Version.current }.to_json
 end
 
+post '/reset' do
+  RepositorioEnvios.new.delete_all
+  RepositorioClientes.new.delete_all
+  RepositorioCadetes.new.delete_all
+end
+
 post '/registrar' do
   @body ||= request.body.read
   parametros_cliente = JSON.parse(@body)
