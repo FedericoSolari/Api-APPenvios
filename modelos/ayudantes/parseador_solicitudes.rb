@@ -5,11 +5,11 @@ class ParseadorSolicitudes
     when '/registrar'
       regex = %r{^(/registrar)\s+(\w+),\s+(.*?),\s+(CP:\s+\d+)$}
       generar_cuerpo_solicitud_cliente(mensaje.match(regex))
-    when '/registrar_cadete'
-      regex = %r{^(/registrar_cadete)\s+(\w+),\s+(\w+)$}
+    when '/registrar-cadete'
+      regex = %r{^(/registrar-cadete)\s+(\w+),\s+(\w+)$}
       generar_cuerpo_solicitud_cadete(mensaje.match(regex))
-    when '/nuevo_envio'
-      regex = %r{^(/nuevo_envio)\s+(.*?),\s+(CP:\d+)$}
+    when '/nuevo-envio'
+      regex = %r{^(/nuevo-envio)\s+(.*?),\s+(CP:\d+)$}
       generar_cuerpo_solicitud_creacion_envio(mensaje.match(regex))
     end
   end
@@ -21,7 +21,7 @@ class ParseadorSolicitudes
   end
 
   def generar_cuerpo_solicitud_cadete(parametros)
-    { comando: parametros[1], body: { nombre: parametros[2], vehiculo: parametros[3] } }
+    { comando: '/registrar_cadete', body: { nombre: parametros[2], vehiculo: parametros[3] } }
   end
 
   def generar_cuerpo_solicitud_creacion_envio(parametros)
