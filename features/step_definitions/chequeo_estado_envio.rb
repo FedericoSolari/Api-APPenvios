@@ -19,7 +19,7 @@ Dado('que el envio esta asignado') do
   RepositorioEnvios.new.save(@envio)
 end
   
-Cuando('envio el comando {string}') do |_comando|
+Cuando('mando el mensaje {string}') do |_comando|
     @response = Faraday.get("/envios/#{@envio.id.to_s}", { 'Content-Type' => 'application/json' })
 end
 
