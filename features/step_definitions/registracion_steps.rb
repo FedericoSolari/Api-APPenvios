@@ -9,7 +9,6 @@ Dado('que no hay un cadete con el nombre {string}') do |_nombre|
   # Actualizar a eliminar clientes con nombre que pasan
   RepositorioClientes.new.delete_all
 end
-
   
 Cuando('envio el mensaje {string}') do |mensaje|
   datos_solicitud = ParseadorSolicitudes.new.parsear(mensaje)

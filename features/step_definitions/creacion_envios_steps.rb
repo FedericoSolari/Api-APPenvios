@@ -7,10 +7,7 @@ Y('que no hay envios creados') do
   RepositorioEnvios.new.delete_all
 end
 
-Entonces('se creo el envio con el ID {int}') do |_id|
-end
-
-Y('veo {string}') do |string|
+Entonces('deberia ver un mensaje que incluya {string}') do |string|
   parsed_response = JSON.parse(@response.body)
   expect(parsed_response['text'].include?(string)).to eq true
 end
