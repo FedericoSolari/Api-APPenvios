@@ -82,3 +82,19 @@ put '/envios/asignar' do
     { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{cliente.direccion}, #{cliente.codigo_postal}. Entregar el envio en #{envio.direccion}, #{envio.codigo_postal}" }.to_json
   end
 end
+
+put '/envios/:id' do
+  @body ||= request.body.read
+  parametros_envio = JSON.parse(@body)
+
+  envio = RepositorioEnvios.new.find(params['id'])
+  if envio.nil?
+    status 400
+    { text: 'No hay envios registrados con ese id' }.to_json
+  else
+    envio.estado = parametros_envio['estado']
+    RepositorioEnvios.new.save(envio)
+    status 201
+    { text: 'Gracias por entregar el envio!' }.to_json
+  end
+end
