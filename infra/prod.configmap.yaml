@@ -6,3 +6,4 @@ data:
   PORT: "8080"
   LOG_LEVEL: "info"
   RACK_ENV: "production"
+  HERE_API_KEY: "-ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs"

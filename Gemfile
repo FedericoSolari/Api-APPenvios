@@ -9,6 +9,7 @@ gem 'pg'
 gem 'rake'
 # gem 'rack-parser', :require => 'rack/parser'
 gem 'activemodel', require: 'active_model'
+gem 'faraday'
 gem 'semantic_logger'
 gem 'sequel'
 gem 'sinatra-contrib'
@@ -17,7 +18,6 @@ group :development, :test do
   gem 'byebug'
   gem 'cucumber'
   gem 'debug', '>= 1.0.0'
-  gem 'faraday'
   gem 'rack-test', require: 'rack/test'
   gem 'rspec'
   gem 'rspec-core'
@@ -25,4 +25,5 @@ group :development, :test do
   gem 'rubocop', '1.50.2', require: false
   gem 'rubocop-rspec', '2.22.0', require: false
   gem 'simplecov'
+  gem 'webmock'
 end
