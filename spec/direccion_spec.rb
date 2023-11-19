@@ -1,4 +1,4 @@
-require_relative '../modelos/direccion'
+# require_relative '../modelos/direccion'
 
 def cuando_valido_domicilio(direccion, codigo_postal)
   body = { "items": [{

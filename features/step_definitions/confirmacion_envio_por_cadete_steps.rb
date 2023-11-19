@@ -1,12 +1,15 @@
-Dado('estoy asignado a un envio') do
-pending # Write code here that turns the phrase above into concrete actions
+Dado('estoy asignado al envio') do
+    @envio.id_cadete = @cadete.id_cadete
+    RepositorioEnvios.new.save(@envio)
 end
 
-Dado('con estado {string}') do |string|
-pending # Write code here that turns the phrase above into concrete actions
+Dado('con estado {string}') do |estado|
+    @envio.estado = estado
+    RepositorioEnvios.new.save(@envio)
 end
 
-Entonces('deberia ver {string}') do |string|
-pending # Write code here that turns the phrase above into concrete actions
+Cuando('confirmo entrega con {string}') do |mensaje|
+    datos_solicitud = {estado: 'entregado'}
+    @response = Faraday.put("/envios/#{@envio.id.to_s}", datos_solicitud.to_json, { 'Content-Type' => 'application/json' })
 end
 
