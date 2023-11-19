@@ -27,3 +27,7 @@ Entonces('deberia ver el id del envio') do
   parsed_response = JSON.parse(@response.body)
   expect(parsed_response['text'].include?(@envio.id.to_s)).to eq true
 end
+
+Dado('que el envio esta entregado') do
+  pending
+end
