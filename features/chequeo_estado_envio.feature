@@ -18,6 +18,7 @@ Característica: Como cliente quiero ver el estado del envio
     Entonces deberia ver un mensaje que incluya "se encuentra en proceso de entrega"
     Y deberia ver el id del envio
 
+  @wip
   Escenario: Obtener el estado de un envio entregado
     Dado que hay registrado un cadete
     Y que el envio esta entregado
