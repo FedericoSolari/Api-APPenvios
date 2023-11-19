@@ -7,3 +7,7 @@ data:
   LOG_LEVEL: "info"
   RACK_ENV: "production"
   HERE_API_KEY: "-ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs"
+  HERE_API_URL: "https://geocode.search.hereapi.com"
+  HERE_API_VERSION: "v1"
+  CIUDAD: "CABA"
+
