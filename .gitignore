@@ -20,3 +20,4 @@ VERSION.txt
 /.bundle/
 /coverage
 start_dev_containers.sh
+Rakefile

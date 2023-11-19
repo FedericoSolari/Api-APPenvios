@@ -1,4 +1,5 @@
 require 'active_model'
+require_relative '../conectores/conector_here_api'
 
 class Direccion
   include ActiveModel::Validations
@@ -11,15 +12,17 @@ class Direccion
   def initialize(direccion, codigo_postal)
     @direccion = direccion
     @codigo_postal = codigo_postal.split(':')[1].strip
-    # @codigo_postal = codigo_postal
   end
 
   def validar_direccion
-    respuesta = Faraday.get("https://geocode.search.hereapi.com/v1/geocode?q=#{@direccion},#{@codigo_postal}CABA&apiKey=#{ENV['HERE_API_KEY']}")
-    body = JSON.parse(respuesta.body)
-    raise 'La direccion no fue encontrada.' if body['items'].empty?
+    conector = ConectorHereApi.new(ENV['HERE_API_KEY'])
+    begin
+      respuesta = conector.obtener_direccion(@direccion, @codigo_postal)
+    rescue StandardError
+      raise 'La direccion no fue encontrada.' if respuesta['items'].empty?
+    end
 
-    ciudad = body['items'][0]['address']['city']
+    ciudad = respuesta['items'][0]['address']['city']
     raise 'La direccion no se encuentra en CABA.' if ciudad != 'Ciudad de Buenos Aires'
   end
 end

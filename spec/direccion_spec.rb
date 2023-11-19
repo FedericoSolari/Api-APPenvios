@@ -31,8 +31,8 @@ end
 
 describe 'Direccion' do
   it 'Debería retornar los parámetros de registrar cliente' do
-    cuando_valido_domicilio('Av Las Heras 1232', '1425')
-    direccion = Direccion.new('Av Las Heras 1232', 'CP: 1425')
+    cuando_valido_domicilio('Av Las Heras 1232', '1018')
+    direccion = Direccion.new('Av Las Heras 1232', 'CP: 1018')
     expect(direccion.valid?).to eq(true)
   end
 end

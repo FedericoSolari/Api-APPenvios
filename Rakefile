@@ -1,6 +1,9 @@
 require 'bundler/setup'
 
 ENV['APP_ENV'] ||= 'test'
+ENV['HERE_API_URL'] ||= 'https://geocode.search.hereapi.com'
+ENV['HERE_API_VERSION'] ||= 'v1'
+ENV['CIUDAD'] ||= 'CABA'
 
 task :version do
   require './lib/version'
