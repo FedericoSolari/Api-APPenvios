@@ -8,14 +8,13 @@ Dado('que hay registrado un cadete') do
   RepositorioCadetes.new.save(@cadete)
 end
   
-Dado('que el envio esta sin asignar') do
-  @envio.id_cadete = nil
-  RepositorioEnvios.new.save(@envio)
-end
-  
-Dado('que el envio esta asignado') do
-  @envio.id_cadete = @cadete.id_cadete
-  @envio.estado = 'en proceso'
+Dado('que el envio esta {string}') do |estado|
+  if estado == 'pendiente de asignacion'
+    @envio.id_cadete = nil
+  else
+    @envio.id_cadete = @cadete.id_cadete
+    @envio.estado = estado
+  end
   RepositorioEnvios.new.save(@envio)
 end
   
@@ -28,6 +27,3 @@ Entonces('deberia ver el id del envio') do
   expect(parsed_response['text'].include?(@envio.id.to_s)).to eq true
 end
 
-Dado('que el envio esta entregado') do
-  pending
-end
