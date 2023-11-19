@@ -13,7 +13,6 @@ variables:
   DB_HOST: postgres
   KUBE_NAMESPACE_PREFIX: cali
   REGISTRY_URL: registry.gitlab.com/fiuba-memo2/tp2
-  HERE_API_KEY: "-ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs"
 
 stages:
   - build
