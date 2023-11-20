@@ -3,8 +3,12 @@ class ParseadorSolicitudes
     comando, *_parametros = mensaje.split
     case comando
     when '/registrar'
-      regex = %r{^(/registrar)\s+(\w+),\s+(.*?),\s+(CP:\s+\d+)$}
-      generar_cuerpo_solicitud_cliente(mensaje.match(regex))
+      if mensaje.split(',')[2].nil? # no tiene codigo postal
+        generar_cuerpo_solicitud_cliente_sin_codigo_postal(mensaje)
+      else
+        regex = %r{^(/registrar)\s+(\w+),\s+(.*?),\s+(CP:\s+\d+)$}
+        generar_cuerpo_solicitud_cliente(mensaje.match(regex))
+      end
     when '/registrar-cadete'
       regex = %r{^(/registrar-cadete)\s+(\w+),\s+(\w+)$}
       generar_cuerpo_solicitud_cadete(mensaje.match(regex))
@@ -26,5 +30,9 @@ class ParseadorSolicitudes
 
   def generar_cuerpo_solicitud_creacion_envio(parametros)
     { comando: '/envios', body: { direccion: parametros[2], codigo_postal: parametros[3] } }
+  end
+
+  def generar_cuerpo_solicitud_cliente_sin_codigo_postal(parametros)
+    { comando: '/registrar', body: { direccion: parametros.split(',')[1], codigo_postal: parametros.split(',')[2] } }
   end
 end

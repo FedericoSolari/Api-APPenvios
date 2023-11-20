@@ -6,10 +6,9 @@ Escenario: Registro fallido al ingresar un domicilio inexistente/invalido
 Cuando envio el mensaje '/registrar Juan, noexistedomicilio, CP: 0000'
 Entonces deberia ver un mensaje "El domicilio ingresado no existe"
 
-@wip
 Escenario: Registro fallido al ingresar un domicilio con datos faltantes
 Cuando envio el mensaje '/registrar Juan, Av Las Heras 1232'
-Entonces deberia ver un mensaje de "Verifique haber ingresado los datos necesarios, el formato correcto es: \<Domicilio\> \<Altura\>, CP: \<codigo postal\>"
+Entonces deberia ver un mensaje "Verifique haber ingresado los datos necesarios, el formato correcto es: \<Domicilio\> \<Altura\>, CP: \<codigo postal\>"
 
 @wip
 Escenario: Registro exitoso al ingresar direccion valida

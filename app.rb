@@ -39,6 +39,9 @@ post '/registrar' do
   rescue DomicilioInexistenteError
     status 400
     { text: 'El domicilio ingresado no existe' }.to_json
+  rescue StandardError
+    status 400
+    { text: 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Domicilio\> \<Altura\>, CP: \<codigo postal\>' }.to_json
   end
 end
 
