@@ -29,7 +29,7 @@ class ParseadorSolicitudes
   end
 
   def generar_cuerpo_solicitud_creacion_envio(parametros)
-    { comando: '/envios', body: { direccion: parametros[2], codigo_postal: parametros[3] } }
+    { comando: '/envios', body: { direccion: parametros[2], codigo_postal: parametros[3], id_cliente: 8 } }
   end
 
   def generar_cuerpo_solicitud_cliente_sin_codigo_postal(parametros)

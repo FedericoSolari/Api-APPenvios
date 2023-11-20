@@ -65,7 +65,8 @@ post '/envios' do
   @body ||= request.body.read
   parametros_envio = JSON.parse(@body)
   begin
-    envio = Envio.new(parametros_envio['direccion'], parametros_envio['codigo_postal'], parametros_envio['id_cliente'])
+    cliente = RepositorioClientes.new.find_by_id(parametros_envio['id_cliente'])
+    envio = Envio.new(parametros_envio['direccion'], parametros_envio['codigo_postal'], cliente)
     RepositorioEnvios.new.save(envio)
     status 201
     { text: "Se registró tu envio con el ID: #{envio.id}" }.to_json
@@ -75,6 +76,9 @@ post '/envios' do
   rescue DomicilioInexistenteError
     status 400
     { text: 'No se encontró un domicilio existente' }.to_json
+  rescue StandardError
+    status 400
+    { text: "No se encontro un cliente con id #{parametros_envio['id_cliente']}" }.to_json
   end
 end
 
@@ -93,17 +97,14 @@ put '/envios/asignar' do
   parametros_envio = JSON.parse(@body)
 
   envio = RepositorioEnvios.new.find_by_state('pendiente de asignacion')
-  if envio.nil?
-    status 400
-    { text: 'No hay envios disponibles para realizar' }.to_json
-  else
-    envio.id_cadete = parametros_envio['id_cadete'].to_i
-    envio.estado = 'en proceso'
-    RepositorioEnvios.new.save(envio)
-    cliente = RepositorioClientes.new.find_by_id(envio.id_cliente)
-    status 201
-    { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{cliente.direccion.direccion}, #{cliente.direccion.codigo_postal}. Entregar el envio en #{envio.direccion.direccion}, #{envio.direccion.codigo_postal}" }.to_json
-  end
+  envio.id_cadete = parametros_envio['id_cadete'].to_i
+  envio.estado = 'en proceso'
+  RepositorioEnvios.new.save(envio)
+  status 201
+  { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}. Entregar el envio en #{envio.direccion.direccion}, #{envio.direccion.codigo_postal}" }.to_json
+rescue StandardError
+  status 400
+  { text: 'Envio no encontrado' }.to_json
 end
 
 put '/envios/:id' do

@@ -1,24 +1,30 @@
 require 'integration_helper'
-require 'byebug'
 require_relative '../../modelos/envio'
 require_relative '../../persistencia/repositorio_envios'
+require_relative '../../persistencia/repositorio_clientes'
 
 describe RepositorioEnvios do
+  let(:cliente) { Cliente.new('Juan', 'Cerrito 628', 'CP:1010', 8) }
+
   it 'deberia guardar y asignar id al envio' do
-    envio = Envio.new('Av Las Heras 1232', 'CP: 1425', 8, 1)
+    RepositorioClientes.new.save(cliente)
+    envio = Envio.new('Av Las Heras 1232', 'CP: 1425', cliente)
+    envio.asignar_cadete(1)
     described_class.new.save(envio)
     expect(envio.id).not_to be_nil
   end
 
   it 'deberia encontrar envio sin cadete asignado' do
+    RepositorioClientes.new.save(cliente)
+
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio_asignado = Envio.new('Av Las Heras 1232', 'CP: 1425', 8)
+    envio_asignado = Envio.new('Av Las Heras 1232', 'CP: 1425', cliente)
     envio_asignado.asignar_cadete(1)
     repositorio.save(envio_asignado)
 
-    envio_sin_asignar = Envio.new('Av Las Heras 1230', 'CP: 1420', 8)
+    envio_sin_asignar = Envio.new('Av Las Heras 1230', 'CP: 1420', cliente)
     repositorio.save(envio_sin_asignar)
 
     envio_encontrado = repositorio.find_by_state('pendiente de asignacion')

@@ -6,20 +6,21 @@ class RepositorioEnvios < AbstractRepository
 
   def find_by_state(estado)
     envio = dataset.where(estado:).first
-    load_object(envio) unless envio.nil?
+    load_object(envio)
   end
 
   protected
 
   def load_object(a_hash)
-    Envio.new(a_hash[:direccion], a_hash[:codigo_postal], a_hash[:id_cliente], a_hash[:id_cadete], a_hash[:id], a_hash[:estado])
+    cliente = RepositorioClientes.new.find_by_id(a_hash[:id_cliente])
+    Envio.new(a_hash[:direccion], a_hash[:codigo_postal], cliente, a_hash[:id_cadete], a_hash[:id], a_hash[:estado])
   end
 
   def changeset(envio)
     {
       direccion: envio.direccion.direccion,
       codigo_postal: envio.direccion.codigo_postal,
-      id_cliente: envio.id_cliente.to_i,
+      id_cliente: envio.cliente.id_cliente.to_i,
       id_cadete: envio.id_cadete&.to_i,
       estado: envio.estado
     }
