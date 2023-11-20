@@ -8,4 +8,11 @@ describe RepositorioCadetes do
     described_class.new.save(pedro)
     expect(pedro.id).not_to be_nil
   end
+
+  it 'deberia encontrar el registro segun el id del cadete' do
+    juan = Cadete.new('Juan', 'Moto', 8)
+    repositorio = described_class.new
+    repositorio.save(juan)
+    expect(repositorio.find_by_id(juan.id_cadete)).not_to be_nil
+  end
 end

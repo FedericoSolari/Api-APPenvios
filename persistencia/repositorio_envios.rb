@@ -13,7 +13,8 @@ class RepositorioEnvios < AbstractRepository
 
   def load_object(a_hash)
     cliente = RepositorioClientes.new.find_by_id(a_hash[:id_cliente])
-    Envio.new(a_hash[:direccion], a_hash[:codigo_postal], cliente, a_hash[:id_cadete], a_hash[:id], a_hash[:estado])
+    cadete = a_hash[:id_cadete].nil? ? nil : RepositorioCadetes.new.find_by_id(a_hash[:id_cadete])
+    Envio.new(a_hash[:direccion], a_hash[:codigo_postal], cliente, cadete, a_hash[:id], a_hash[:estado])
   end
 
   def changeset(envio)
@@ -21,7 +22,7 @@ class RepositorioEnvios < AbstractRepository
       direccion: envio.direccion.direccion,
       codigo_postal: envio.direccion.codigo_postal,
       id_cliente: envio.cliente.id_cliente.to_i,
-      id_cadete: envio.id_cadete&.to_i,
+      id_cadete: envio.cadete&.id_cadete.to_i,
       estado: envio.estado
     }
   end

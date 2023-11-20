@@ -9,13 +9,12 @@ Dado('que hay registrado un cadete') do
 end
   
 Dado('que el envio esta {string}') do |estado|
-  if estado == 'pendiente de asignacion'
-    @envio.id_cadete = nil
-  else
-    @envio.id_cadete = @cadete.id_cadete
-    @envio.estado = estado
+  if estado != 'pendiente de asignacion'
+    @envio.asignar_cadete(@cadete)
+    @envio.con_estado(estado)
+    RepositorioEnvios.new.save(@envio)
   end
-  RepositorioEnvios.new.save(@envio)
+  expect(@envio.estado).to eq estado
 end
   
 Cuando('mando el mensaje {string}') do |_comando|

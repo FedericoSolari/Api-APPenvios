@@ -1,5 +1,3 @@
-require 'byebug'
-
 Dado('que estoy registrado como cliente') do
   @cliente = Cliente.new('Juan', 'Av Las Heras 1232', 'CP: 1018', 8)
   RepositorioClientes.new.save(@cliente)

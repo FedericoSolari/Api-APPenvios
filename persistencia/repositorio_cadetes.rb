@@ -4,6 +4,13 @@ class RepositorioCadetes < AbstractRepository
   self.table_name = :cadetes
   self.model_class = 'Cadete'
 
+  def find_by_id(id_cadete)
+    cadete = dataset.where(id_cadete:).first
+    return nil if cadete.nil?
+
+    load_object(cadete)
+  end
+
   protected
 
   def load_object(a_hash)

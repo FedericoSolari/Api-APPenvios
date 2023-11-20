@@ -6,6 +6,8 @@ class RepositorioClientes < AbstractRepository
 
   def find_by_id(id_cliente)
     cliente = dataset.where(id_cliente:).first
+    return nil if cliente.nil?
+
     load_object(cliente)
   end
 

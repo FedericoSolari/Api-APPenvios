@@ -9,9 +9,11 @@ Dado('que estoy registrado como cadete') do
 end
 
 Cuando('envio el comando {string}') do |_comando|
-    datos_solicitud = {id_cadete:@cadete.id_cadete}
+    datos_solicitud = {id_cadete: @cadete.id_cadete}
     @response = Faraday.put('/envios/asignar', datos_solicitud.to_json, { 'Content-Type' => 'application/json' })
 end
 
 Entonces('se me asigna un envio') do
+  @envio.asignar_cadete(@cadete)
+  RepositorioEnvios.new.save(@envio)
 end

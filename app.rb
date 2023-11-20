@@ -91,12 +91,13 @@ rescue StandardError
 end
 
 put '/envios/asignar' do
-  @body ||= request.body.read
+  @body = request.body.read
   parametros_envio = JSON.parse(@body)
 
   envio = RepositorioEnvios.new.find_by_state('pendiente de asignacion')
-  envio.id_cadete = parametros_envio['id_cadete'].to_i
-  envio.estado = 'en proceso'
+  cadete = RepositorioCadetes.new.find_by_id(parametros_envio['id_cadete'])
+  envio.asignar_cadete(cadete)
+  envio.con_estado('en proceso')
   RepositorioEnvios.new.save(envio)
   status 201
   { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}. Entregar el envio en #{envio.direccion.direccion}, #{envio.direccion.codigo_postal}" }.to_json
@@ -106,17 +107,15 @@ rescue StandardError
 end
 
 put '/envios/:id' do
-  @body ||= request.body.read
+  @body = request.body.read
   parametros_envio = JSON.parse(@body)
 
   envio = RepositorioEnvios.new.find(params['id'])
-  if envio.nil?
-    status 400
-    { text: 'No hay envios registrados con ese id' }.to_json
-  else
-    envio.estado = parametros_envio['estado']
-    RepositorioEnvios.new.save(envio)
-    status 201
-    { text: 'Gracias por entregar el envio!' }.to_json
-  end
+  envio.con_estado(parametros_envio['estado'])
+  RepositorioEnvios.new.save(envio)
+  status 201
+  { text: 'Gracias por entregar el envio!' }.to_json
+rescue StandardError
+  status 400
+  { text: 'Envio no encontrado' }.to_json
 end
