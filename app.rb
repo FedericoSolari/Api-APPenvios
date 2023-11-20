@@ -32,7 +32,9 @@ post '/registrar' do
     cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'], parametros_cliente['id_cliente'])
     RepositorioClientes.new.save(cliente)
     status 201
-    { text: "Bienvenid@ #{cliente.nombre}" }.to_json
+    # rubocop:disable Layout/LineLength
+    { text: "Bienvenid@ #{cliente.nombre}. Las coordenadas de tu domicilio son: Lat: #{cliente.direccion.latitud}, Lng: #{cliente.direccion.longitud}" }.to_json
+    # rubocop:enable Layout/LineLength
   rescue CiudadIncorrectaError
     status 400
     { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
