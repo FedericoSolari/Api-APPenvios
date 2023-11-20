@@ -6,7 +6,7 @@ class ParseadorEstado
     when 'en proceso'
       "Tu envio (ID: #{id_envio}) se encuentra en proceso de entrega"
     when 'entregado'
-      "El envio (ID: #{id_envio}) se entregó"
+      "Ya entregamos tu envío (ID: #{id_envio})"
     else
       'Hubo un error al obtener el estado'
     end
