@@ -17,8 +17,8 @@ class RepositorioEnvios < AbstractRepository
 
   def changeset(envio)
     {
-      direccion: envio.direccion,
-      codigo_postal: envio.codigo_postal,
+      direccion: envio.direccion.direccion,
+      codigo_postal: envio.direccion.codigo_postal,
       id_cliente: envio.id_cliente.to_i,
       id_cadete: envio.id_cadete&.to_i,
       estado: envio.estado

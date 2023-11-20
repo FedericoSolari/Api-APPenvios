@@ -9,8 +9,7 @@ class Cliente
 
   def initialize(nombre, direccion, codigo_postal, id_cliente, id = nil)
     @nombre = nombre
-    @direccion = direccion
-    @codigo_postal = codigo_postal
+    @direccion = Direccion.new(direccion, codigo_postal)
     @id_cliente = id_cliente
     @id = id
   end

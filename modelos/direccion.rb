@@ -1,5 +1,7 @@
 require 'active_model'
-require_relative '../conectores/conector_here_api'
+require_relative '../fabrica/fabrica_conector_here_api'
+require_relative '../excepciones/domicilio_inexistente_error'
+require_relative '../excepciones/ciudad_incorrecta_error'
 
 class Direccion
   include ActiveModel::Validations
@@ -11,18 +13,16 @@ class Direccion
 
   def initialize(direccion, codigo_postal)
     @direccion = direccion
-    @codigo_postal = codigo_postal.split(':')[1].strip
+    @codigo_postal = codigo_postal.split(':')[1]
+    validate!
   end
 
   def validar_direccion
-    conector = ConectorHereApi.new(ENV['HERE_API_KEY'])
-    begin
-      respuesta = conector.obtener_direccion(@direccion, @codigo_postal)
-    rescue StandardError
-      raise 'La direccion no fue encontrada.' if respuesta['items'].empty?
-    end
+    conector = FabricaConectorHereApi.crear_conector_here_api(ENV['HERE_API_KEY'])
+    respuesta = conector.obtener_direccion(@direccion, @codigo_postal)
+    raise DomicilioInexistenteError if respuesta[:items].nil? || respuesta[:items].empty?
 
-    ciudad = respuesta['items'][0]['address']['city']
-    raise 'La direccion no se encuentra en CABA.' if ciudad != 'Ciudad de Buenos Aires'
+    ciudad = respuesta[:items][0][:address][:city]
+    raise CiudadIncorrectaError if ciudad != 'Ciudad de Buenos Aires'
   end
 end

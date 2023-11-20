@@ -1,4 +1,5 @@
 require 'active_model'
+require_relative 'direccion'
 class Envio
   include ActiveModel::Validations
 
@@ -8,8 +9,7 @@ class Envio
   validates :direccion, presence: true
   # rubocop:disable Metrics/ParameterLists
   def initialize(direccion, codigo_postal, id_cliente, id_cadete = nil, id = nil, estado = 'pendiente de asignacion')
-    @direccion = direccion
-    @codigo_postal = codigo_postal
+    @direccion = Direccion.new(direccion, codigo_postal)
     @id_cliente = id_cliente
     @id_cadete = id_cadete
     @id = id

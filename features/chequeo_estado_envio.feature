@@ -3,7 +3,7 @@
 Característica: Como cliente quiero ver el estado del envio
   Antecedentes:
     Dado que estoy registrado como cliente
-    Y hay un envio con direccion "Santa fe 1223", "CP: 1400"
+    Y hay un envio con direccion "Cerrito 628", "CP: 1049"
 
   Escenario: Obtener el estado de un envio sin cadete asignado
     Dado que el envio esta "pendiente de asignacion"

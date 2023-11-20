@@ -18,8 +18,8 @@ class RepositorioClientes < AbstractRepository
   def changeset(cliente)
     {
       nombre: cliente.nombre,
-      direccion: cliente.direccion,
-      codigo_postal: cliente.codigo_postal,
+      direccion: cliente.direccion.direccion,
+      codigo_postal: cliente.direccion.codigo_postal,
       id_cliente: cliente.id_cliente
     }
   end

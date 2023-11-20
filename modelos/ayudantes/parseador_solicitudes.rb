@@ -9,7 +9,7 @@ class ParseadorSolicitudes
       regex = %r{^(/registrar-cadete)\s+(\w+),\s+(\w+)$}
       generar_cuerpo_solicitud_cadete(mensaje.match(regex))
     when '/nuevo-envio'
-      regex = %r{^(/nuevo-envio)\s+(.*?),\s+(CP:\d+)$}
+      regex = %r{^(/nuevo-envio)\s+(.*?),\s+(CP:\s+\d+)$}
       generar_cuerpo_solicitud_creacion_envio(mensaje.match(regex))
     end
   end
@@ -25,6 +25,6 @@ class ParseadorSolicitudes
   end
 
   def generar_cuerpo_solicitud_creacion_envio(parametros)
-    { comando: '/envios', body: { direccion: parametros[3], codigo_postal: parametros[4] } }
+    { comando: '/envios', body: { direccion: parametros[2], codigo_postal: parametros[3] } }
   end
 end
