@@ -31,15 +31,15 @@ post '/registrar' do
   begin
     cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'], parametros_cliente['id_cliente'])
     RepositorioClientes.new.save(cliente)
+    status 201
+    { text: "Bienvenid@ #{cliente.nombre}" }.to_json
   rescue CiudadIncorrectaError
     status 400
     { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
   rescue DomicilioInexistenteError
     status 400
-    { text: 'No se encontró un domicilio existente' }.to_json
+    { text: 'El domicilio ingresado no existe' }.to_json
   end
-  status 201
-  { text: "Bienvenid@ #{cliente.nombre}" }.to_json
 end
 
 post '/registrar_cadete' do
