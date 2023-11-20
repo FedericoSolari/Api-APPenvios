@@ -28,19 +28,24 @@ end
 post '/registrar' do
   @body ||= request.body.read
   parametros_cliente = JSON.parse(@body)
+  customer_logger.info("Petición POST recibida en /registrar con cuerpo: #{@body}")
   begin
     cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'], parametros_cliente['id_cliente'])
     RepositorioClientes.new.save(cliente)
+    customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
     status 201
     { text: "Bienvenid@ #{cliente.nombre}. Las coordenadas de tu domicilio son: " \
       "Lat: #{cliente.direccion.latitud}, Lng: #{cliente.direccion.longitud}" }.to_json
   rescue CiudadIncorrectaError
+    customer_logger.error('Error al procesar CiudadIncorrectaError')
     status 400
     { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
   rescue DomicilioInexistenteError
+    customer_logger.error('Error al procesar DomicilioInexistenteError')
     status 400
     { text: 'El domicilio ingresado no existe' }.to_json
   rescue StandardError
+    customer_logger.error('Error inesperado')
     status 400
     { text: 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>' }.to_json
   end
