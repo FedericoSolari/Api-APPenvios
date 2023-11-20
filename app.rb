@@ -80,14 +80,12 @@ end
 
 get '/envios/:id' do
   envio = RepositorioEnvios.new.find(params['id'])
-  if envio.nil?
-    status 400
-    { text: 'No existe el envio' }.to_json
-  else
-    texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado)
-    status 201
-    { text: texto }.to_json
-  end
+  texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado)
+  status 201
+  { text: texto }.to_json
+rescue StandardError => e
+  status 400
+  { text: e.message }.to_json
 end
 
 put '/envios/asignar' do
