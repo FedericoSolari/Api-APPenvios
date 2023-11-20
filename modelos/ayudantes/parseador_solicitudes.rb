@@ -1,4 +1,5 @@
 class ParseadorSolicitudes
+  # rubocop:disable Metrics/AbcSize
   def parsear(mensaje)
     comando, *_parametros = mensaje.split
     case comando
@@ -13,10 +14,15 @@ class ParseadorSolicitudes
       regex = %r{^(/registrar-cadete)\s+(\w+),\s+(\w+)$}
       generar_cuerpo_solicitud_cadete(mensaje.match(regex))
     when '/nuevo-envio'
-      regex = %r{^(/nuevo-envio)\s+(.*?),\s+(CP:\s+\d+)$}
-      generar_cuerpo_solicitud_creacion_envio(mensaje.match(regex))
+      if mensaje.split(',')[1].nil? # no tiene codigo postal
+        generar_cuerpo_solicitud_creacion_envio_sin_codigo_postal(mensaje)
+      else
+        regex = %r{^(/nuevo-envio)\s+(.*?),\s+(CP:\s+\d+)$}
+        generar_cuerpo_solicitud_creacion_envio(mensaje.match(regex))
+      end
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
@@ -34,5 +40,9 @@ class ParseadorSolicitudes
 
   def generar_cuerpo_solicitud_cliente_sin_codigo_postal(parametros)
     { comando: '/registrar', body: { direccion: parametros.split(',')[1], codigo_postal: parametros.split(',')[2] } }
+  end
+
+  def generar_cuerpo_solicitud_creacion_envio_sin_codigo_postal(parametros)
+    { comando: '/envios', body: { direccion: parametros.split(',')[0], codigo_postal: parametros.split(',')[1], id_cliente: 8 } }
   end
 end

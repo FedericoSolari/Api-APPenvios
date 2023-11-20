@@ -73,10 +73,10 @@ post '/envios' do
     { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
   rescue DomicilioInexistenteError
     status 400
-    { text: 'No se encontró un domicilio existente' }.to_json
+    { text: 'El domicilio ingresado no existe' }.to_json
   rescue StandardError
     status 400
-    { text: "No se encontro un cliente con id #{parametros_envio['id_cliente']}" }.to_json
+    { text: 'Verifique haber ingresado los datos necesarios, el formato correcto es: <Domicilio> <Altura>, CP: <codigo postal>' }.to_json
   end
 end
 
