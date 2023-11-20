@@ -18,10 +18,11 @@ services:
       PORT: 3000
       TEST_DB_URL: "postgres://postgres:example@test_db:5432/postgres"
       DEV_DB_URL: "postgres://postgres:example@dev_db:5432/postgres"
-      HERE_API_KEY: -ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs
-      HERE_API_URL: https://geocode.search.hereapi.com
-      HERE_API_VERSION: v1
-      CIUDAD: CABA
+      HERE_API_KEY: "-ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs"
+      HERE_API_URL: "https://geocode.search.hereapi.com"
+      HERE_API_VERSION: "v1"
+      CIUDAD: "CABA"
+
     depends_on:
       - test_db
       - dev_db
