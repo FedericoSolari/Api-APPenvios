@@ -67,7 +67,8 @@ post '/envios' do
     envio = Envio.new(parametros_envio['direccion'], parametros_envio['codigo_postal'], cliente)
     RepositorioEnvios.new.save(envio)
     status 201
-    { text: "Se registró tu envio con el ID: #{envio.id}" }.to_json
+    { text: "Se registró tu envio con el ID: #{envio.id}. Las coordenadas del domicilio de entrega son: "\
+    "Lat: #{envio.direccion.latitud}, Lng: #{envio.direccion.longitud}" }.to_json
   rescue CiudadIncorrectaError
     status 400
     { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
