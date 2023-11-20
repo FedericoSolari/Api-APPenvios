@@ -14,13 +14,14 @@ describe RepositorioEnvios do
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio_con_idcadete = Envio.new('Av Las Heras 1232', 'CP: 1425', 8, 1)
-    repositorio.save(envio_con_idcadete)
+    envio_asignado = Envio.new('Av Las Heras 1232', 'CP: 1425', 8)
+    envio_asignado.asignar_cadete(1)
+    repositorio.save(envio_asignado)
 
-    envio_sin_idcadete = Envio.new('Av Las Heras 1230', 'CP: 1420', 8)
-    repositorio.save(envio_sin_idcadete)
+    envio_sin_asignar = Envio.new('Av Las Heras 1230', 'CP: 1420', 8)
+    repositorio.save(envio_sin_asignar)
 
-    envio_encontrado = repositorio.find_unassigned
-    expect(envio_encontrado.id).to eq envio_sin_idcadete.id
+    envio_encontrado = repositorio.find_by_state('pendiente de asignacion')
+    expect(envio_encontrado.id).to eq envio_sin_asignar.id
   end
 end

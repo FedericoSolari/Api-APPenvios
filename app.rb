@@ -83,16 +83,16 @@ get '/envios/:id' do
   texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado)
   status 201
   { text: texto }.to_json
-rescue StandardError => e
+rescue StandardError
   status 400
-  { text: e.message }.to_json
+  { text: 'Envio no encontrado' }.to_json
 end
 
 put '/envios/asignar' do
   @body ||= request.body.read
   parametros_envio = JSON.parse(@body)
 
-  envio = RepositorioEnvios.new.find_unassigned
+  envio = RepositorioEnvios.new.find_by_state('pendiente de asignacion')
   if envio.nil?
     status 400
     { text: 'No hay envios disponibles para realizar' }.to_json

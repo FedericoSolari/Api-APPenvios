@@ -4,8 +4,8 @@ class RepositorioEnvios < AbstractRepository
   self.table_name = :envios
   self.model_class = 'Envio'
 
-  def find_unassigned
-    envio = dataset.where(id_cadete: nil).first
+  def find_by_state(estado)
+    envio = dataset.where(estado:).first
     load_object(envio) unless envio.nil?
   end
 

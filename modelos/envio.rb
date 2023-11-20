@@ -16,4 +16,9 @@ class Envio
     @estado = estado
   end
   # rubocop:enable Metrics/ParameterLists
+
+  def asignar_cadete(id_cadete)
+    @id_cadete = id_cadete
+    @estado = 'en proceso'
+  end
 end
