@@ -12,8 +12,8 @@ class ConectorHereApi
   def obtener_direccion(direccion, codigo_postal)
     respuesta = Faraday.get("#{@api_url}/#{@api_version}/geocode?q=#{direccion},#{codigo_postal}#{@ciudad_de_interes}&apiKey=#{@api_key}")
     parseador_respuesta(respuesta)
-  rescue Faraday::Error
-    raise ConexionHereApiError
+  rescue Faraday::Error => e
+    raise ConexionHereApiError, e.message
   end
 
   private

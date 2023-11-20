@@ -37,15 +37,13 @@ post '/registrar' do
     { text: "Bienvenid@ #{cliente.nombre}. Las coordenadas de tu domicilio son: " \
       "Lat: #{cliente.direccion.latitud}, Lng: #{cliente.direccion.longitud}" }.to_json
   rescue CiudadIncorrectaError
-    customer_logger.error('Error al procesar CiudadIncorrectaError')
     status 400
     { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
   rescue DomicilioInexistenteError
-    customer_logger.error('Error al procesar DomicilioInexistenteError')
     status 400
     { text: 'El domicilio ingresado no existe' }.to_json
-  rescue StandardError
-    customer_logger.error('Error inesperado')
+  rescue StandardError => e
+    customer_logger.error('Error inesperado', e.message)
     status 400
     { text: 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>' }.to_json
   end
