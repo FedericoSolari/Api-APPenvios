@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../modelos/estados/pendiente'
+require_relative '../modelos/estados/en_proceso'
 
 describe 'Estados' do
   describe 'Pendiente' do
@@ -23,19 +24,19 @@ describe 'Estados' do
   end
 
   describe 'En Proceso' do
-    xit 'Estado EnProceso se encuentra asignado a un cadete' do
+    it 'Estado EnProceso se encuentra asignado a un cadete' do
       estado_envio = EnProceso.new
 
       expect(estado_envio.cadete_asignado?).to eq true
     end
 
-    xit 'Estado EnProceso no fue retirado por el cadete' do
+    it 'Estado EnProceso no fue retirado por el cadete' do
       estado_envio = EnProceso.new
 
       expect(estado_envio.se_retiro?).to eq false
     end
 
-    xit 'Estado EnProceso no fue entregado' do
+    it 'Estado EnProceso no fue entregado' do
       estado_envio = EnProceso.new
 
       expect(estado_envio.se_entrego?).to eq false
