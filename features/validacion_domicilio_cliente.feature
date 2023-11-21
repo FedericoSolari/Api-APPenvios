@@ -11,5 +11,5 @@ Cuando envio el mensaje '/registrar Juan, Av Las Heras 1232'
 Entonces deberia ver un mensaje "Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>"
 
 Escenario: Registro exitoso al ingresar direccion valida
-Cuando envio el mensaje '/registrar Juan, Av Las Heras 1232, CP: 1425'
+Cuando envio el mensaje '/registrar Juan, Av Las Heras 1232, CP: 1018'
 Entonces deberia ver un mensaje "Bienvenid@ Juan. Las coordenadas de tu domicilio son: Lat: -34.59218, Lng: -58.39141"
