@@ -29,7 +29,7 @@ class RepositorioEnvios < AbstractRepository
       codigo_postal: envio.direccion.codigo_postal,
       id_cliente: envio.cliente.id_cliente.to_i,
       id_cadete: envio.cadete&.id_cadete.to_i,
-      estado: envio.estado.obtener_estado
+      estado: envio.estado.estado
     }
   end
 end

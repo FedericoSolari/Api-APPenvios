@@ -1,8 +1,10 @@
-class Entregado
+require_relative './estado'
+
+class Entregado < Estado
   ESTADO = 'entregado'.freeze
 
   def initialize
-    @estado = ESTADO
+    super(ESTADO)
   end
 
   def cadete_asignado?
@@ -15,9 +17,5 @@ class Entregado
 
   def se_entrego?
     true
-  end
-
-  def obtener_estado
-    @estado
   end
 end

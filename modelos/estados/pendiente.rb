@@ -1,8 +1,10 @@
-class Pendiente
+require_relative './estado'
+
+class Pendiente < Estado
   ESTADO = 'pendiente de asignacion'.freeze
 
   def initialize
-    @estado = ESTADO
+    super(ESTADO)
   end
 
   def cadete_asignado?
@@ -15,9 +17,5 @@ class Pendiente
 
   def se_entrego?
     false
-  end
-
-  def obtener_estado
-    @estado
   end
 end

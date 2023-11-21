@@ -71,7 +71,7 @@ describe 'Estados' do
       estado_a_crear = 'pendiente de asignacion'
       estado_creado = fabrica.crear_estado(estado_a_crear)
 
-      expect(estado_creado.obtener_estado).to eq estado_a_crear
+      expect(estado_creado.estado).to eq estado_a_crear
     end
 
     it 'Fabrica crea correctamente un estado EnProceso' do
@@ -79,7 +79,7 @@ describe 'Estados' do
       estado_a_crear = 'en proceso'
       estado_creado = fabrica.crear_estado(estado_a_crear)
 
-      expect(estado_creado.obtener_estado).to eq estado_a_crear
+      expect(estado_creado.estado).to eq estado_a_crear
     end
 
     it 'Fabrica crea correctamente un estado Entregado' do
@@ -87,7 +87,7 @@ describe 'Estados' do
       estado_a_crear = 'entregado'
       estado_creado = fabrica.crear_estado(estado_a_crear)
 
-      expect(estado_creado.obtener_estado).to eq estado_a_crear
+      expect(estado_creado.estado).to eq estado_a_crear
     end
   end
 end

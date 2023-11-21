@@ -1,8 +1,10 @@
-class EnProceso
+require_relative './estado'
+
+class EnProceso < Estado
   ESTADO = 'en proceso'.freeze
 
   def initialize
-    @estado = ESTADO
+    super(ESTADO)
   end
 
   def cadete_asignado?
@@ -15,9 +17,5 @@ class EnProceso
 
   def se_entrego?
     false
-  end
-
-  def obtener_estado
-    @estado
   end
 end

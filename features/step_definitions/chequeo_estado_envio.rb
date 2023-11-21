@@ -15,7 +15,7 @@ Dado('que el envio esta {string}') do |estado|
     @envio.con_estado(FabricaEstados.new.crear_estado(estado))
     RepositorioEnvios.new.save(@envio)
   end
-  expect(@envio.estado.obtener_estado).to eq estado
+  expect(@envio.estado.estado).to eq estado
 end
   
 Cuando('mando el mensaje {string}') do |_comando|

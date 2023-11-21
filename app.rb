@@ -88,7 +88,7 @@ end
 
 get '/envios/:id' do
   envio = RepositorioEnvios.new.find(params['id'])
-  texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado.obtener_estado)
+  texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado.estado)
   status 201
   { text: texto }.to_json
 rescue StandardError
