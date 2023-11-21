@@ -1,13 +1,14 @@
 #language: es
-@wip
 Característica: Notificar entrega de envio
 
 Antecedentes:
 
-Dado que existe un envio con direccion "Cerrito 628, CP: 1049"
-Y esta en proceso de entrega
+    Dado que estoy registrado como cliente
+    Y que hay registrado un cadete
+    Y hay un envio con direccion "Cerrito 628", "CP: 1049"
+    Y esta en proceso de entrega
 
 Escenario: Cuando se entrega mi envio recibo notificación de entrega
 
-Cuando se entrega mi envio
-Entonces deberia ver el mensaje que incluya "Ya entregamos tu envío (ID:"
+    Cuando confirmo entrega con "/confirmar-entrega ID"
+    Entonces deberia ver un mensaje para el cliente "Ya entregamos tu envío (ID:"

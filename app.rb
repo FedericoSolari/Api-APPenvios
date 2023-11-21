@@ -122,7 +122,7 @@ put '/envios/:id' do
 
   status 201
   { text: 'Gracias por entregar el envio!', cliente: envio.cliente.id_cliente,
-    text_to_client: "Ya entregamos tu envio (ID: #{envio.id})" }.to_json
+    text_to_client: "Ya entregamos tu envío (ID: #{envio.id})" }.to_json
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   status 400
