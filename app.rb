@@ -119,9 +119,12 @@ put '/envios/:id' do
   envio = RepositorioEnvios.new.find(params['id'])
   envio.con_estado(FabricaEstados.new.crear_estado(parametros_envio['estado']))
   RepositorioEnvios.new.save(envio)
+
   status 201
-  { text: 'Gracias por entregar el envio!' }.to_json
-rescue StandardError
+  { text: 'Gracias por entregar el envio!', cliente: envio.cliente.id_cliente,
+    text_to_client: "Ya entregamos tu envio (ID: #{envio.id})" }.to_json
+rescue StandardError => e
+  customer_logger.error('Error inesperado', e.message)
   status 400
   { text: 'Envio no encontrado' }.to_json
 end
