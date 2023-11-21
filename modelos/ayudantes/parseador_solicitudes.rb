@@ -43,6 +43,6 @@ class ParseadorSolicitudes
   end
 
   def generar_cuerpo_solicitud_creacion_envio_sin_codigo_postal(parametros)
-    { comando: '/envios', body: { tamanio: parametros.split(',')[0], direccion: parametros.split(',')[1], codigo_postal: parametros.split(',')[2], id_cliente: 8 } }
+    { comando: '/envios', body: { tamanio: parametros.split(',')[0].split(' ')[1], direccion: parametros.split(',')[1], codigo_postal: parametros.split(',')[2], id_cliente: 8 } }
   end
 end
