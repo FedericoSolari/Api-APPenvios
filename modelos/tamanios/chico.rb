@@ -1,10 +1,8 @@
-class Chico
+require_relative './tamanio'
+
+class Chico < Tamanio
   TAMANIO = 'chico'.freeze
   def initialize
-    @tamanio = TAMANIO
-  end
-
-  def tamanio
-    @tamanio
+    super(TAMANIO)
   end
 end

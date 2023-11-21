@@ -1,10 +1,8 @@
-class Mediano
+require_relative './tamanio'
+
+class Mediano < Tamanio
   TAMANIO = 'mediano'.freeze
   def initialize
-    @tamanio = TAMANIO
-  end
-
-  def tamanio
-    @tamanio
+    super(TAMANIO)
   end
 end
