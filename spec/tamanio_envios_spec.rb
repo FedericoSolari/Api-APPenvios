@@ -10,4 +10,12 @@ describe 'Tamaños' do
       expect(tamanio.tamanio).to eq tamanio_esperado
     end
   end
+
+  describe 'Mediano' do
+    xit 'Envio mediano creado correctamente' do
+      tamanio = Mediano.new
+      tamanio_esperado = 'mediano'
+      expect(tamanio.tamanio).to eq tamanio_esperado
+    end
+  end
 end
