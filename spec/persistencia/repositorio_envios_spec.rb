@@ -25,7 +25,7 @@ describe RepositorioEnvios do
 
     envio_asignado = Envio.new('Av Las Heras 1232', 'CP: 1425', cliente)
     envio_asignado.asignar_cadete(cadete)
-    envio_asignado.con_estado('en proceso')
+    envio_asignado.con_estado(FabricaEstados.new.crear_estado('en proceso'))
     repositorio.save(envio_asignado)
 
     envio_sin_asignar = Envio.new('Av Las Heras 1230', 'CP: 1420', cliente)

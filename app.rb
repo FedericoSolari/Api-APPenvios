@@ -83,7 +83,7 @@ end
 
 get '/envios/:id' do
   envio = RepositorioEnvios.new.find(params['id'])
-  texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado)
+  texto = ParseadorEstado.new.obtener_mensaje(envio.id, envio.estado.obtener_estado)
   status 201
   { text: texto }.to_json
 rescue StandardError
@@ -98,7 +98,7 @@ put '/envios/asignar' do
   envio = RepositorioEnvios.new.find_by_state('pendiente de asignacion')
   cadete = RepositorioCadetes.new.find_by_id(parametros_envio['id_cadete'])
   envio.asignar_cadete(cadete)
-  envio.con_estado('en proceso')
+  envio.con_estado(FabricaEstados.new.crear_estado('en proceso'))
   RepositorioEnvios.new.save(envio)
   status 201
   { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}. Entregar el envio en #{envio.direccion.direccion}, #{envio.direccion.codigo_postal}" }.to_json
@@ -112,7 +112,7 @@ put '/envios/:id' do
   parametros_envio = JSON.parse(@body)
 
   envio = RepositorioEnvios.new.find(params['id'])
-  envio.con_estado(parametros_envio['estado'])
+  envio.con_estado(FabricaEstados.new.crear_estado(parametros_envio['estado']))
   RepositorioEnvios.new.save(envio)
   status 201
   { text: 'Gracias por entregar el envio!' }.to_json

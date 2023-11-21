@@ -11,10 +11,10 @@ end
 Dado('que el envio esta {string}') do |estado|
   if estado != 'pendiente de asignacion'
     @envio.asignar_cadete(@cadete)
-    @envio.con_estado(estado)
+    @envio.con_estado(FabricaEstados.new.crear_estado(estado))
     RepositorioEnvios.new.save(@envio)
   end
-  expect(@envio.estado).to eq estado
+  expect(@envio.estado.obtener_estado).to eq estado
 end
   
 Cuando('mando el mensaje {string}') do |_comando|
