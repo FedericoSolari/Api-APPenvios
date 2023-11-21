@@ -19,4 +19,12 @@ describe 'Tamaños' do
       expect(tamanio.tamanio).to eq tamanio_esperado
     end
   end
+
+  describe 'Grande' do
+    xit 'Envio grande creado correctamente' do
+      tamanio = Grande.new
+      tamanio_esperado = 'grande'
+      expect(tamanio.tamanio).to eq tamanio_esperado
+    end
+  end
 end
