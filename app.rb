@@ -5,6 +5,7 @@ require_relative './config/configuration'
 require_relative './modelos/ayudantes/parseador_estado'
 require_relative './excepciones/ciudad_incorrecta_error'
 require_relative './excepciones/domicilio_inexistente_error'
+require_relative './fabricas/fabrica_tamanios'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
@@ -64,7 +65,8 @@ post '/envios' do
   parametros_envio = JSON.parse(@body)
   begin
     cliente = RepositorioClientes.new.find_by_id(parametros_envio['id_cliente'])
-    envio = Envio.new(parametros_envio['direccion'], parametros_envio['codigo_postal'], cliente)
+    tamanio = FabricaTamanios.new.crear_tamanio(parametros_envio['tamanio'])
+    envio = Envio.new(tamanio, parametros_envio['direccion'], parametros_envio['codigo_postal'], cliente)
     RepositorioEnvios.new.save(envio)
     status 201
     { text: "Se registró tu envio con el ID: #{envio.id}. Las coordenadas del domicilio de entrega son: "\

@@ -3,6 +3,7 @@ ENV['APP_ENV'] = 'test'
 require 'rack/test'
 require 'rspec/expectations'
 require_relative '../../app.rb'
+require_relative '../../modelos/tamanios/chico'
 require 'byebug'
 require 'faraday'
 

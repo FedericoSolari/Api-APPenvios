@@ -4,7 +4,7 @@ require_relative '../modelos/tamanios/grande'
 
 class FabricaTamanios
   def crear_tamanio(tamanio)
-    case tamanio
+    case tamanio.downcase
     when 'chico'
       Chico.new
     when 'mediano'

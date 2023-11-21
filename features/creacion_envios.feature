@@ -8,5 +8,5 @@ Característica: Como cliente quiero realizar envios
       Y que no hay envios creados
 
     Escenario: Envio creado con exito con comando '/nuevo-envio Cerrito 628, CP:1049'
-      Cuando envio el mensaje '/nuevo-envio Cerrito 628, CP: 1049'
+      Cuando envio el mensaje '/nuevo-envio Chico, Cerrito 628, CP: 1049'
       Entonces deberia ver un mensaje que incluya "Se registró tu envio con el ID"

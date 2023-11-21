@@ -1,5 +1,6 @@
 Y('hay un envio con direccion {string}, {string}') do |direccion, codigo_postal|
-  @envio = Envio.new(direccion,codigo_postal,@cliente)
+  tamanio = Chico.new
+  @envio = Envio.new(tamanio, direccion,codigo_postal,@cliente)
   RepositorioEnvios.new.save(@envio)
 end
 
