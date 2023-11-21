@@ -16,7 +16,7 @@ describe 'Estados' do
       expect(estado_envio.se_retiro?).to eq false
     end
 
-    it 'Estado pendiente no fue entregado' do
+    it 'Estado pendiente no se encuentra entregado' do
       estado_envio = Pendiente.new
 
       expect(estado_envio.se_entrego?).to eq false
@@ -36,10 +36,30 @@ describe 'Estados' do
       expect(estado_envio.se_retiro?).to eq false
     end
 
-    it 'Estado EnProceso no fue entregado' do
+    it 'Estado EnProceso no se encuentra entregado' do
       estado_envio = EnProceso.new
 
       expect(estado_envio.se_entrego?).to eq false
+    end
+  end
+
+  describe 'Entregado' do
+    xit 'Estado Entregado se encuentra asignado a un cadete' do
+      estado_envio = Entregado.new
+
+      expect(estado_envio.cadete_asignado?).to eq true
+    end
+
+    xit 'Estado Entregado fue retirado por el cadete' do
+      estado_envio = Entregado.new
+
+      expect(estado_envio.se_retiro?).to eq true
+    end
+
+    xit 'Estado Entregado se encuentra entregado' do
+      estado_envio = Entregado.new
+
+      expect(estado_envio.se_entrego?).to eq true
     end
   end
 end
