@@ -63,4 +63,30 @@ describe 'Estados' do
       expect(estado_envio.se_entrego?).to eq true
     end
   end
+
+  describe 'Fabrica de estados' do
+    xit 'Fabrica crea correctamente un estado Pendiente' do
+      fabrica = FabricaEstados.new
+      estado_a_crear = 'pendiente de asignacion'
+      estado_creado = fabrica.crear_estado(estado_a_crear)
+
+      expect(estado_creado.obtener_estado).to eq estado_a_crear
+    end
+
+    xit 'Fabrica crea correctamente un estado EnProceso' do
+      fabrica = FabricaEstados.new
+      estado_a_crear = 'en proceso'
+      estado_creado = fabrica.crear_estado(estado_a_crear)
+
+      expect(estado_creado.obtener_estado).to eq estado_a_crear
+    end
+
+    xit 'Fabrica crea correctamente un estado Entregado' do
+      fabrica = FabricaEstados.new
+      estado_a_crear = 'entregado'
+      estado_creado = fabrica.crear_estado(estado_a_crear)
+
+      expect(estado_creado.obtener_estado).to eq estado_a_crear
+    end
+  end
 end
