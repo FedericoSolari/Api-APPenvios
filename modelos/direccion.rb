@@ -1,5 +1,5 @@
 require 'active_model'
-require_relative '../fabrica/fabrica_conector_here_api'
+require_relative '../fabricas/fabrica_conector_here_api'
 require_relative '../excepciones/domicilio_inexistente_error'
 require_relative '../excepciones/ciudad_incorrecta_error'
 
