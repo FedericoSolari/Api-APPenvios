@@ -28,4 +28,14 @@ describe 'Tamaños' do
       expect(tamanio.tamanio).to eq tamanio_esperado
     end
   end
+
+  describe 'Fabrica de tamaños' do
+    xit 'Fabrica crea correctamente un tamaño chico' do
+      fabrica = FabricaTamanios.new
+      tamanio_a_crear = 'chico'
+      tamanio_creado = fabrica.crear_tamanio(tamanio_a_crear)
+
+      expect(tamanio_creado.tamanio).to eq tamanio_a_crear
+    end
+  end
 end
