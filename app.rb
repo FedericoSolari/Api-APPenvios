@@ -37,14 +37,18 @@ post '/registrar' do
     if ValidadorParametros.new.validar_registro_cliente(parametros_cliente)
       cliente = ServicioCliente.agregar_cliente(parametros_cliente)
       customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
-      status 201
-      { text: "Bienvenid@ *#{cliente.nombre}*. \nLas coordenadas de tu domicilio son: " \
-        "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_" }.to_json
+      handle_response(201, "Bienvenid@ *#{cliente.nombre}*. \nLas coordenadas de tu domicilio son: " \
+        "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_")
     end
+  rescue CiudadIncorrectaError
+    handle_response(400, "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}")
+  rescue DomicilioInexistenteError
+    handle_response(400, 'El domicilio ingresado no existe')
+  rescue ParametrosInvalidosError
+    handle_response(400, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
   rescue StandardError => e
     customer_logger.error('Error inesperado', e.message)
-    status 400
-    { text: e.message }.to_json
+    handle_response(500, 'Error interno del servidor')
   end
 end
 
@@ -56,13 +60,14 @@ post '/registrar_cadete' do
     if ValidadorParametros.new.validar_registro_cadete(parametros_cadete)
       cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
       RepositorioCadetes.new.save(cadete)
-      status 201
-      { text: "Bienvenid@ a la flota *#{cadete.nombre}*" }.to_json
+      handle_response(201, "Bienvenid@ a la flota *#{cadete.nombre}*")
     end
+  rescue ParametrosInvalidosError
+    handle_response(400,
+                    'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Vehículo\>')
   rescue StandardError => e
     customer_logger.error('Error inesperado', e.message)
-    status 400
-    { text: e.message }.to_json
+    handle_response(500, 'Error interno del servidor')
   end
 end
 
@@ -74,13 +79,21 @@ post '/envios' do
     if ValidadorParametros.new.validar_creacion_envio(parametros_envio)
       envio = ServicioEnvio.agregar_envio(parametros_envio)
       customer_logger.info("INFO: Envio creado exitosamente: #{envio.id}")
-      status 201
-      { text: "Se registró tu envio con el ID: *#{envio.id}*. \nLas coordenadas del domicilio de entrega son: "\
-        "\nLat: _#{envio.direccion.latitud}_ \nLng: _#{envio.direccion.longitud}_" }.to_json
+      handle_response(201, "Se registró tu envio con el ID: *#{envio.id}*. " \
+        "\nLas coordenadas del domicilio de entrega son: "\
+        "\nLat: _#{envio.direccion.latitud}_ \nLng: _#{envio.direccion.longitud}_")
     end
+  rescue CiudadIncorrectaError
+    handle_response(400, "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}")
+  rescue DomicilioInexistenteError
+    handle_response(400, 'El domicilio ingresado no existe')
+  rescue TamanioIncorrectoError
+    handle_response(400, 'Tamaño indicado incorrecto, los tamaños validos son: Chico, Mediano o Grande')
+  rescue ParametrosInvalidosError
+    handle_response(400, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
   rescue StandardError => e
-    status 400
-    { text: e.message }.to_json
+    customer_logger.error('Error inesperado', e.message)
+    handle_response(500, 'Error interno del servidor')
   end
 end
 
@@ -89,11 +102,10 @@ get '/envios/:id' do
   envio = RepositorioEnvios.new.find(params['id'])
   texto = ParseadorEstado.new.obtener_mensaje(envio)
   customer_logger.info("INFO: Envio id:#{params['id']} con estado: #{envio.estado.estado}")
-  status 201
-  { text: texto }.to_json
+  handle_response(200, texto)
 rescue StandardError => e
-  status 400
-  { text: e.message }.to_json
+  customer_logger.error('Error inesperado', e.message)
+  handle_response(500, 'Error interno del servidor')
 end
 
 put '/envios/asignar' do
@@ -110,11 +122,11 @@ put '/envios/asignar' do
   customer_logger.info("INFO: Envio id:#{params['id']} asignado a cadete con id:#{cadete.id_cadete}")
 
   RepositorioEnvios.new.save(envio)
-  status 201
-  { text: "Te asignamos el siguiente envio con ID *#{envio.id}*. \nRetirar el envio en *_#{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}_*. \nEntregar el envio en *_#{envio.direccion.direccion}, #{envio.direccion.codigo_postal}_*" }.to_json
+
+  handle_response(200, "Te asignamos el siguiente envio con ID *#{envio.id}*. \nRetirar el envio en *_#{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}_*. \nEntregar el envio en *_#{envio.direccion.direccion}, #{envio.direccion.codigo_postal}_*")
 rescue StandardError => e
-  status 400
-  { text: e.message }.to_json
+  customer_logger.error('Error inesperado', e.message)
+  handle_response(500, 'Error interno del servidor')
 end
 
 put '/envios/:id' do
@@ -135,6 +147,10 @@ put '/envios/:id' do
     text_to_client: ParseadorEstado.new.obtener_mensaje(envio) }.to_json
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
-  status 400
-  { text: e.message }.to_json
+  handle_response(500, 'Error interno del servidor')
+end
+
+def handle_response(status_code, message)
+  status status_code
+  { text: message }.to_json
 end
