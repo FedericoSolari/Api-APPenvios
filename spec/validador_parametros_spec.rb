@@ -78,5 +78,12 @@ describe ValidadorParametros do
           'el formato correcto es: \<Nombre\>, \<Vehículo\>'
       )
     end
+
+    it 'Debería devolver true cuando estan todos los parametros correctamente' do
+      parametros_enviados = { nombre: 'Juan', vehiculo: 'Moto', id_cadete: 2 }.to_json
+      parametros = JSON.parse(parametros_enviados)
+
+      expect(described_class.new.validar_registro_cadete(parametros)).to eq true
+    end
   end
 end
