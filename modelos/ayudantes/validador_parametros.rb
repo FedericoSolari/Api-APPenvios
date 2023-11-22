@@ -17,4 +17,12 @@ class ValidadorParametros
 
     true
   end
+
+  def validar_creacion_envio(parametros)
+    if parametros['tamanio'].nil? || parametros['direccion'].nil? || parametros['codigo_postal'].nil? || parametros['id_cliente'].nil?
+      raise ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>'
+    end
+
+    true
+  end
 end
