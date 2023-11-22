@@ -6,6 +6,7 @@ require_relative './modelos/ayudantes/parseador_estado'
 require_relative './excepciones/ciudad_incorrecta_error'
 require_relative './excepciones/domicilio_inexistente_error'
 require_relative './fabricas/fabrica_tamanios'
+require_relative './modelos/ayudantes/validador_parametros'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
@@ -33,21 +34,17 @@ post '/registrar' do
   parametros_cliente = JSON.parse(@body)
   customer_logger.info("INFO: Petición POST recibida en /registrar con cuerpo: #{@body}")
   begin
-    cliente = ServicioCliente.agregar_cliente(parametros_cliente)
-    customer_logger.info("INFO: Cliente registrado exitosamente: #{cliente.nombre}")
-    status 201
-    { text: "Bienvenid@ #{cliente.nombre}. Las coordenadas de tu domicilio son: " \
-      "Lat: #{cliente.direccion.latitud}, Lng: #{cliente.direccion.longitud}" }.to_json
-  rescue CiudadIncorrectaError
-    status 400
-    { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
-  rescue DomicilioInexistenteError
-    status 400
-    { text: 'El domicilio ingresado no existe' }.to_json
+    if ValidadorParametros.new.validar_registro_cliente(parametros_cliente)
+      cliente = ServicioCliente.agregar_cliente(parametros_cliente)
+      customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
+      status 201
+      { text: "Bienvenid@ #{cliente.nombre}. Las coordenadas de tu domicilio son: " \
+        "Lat: #{cliente.direccion.latitud}, Lng: #{cliente.direccion.longitud}" }.to_json
+    end
   rescue StandardError => e
     customer_logger.error('Error inesperado', e.message)
     status 400
-    { text: 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>' }.to_json
+    { text: e.message }.to_json
   end
 end
 
@@ -55,13 +52,18 @@ post '/registrar_cadete' do
   @body ||= request.body.read
   parametros_cadete = JSON.parse(@body)
 
-  customer_logger.info("INFO: Petición POST recibida en /registrar_cadete con cuerpo: #{@body}")
-
-  cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
-  customer_logger.info("INFO: Cadete registrado exitosamente: #{cadete.nombre}")
-  RepositorioCadetes.new.save(cadete)
-  status 201
-  { text: "Bienvenid@ a la flota #{cadete.nombre}" }.to_json
+  begin
+    if ValidadorParametros.new.validar_registro_cadete(parametros_cadete)
+      cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
+      RepositorioCadetes.new.save(cadete)
+      status 201
+      { text: "Bienvenid@ a la flota #{cadete.nombre}" }.to_json
+    end
+  rescue StandardError => e
+    customer_logger.error('Error inesperado', e.message)
+    status 400
+    { text: e.message }.to_json
+  end
 end
 
 post '/envios' do
@@ -69,23 +71,16 @@ post '/envios' do
   parametros_envio = JSON.parse(@body)
   customer_logger.info("INFO: Petición POST recibida en /envios con cuerpo: #{@body}")
   begin
-    envio = ServicioEnvio.agregar_envio(parametros_envio)
-    customer_logger.info("INFO: Envio creado exitosamente: #{envio.id}")
-    status 201
-    { text: "Se registró tu envio con el ID: #{envio.id}. Las coordenadas del domicilio de entrega son: "\
-    "Lat: #{envio.direccion.latitud}, Lng: #{envio.direccion.longitud}" }.to_json
-  rescue CiudadIncorrectaError
-    status 400
-    { text: "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}" }.to_json
-  rescue DomicilioInexistenteError
-    status 400
-    { text: 'El domicilio ingresado no existe' }.to_json
-  rescue TamanioIncorrectoError => e
+    if ValidadorParametros.new.validar_creacion_envio(parametros_envio)
+      envio = ServicioEnvio.agregar_envio(parametros_envio)
+      customer_logger.info("INFO: Envio creado exitosamente: #{envio.id}")
+      status 201
+      { text: "Se registró tu envio con el ID: #{envio.id}. Las coordenadas del domicilio de entrega son: "\
+        "Lat: #{envio.direccion.latitud}, Lng: #{envio.direccion.longitud}" }.to_json
+    end
+  rescue StandardError => e
     status 400
     { text: e.message }.to_json
-  rescue StandardError
-    status 400
-    { text: 'Verifique haber ingresado los datos necesarios, el formato correcto es: <Domicilio> <Altura>, CP: <codigo postal>' }.to_json
   end
 end
 
@@ -117,9 +112,9 @@ put '/envios/asignar' do
   RepositorioEnvios.new.save(envio)
   status 201
   { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}. Entregar el envio en #{envio.direccion.direccion}, #{envio.direccion.codigo_postal}" }.to_json
-rescue StandardError
+rescue StandardError => e
   status 400
-  { text: 'Envio no encontrado' }.to_json
+  { text: e.message }.to_json
 end
 
 put '/envios/:id' do
@@ -141,5 +136,5 @@ put '/envios/:id' do
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   status 400
-  { text: 'Envio no encontrado' }.to_json
+  { text: e.message }.to_json
 end

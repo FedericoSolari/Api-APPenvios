@@ -1,5 +1,5 @@
 class DomicilioInexistenteError < StandardError
-  def initialize(message = 'Error al conectar con la Api')
+  def initialize(message = 'El domicilio ingresado no existe')
     super(message)
   end
 end
