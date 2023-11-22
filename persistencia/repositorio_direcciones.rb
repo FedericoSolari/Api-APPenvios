@@ -9,6 +9,11 @@ class RepositorioDirecciones < AbstractRepository
     load_object(direccion)
   end
 
+  def find_by_address(direccion, codigo_postal)
+    direccion = dataset.where(direccion:, codigo_postal:).first
+    load_object(direccion)
+  end
+
   protected
 
   def load_object(a_hash)

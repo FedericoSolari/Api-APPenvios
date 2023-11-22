@@ -16,7 +16,7 @@ describe 'RepositorioDirecciones' do
     expect(repositorio.find_by_id(direccion.id)).not_to be_nil
   end
 
-  xit 'deberia encontrar el registro segun el id de la direccion' do
+  it 'deberia encontrar el registro segun el id de la direccion' do
     direccion = Direccion.new('Av Las Heras 1232', 'CP: 1018')
     repositorio = RepositorioDirecciones.new
     repositorio.save(direccion)
