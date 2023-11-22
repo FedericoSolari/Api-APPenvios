@@ -4,7 +4,6 @@ require_relative 'estados/pendiente'
 require_relative 'estados/entregado'
 require_relative 'estados/en_proceso'
 require_relative '../fabricas/fabrica_conector_here_api_routes'
-require 'byebug'
 
 class Envio
   include ActiveModel::Validations
@@ -34,7 +33,6 @@ class Envio
 
   def tiempo_estimado
     conector = FabricaConectorHereApiRoutes.crear_conector_here_api_routes(ENV['HERE_API_KEY'])
-    # byebug
     respuesta = conector.obtener_duracion_viaje(@cliente.direccion.latitud, @cliente.direccion.longitud,
                                                 @direccion.latitud, @direccion.longitud)
     secciones = respuesta['routes'][0]['sections']

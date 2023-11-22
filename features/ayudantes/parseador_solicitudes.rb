@@ -1,5 +1,4 @@
 class ParseadorSolicitudes
-  # rubocop:disable Metrics/AbcSize
   def parsear(mensaje)
     comando, *_parametros = mensaje.split
     case comando
@@ -22,7 +21,6 @@ class ParseadorSolicitudes
       end
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   private
 
