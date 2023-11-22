@@ -16,4 +16,4 @@ Característica: Validar domicilio en la creacion de un envio
   Escenario: Registro exitoso al ingresar direccion valida
     Cuando envio el mensaje '/nuevo-envio chico, Cerrito 628, CP: 1049'
     Entonces deberia ver un mensaje que incluya "Se registró tu envio con el ID:"
-    Entonces deberia ver un mensaje que incluya "Lat: -34.59218, Lng: -58.39141"
+    Entonces deberia ver un mensaje que incluya "Lat: -34.59218 Lng: -58.39141"

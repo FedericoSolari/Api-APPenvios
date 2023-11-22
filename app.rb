@@ -38,8 +38,8 @@ post '/registrar' do
       cliente = ServicioCliente.agregar_cliente(parametros_cliente)
       customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
       status 201
-      { text: "Bienvenid@ #{cliente.nombre}. Las coordenadas de tu domicilio son: " \
-        "Lat: #{cliente.direccion.latitud}, Lng: #{cliente.direccion.longitud}" }.to_json
+      { text: "Bienvenid@ *#{cliente.nombre}*. \nLas coordenadas de tu domicilio son: " \
+        "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_" }.to_json
     end
   rescue StandardError => e
     customer_logger.error('Error inesperado', e.message)
@@ -57,7 +57,7 @@ post '/registrar_cadete' do
       cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
       RepositorioCadetes.new.save(cadete)
       status 201
-      { text: "Bienvenid@ a la flota #{cadete.nombre}" }.to_json
+      { text: "Bienvenid@ a la flota *#{cadete.nombre}*" }.to_json
     end
   rescue StandardError => e
     customer_logger.error('Error inesperado', e.message)
@@ -75,8 +75,8 @@ post '/envios' do
       envio = ServicioEnvio.agregar_envio(parametros_envio)
       customer_logger.info("INFO: Envio creado exitosamente: #{envio.id}")
       status 201
-      { text: "Se registró tu envio con el ID: #{envio.id}. Las coordenadas del domicilio de entrega son: "\
-        "Lat: #{envio.direccion.latitud}, Lng: #{envio.direccion.longitud}" }.to_json
+      { text: "Se registró tu envio con el ID: *#{envio.id}*. \nLas coordenadas del domicilio de entrega son: "\
+        "\nLat: _#{envio.direccion.latitud}_ \nLng: _#{envio.direccion.longitud}_" }.to_json
     end
   rescue StandardError => e
     status 400
@@ -111,7 +111,7 @@ put '/envios/asignar' do
 
   RepositorioEnvios.new.save(envio)
   status 201
-  { text: "Te asignamos el siguiente envio con ID #{envio.id}. Retirar el envio en #{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}. Entregar el envio en #{envio.direccion.direccion}, #{envio.direccion.codigo_postal}" }.to_json
+  { text: "Te asignamos el siguiente envio con ID *#{envio.id}*. \nRetirar el envio en *_#{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}_*. \nEntregar el envio en *_#{envio.direccion.direccion}, #{envio.direccion.codigo_postal}_*" }.to_json
 rescue StandardError => e
   status 400
   { text: e.message }.to_json
@@ -132,7 +132,7 @@ put '/envios/:id' do
 
   status 201
   { text: 'Gracias por entregar el envio!', cliente: envio.cliente.id_cliente,
-    text_to_client: "Ya entregamos tu envío (ID: #{envio.id})" }.to_json
+    text_to_client: ParseadorEstado.new.obtener_mensaje(envio) }.to_json
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   status 400
