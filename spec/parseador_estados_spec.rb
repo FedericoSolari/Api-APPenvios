@@ -19,7 +19,7 @@ describe 'ParseadorEstados' do
       envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, cadete, 8, EnProceso.new)
       mensaje_estado = ParseadorEstado.new.obtener_mensaje(envio)
 
-      expect(mensaje_estado).to eq 'Tu envio (ID: 8) se encuentra en proceso de entrega. Tiempo estimado: 2'
+      expect(mensaje_estado).to eq 'Tu envio (ID: 8) se encuentra en proceso de entrega. Tiempo estimado: 2 minutos'
     end
   end
 end
