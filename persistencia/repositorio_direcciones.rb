@@ -4,6 +4,11 @@ class RepositorioDirecciones < AbstractRepository
   self.table_name = :direcciones
   self.model_class = 'Direccion'
 
+  def find_by_id(id)
+    direccion = dataset.where(id:).first
+    load_object(direccion)
+  end
+
   protected
 
   def load_object(a_hash)
