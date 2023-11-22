@@ -1,7 +1,5 @@
 require 'faraday'
 require_relative '../excepciones/conexion_here_api_error'
-require 'dotenv'
-Dotenv.load('.env')
 
 class ConectorHereApiRoutes
   def initialize(api_key, tipo_de_retorno = 'summary')
