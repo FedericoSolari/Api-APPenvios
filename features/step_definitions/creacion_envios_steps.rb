@@ -11,5 +11,6 @@ end
 
 Entonces('deberia ver un mensaje que incluya {string}') do |mensaje|
   parsed_response = JSON.parse(@response.body)
+  puts "response: #{parsed_response}"
   expect(parsed_response['text'].include?(mensaje)).to eq true
 end

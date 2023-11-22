@@ -1,12 +1,12 @@
 class ParseadorEstado
-  def obtener_mensaje(id_envio, estado)
-    case estado
+  def obtener_mensaje(envio)
+    case envio.estado.estado
     when 'pendiente de asignacion'
-      "Tu envio (ID: #{id_envio}) se encuentra pendiente de asignación"
+      "Tu envio (ID: #{envio.id}) se encuentra pendiente de asignación"
     when 'en proceso'
-      "Tu envio (ID: #{id_envio}) se encuentra en proceso de entrega"
+      "Tu envio (ID: #{envio.id}) se encuentra en proceso de entrega. Tiempo estimado: #{envio.tiempo_estimado}"
     when 'entregado'
-      "Ya entregamos tu envío (ID: #{id_envio})"
+      "Ya entregamos tu envío (ID: #{envio.id})"
     else
       'Hubo un error al obtener el estado'
     end

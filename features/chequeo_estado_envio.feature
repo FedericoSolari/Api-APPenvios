@@ -11,7 +11,6 @@ Cuando mando el mensaje "/estado-envio ID"
 Entonces deberia ver un mensaje que incluya "se encuentra pendiente de asignación"
 Y deberia ver el id del envio
 
-@wip
 Escenario: Obtener el estado de un envio que ya fue asignado a un cadete
 Dado que hay registrado un cadete
 Y que el envio esta "en proceso"
