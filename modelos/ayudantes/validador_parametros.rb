@@ -8,4 +8,13 @@ class ValidadorParametros
 
     true
   end
+
+  def validar_registro_cadete(parametros)
+    if parametros['nombre'].nil? || parametros['vehiculo'].nil? || parametros['id_cadete'].nil?
+      raise ParametrosInvalidosError,
+            'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Vehículo\>'
+    end
+
+    true
+  end
 end
