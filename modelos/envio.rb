@@ -29,4 +29,13 @@ class Envio
   def con_estado(estado)
     @estado = estado
   end
+
+  def tiempo_estimado
+    conector = ConectorHereApiRoutes.new(ENV['HERE_API_KEY'])
+    respuesta = conector.obtener_duracion_viaje(@cliente.direccion.latitud, @cliente.direccion.longitud,
+                                                @direccion.latitud, @direccion.longitud)
+    secciones = respuesta['routes'][0]['sections']
+    resumen_seccion = secciones[0]['summary']
+    resumen_seccion['duration'] / 60
+  end
 end

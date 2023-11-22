@@ -19,7 +19,7 @@ describe 'envio' do
       expect(envio.valid?).to eq true
     end
 
-    xit 'Se obtiene correctamente el tiempo estimado del envio' do
+    it 'Se obtiene correctamente el tiempo estimado del envio' do
       envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, cadete)
 
       expect(envio.tiempo_estimado >= 0).to eq true
