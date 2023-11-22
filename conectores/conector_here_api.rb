@@ -3,7 +3,7 @@ require_relative '../excepciones/conexion_here_api_error'
 
 class ConectorHereApi
   def initialize(api_key)
-    @api_key = api_key || ENV['HERE_API_KEY']
+    @api_key = api_key || '-ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs'
     @api_url = ENV['HERE_API_URL'] || 'https://geocode.search.hereapi.com'
     @ciudad_de_interes = ENV['CIUDAD'] || 'CABA'
     @api_version = ENV['HERE_API_VERSION'] || 'v1'

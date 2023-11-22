@@ -3,7 +3,7 @@ require_relative '../excepciones/conexion_here_api_error'
 
 class ConectorHereApiRoutes
   def initialize(api_key, tipo_de_retorno = 'summary')
-    @api_key = api_key || ENV['HERE_API_KEY']
+    @api_key = api_key || '-ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs'
     @api_url = ENV['HERE_API_ROUTES_URL'] || 'https://router.hereapi.com/v8/routes'
     @tipo_de_retorno = tipo_de_retorno
   end
