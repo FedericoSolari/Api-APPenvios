@@ -11,6 +11,7 @@ Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'modelos', '*.rb')].each { |file| require file }
 require_relative './servicios/servicio_cliente'
+require_relative './servicios/servicio_envio'
 
 customer_logger = Configuration.logger
 set :logger, customer_logger
@@ -64,10 +65,7 @@ post '/envios' do
   @body ||= request.body.read
   parametros_envio = JSON.parse(@body)
   begin
-    cliente = RepositorioClientes.new.find_by_id(parametros_envio['id_cliente'])
-    tamanio = FabricaTamanios.new.crear_tamanio(parametros_envio['tamanio'])
-    envio = Envio.new(tamanio, parametros_envio['direccion'], parametros_envio['codigo_postal'], cliente)
-    RepositorioEnvios.new.save(envio)
+    envio = ServicioEnvio.agregar_envio(parametros_envio)
     status 201
     { text: "Se registró tu envio con el ID: #{envio.id}. Las coordenadas del domicilio de entrega son: "\
     "Lat: #{envio.direccion.latitud}, Lng: #{envio.direccion.longitud}" }.to_json

@@ -8,13 +8,13 @@ class Envio
   include ActiveModel::Validations
 
   attr_accessor :id, :cadete
-  attr_accessor :tamanio, :direccion, :codigo_postal, :cliente, :estado
+  attr_accessor :tamanio, :direccion, :cliente, :estado
 
   validates :direccion, presence: true
   # rubocop:disable Metrics/ParameterLists
-  def initialize(tamanio, direccion, codigo_postal, cliente, cadete = nil, id = nil, estado = Pendiente.new)
+  def initialize(tamanio, direccion, cliente, cadete = nil, id = nil, estado = Pendiente.new)
     @tamanio = tamanio
-    @direccion = Direccion.new(direccion, codigo_postal)
+    @direccion = direccion
     @cliente = cliente
     @cadete = cadete
     @id = id

@@ -8,13 +8,13 @@ describe 'envio' do
 
   describe 'valido?' do
     it 'Se crea exitosamente un envio al ingresar todos los datos correctamente' do
-      envio = Envio.new(tamanio, 'Av Las Heras 1232', '1425', cliente)
+      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
 
       expect(envio.valid?).to eq true
     end
 
     it 'Se crea exitosamente un envio al ingresarle un cadete' do
-      envio = Envio.new(tamanio, 'Av Las Heras 1232', '1425', cliente, cadete)
+      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, cadete)
 
       expect(envio.valid?).to eq true
     end

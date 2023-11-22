@@ -11,7 +11,7 @@ describe RepositorioEnvios do
   it 'deberia guardar y asignar id al envio' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
-    envio = Envio.new(tamanio, 'Av Las Heras 1232', 'CP: 1425', cliente)
+    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
     envio.asignar_cadete(cadete)
     described_class.new.save(envio)
     expect(envio.id).not_to be_nil
@@ -24,12 +24,12 @@ describe RepositorioEnvios do
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio_asignado = Envio.new(tamanio, 'Av Las Heras 1232', 'CP: 1425', cliente)
+    envio_asignado = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
     envio_asignado.asignar_cadete(cadete)
     envio_asignado.con_estado(FabricaEstados.new.crear_estado('en proceso'))
     repositorio.save(envio_asignado)
 
-    envio_sin_asignar = Envio.new(tamanio, 'Av Las Heras 1230', 'CP: 1420', cliente)
+    envio_sin_asignar = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
     repositorio.save(envio_sin_asignar)
 
     envio_encontrado = repositorio.find_by_state('pendiente de asignacion')
