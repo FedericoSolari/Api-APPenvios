@@ -15,6 +15,7 @@ variables:
   REGISTRY_URL: registry.gitlab.com/fiuba-memo2/tp2
   HERE_API_KEY: -ZgDQiB9BtkuI_pYPTuXDKIEtTX-qjZyPmZJEyVE-Zs
   HERE_API_URL: https://geocode.search.hereapi.com
+  HERE_API_ROUTES_URL: https://router.hereapi.com/v8/routes
   HERE_API_VERSION: v1
   CIUDAD: CABA
 
