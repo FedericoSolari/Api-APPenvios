@@ -4,7 +4,7 @@ require_relative '../../persistencia/repositorio_envios'
 require_relative '../../persistencia/repositorio_clientes'
 
 describe RepositorioEnvios do
-  let(:cliente) { Cliente.new('Juan', 'Cerrito 628', 'CP:1010', 8) }
+  let(:cliente) { Cliente.new('Juan', Direccion.new('Cerrito 628', 'CP:1010'), 8) }
   let(:cadete) { Cadete.new('Pedro', 'Moto', 8) }
   let(:tamanio) { Chico.new }
 

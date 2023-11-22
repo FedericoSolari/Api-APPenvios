@@ -14,14 +14,14 @@ class RepositorioClientes < AbstractRepository
   protected
 
   def load_object(a_hash)
-    Cliente.new(a_hash[:nombre], a_hash[:direccion], a_hash[:codigo_postal], a_hash[:id_cliente], a_hash[:id])
+    direccion = RepositorioDirecciones.new.find_by_id(a_hash[:id_direccion])
+    Cliente.new(a_hash[:nombre], direccion, a_hash[:id_cliente], a_hash[:id])
   end
 
   def changeset(cliente)
     {
       nombre: cliente.nombre,
-      direccion: cliente.direccion.direccion,
-      codigo_postal: cliente.direccion.codigo_postal,
+      id_direccion: cliente.direccion.id,
       id_cliente: cliente.id_cliente
     }
   end

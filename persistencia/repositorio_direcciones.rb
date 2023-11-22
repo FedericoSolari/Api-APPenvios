@@ -6,11 +6,15 @@ class RepositorioDirecciones < AbstractRepository
 
   def find_by_id(id)
     direccion = dataset.where(id:).first
+    return nil if direccion.nil?
+
     load_object(direccion)
   end
 
   def find_by_address(direccion, codigo_postal)
     direccion = dataset.where(direccion:, codigo_postal:).first
+    return nil if direccion.nil?
+
     load_object(direccion)
   end
 

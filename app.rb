@@ -10,6 +10,7 @@ require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'modelos', '*.rb')].each { |file| require file }
+require_relative './servicios/servicio_cliente'
 
 customer_logger = Configuration.logger
 set :logger, customer_logger
@@ -31,8 +32,7 @@ post '/registrar' do
   parametros_cliente = JSON.parse(@body)
   customer_logger.info("Petición POST recibida en /registrar con cuerpo: #{@body}")
   begin
-    cliente = Cliente.new(parametros_cliente['nombre'], parametros_cliente['direccion'], parametros_cliente['codigo_postal'], parametros_cliente['id_cliente'])
-    RepositorioClientes.new.save(cliente)
+    cliente = ServicioCliente.agregar_cliente(parametros_cliente)
     customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
     status 201
     { text: "Bienvenid@ #{cliente.nombre}. Las coordenadas de tu domicilio son: " \

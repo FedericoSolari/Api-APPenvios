@@ -1,5 +1,7 @@
 Dado('que hay registrado un cliente con domicilio {string}, {string}') do |direccion, codigo_postal|
-    @cliente = Cliente.new("Pedro",direccion,codigo_postal,8)
+    direccion = Direccion.new(direccion, codigo_postal)
+    RepositorioDirecciones.new.save(direccion)
+    @cliente = Cliente.new("Pedro", direccion, 8)
     RepositorioClientes.new.save(@cliente)
 end
 
