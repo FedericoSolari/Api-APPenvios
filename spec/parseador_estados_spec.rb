@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../modelos/ayudantes/parseador_estado'
+require_relative '../ayudantes/parseador_estado'
 
 describe 'ParseadorEstados' do
   describe 'Mensajes de estado' do

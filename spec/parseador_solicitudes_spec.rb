@@ -1,4 +1,4 @@
-require_relative '../modelos/ayudantes/parseador_solicitudes'
+require_relative '../features/ayudantes/parseador_solicitudes'
 
 describe ParseadorSolicitudes do
   it 'Debería retornar /registrar en el comando' do

@@ -1,13 +1,13 @@
 require 'sinatra'
 require 'sequel'
 require 'sinatra/custom_logger'
+require_relative './ayudantes/parseador_estado'
+require_relative './validadores/validador_parametros'
 require_relative './config/configuration'
-require_relative './modelos/ayudantes/parseador_estado'
 require_relative './excepciones/ciudad_incorrecta_error'
 require_relative './excepciones/domicilio_inexistente_error'
 require_relative './excepciones/envio_no_encontrado_error'
 require_relative './fabricas/fabrica_tamanios'
-require_relative './modelos/ayudantes/validador_parametros'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }

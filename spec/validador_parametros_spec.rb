@@ -1,4 +1,4 @@
-require_relative '../modelos/ayudantes/validador_parametros'
+require_relative '../validadores/validador_parametros'
 require_relative '../excepciones/parametros_invalidos_error'
 
 describe ValidadorParametros do

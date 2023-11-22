@@ -1,4 +1,4 @@
-require_relative '../../excepciones/parametros_invalidos_error'
+require_relative '../excepciones/parametros_invalidos_error'
 
 class ValidadorParametros
   def validar_registro_cliente(parametros)
