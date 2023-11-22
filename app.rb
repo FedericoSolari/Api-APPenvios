@@ -5,6 +5,7 @@ require_relative './config/configuration'
 require_relative './modelos/ayudantes/parseador_estado'
 require_relative './excepciones/ciudad_incorrecta_error'
 require_relative './excepciones/domicilio_inexistente_error'
+require_relative './excepciones/envio_no_encontrado_error'
 require_relative './fabricas/fabrica_tamanios'
 require_relative './modelos/ayudantes/validador_parametros'
 require_relative './lib/version'
@@ -124,6 +125,8 @@ put '/envios/asignar' do
   RepositorioEnvios.new.save(envio)
 
   handle_response(200, "Te asignamos el siguiente envio con ID *#{envio.id}*. \nRetirar el envio en *_#{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}_*. \nEntregar el envio en *_#{envio.direccion.direccion}, #{envio.direccion.codigo_postal}_*")
+rescue EnvioNoEncontradoError
+  handle_response(400, 'No hay envios disponibles')
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   handle_response(500, 'Error interno del servidor')

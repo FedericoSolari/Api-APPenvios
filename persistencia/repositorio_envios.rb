@@ -1,6 +1,7 @@
 require_relative './abstract_repository'
 require_relative '../fabricas/fabrica_estados'
 require_relative '../fabricas/fabrica_tamanios'
+require_relative '../excepciones/envio_no_encontrado_error'
 
 class RepositorioEnvios < AbstractRepository
   self.table_name = :envios
@@ -8,6 +9,8 @@ class RepositorioEnvios < AbstractRepository
 
   def find_by_state(estado)
     envio = dataset.where(estado:).first
+    raise EnvioNoEncontradoError, "No se encontraron envios con estado #{estado}" if envio.nil?
+
     load_object(envio)
   end
 
