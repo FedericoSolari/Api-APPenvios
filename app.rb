@@ -7,6 +7,7 @@ require_relative './config/configuration'
 require_relative './excepciones/ciudad_incorrecta_error'
 require_relative './excepciones/domicilio_inexistente_error'
 require_relative './excepciones/envio_no_encontrado_error'
+require_relative './excepciones/cliente_no_encontrado_error'
 require_relative './fabricas/fabrica_tamanios'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
@@ -84,6 +85,8 @@ post '/envios' do
         "\nLas coordenadas del domicilio de entrega son: "\
         "\nLat: _#{envio.direccion.latitud}_ \nLng: _#{envio.direccion.longitud}_")
     end
+  rescue ClienteNoEncontradoError
+    handle_response(400, 'Para poder realizar un envio el usuario debe estar registrado')
   rescue CiudadIncorrectaError
     handle_response(400, "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}")
   rescue DomicilioInexistenteError

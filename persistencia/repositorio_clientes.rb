@@ -1,4 +1,5 @@
 require_relative './abstract_repository'
+require_relative '../excepciones/cliente_no_encontrado_error'
 
 class RepositorioClientes < AbstractRepository
   self.table_name = :clientes
@@ -6,7 +7,7 @@ class RepositorioClientes < AbstractRepository
 
   def find_by_id(id_cliente)
     cliente = dataset.where(id_cliente:).first
-    return nil if cliente.nil?
+    raise ClienteNoEncontradoError, "No se encontró cliente con el id #{id_cliente}" if cliente.nil?
 
     load_object(cliente)
   end
