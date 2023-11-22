@@ -1,9 +1,9 @@
 require 'integration_helper'
 require_relative '../../modelos/direccion'
-# require_relative '../../persistencia/repositorio_direcciones'
+require_relative '../../persistencia/repositorio_direcciones'
 
 describe 'RepositorioDirecciones' do
-  xit 'deberia guardar y asignar id a la direccion' do
+  it 'deberia guardar y asignar id a la direccion' do
     direccion = Direccion.new('Av Las Heras 1232', 'CP: 1018')
     RepositorioDirecciones.new.save(direccion)
     expect(direccion.id).not_to be_nil

@@ -6,16 +6,17 @@ require_relative '../excepciones/ciudad_incorrecta_error'
 class Direccion
   include ActiveModel::Validations
 
-  attr_accessor :direccion, :codigo_postal, :latitud, :longitud
+  attr_accessor :direccion, :codigo_postal, :latitud, :longitud, :id
 
   validates :direccion, :codigo_postal, presence: true
   validate :validar_direccion
 
-  def initialize(direccion, codigo_postal)
+  def initialize(direccion, codigo_postal, id = nil, latitud = nil, longitud = nil)
+    @id = id
     @direccion = direccion
     @codigo_postal = codigo_postal
-    @latitud = nil
-    @longitud = nil
+    @latitud = latitud
+    @longitud = longitud
     validate!
   end
 
