@@ -12,23 +12,12 @@ class Envio
   attr_accessor :tamanio, :direccion, :cliente, :estado
 
   validates :direccion, presence: true
-  # rubocop:disable Metrics/ParameterLists
-  def initialize(tamanio, direccion, cliente, cadete = nil, id = nil, estado = Pendiente.new)
+  def initialize(tamanio, direccion, cliente, id = nil)
     @tamanio = tamanio
     @direccion = direccion
     @cliente = cliente
-    @cadete = cadete
     @id = id
-    @estado = estado
-  end
-  # rubocop:enable Metrics/ParameterLists
-
-  def asignar_cadete(cadete)
-    @cadete = cadete
-  end
-
-  def con_estado(estado)
-    @estado = estado
+    @estado = Pendiente.new
   end
 
   def tiempo_estimado

@@ -120,8 +120,8 @@ put '/envios/asignar' do
 
   envio = RepositorioEnvios.new.find_by_state('pendiente de asignacion')
   cadete = RepositorioCadetes.new.find_by_id(parametros_envio['id_cadete'])
-  envio.asignar_cadete(cadete)
-  envio.con_estado(FabricaEstados.new.crear_estado('en proceso'))
+  envio.cadete = cadete
+  envio.estado = FabricaEstados.new.crear_estado('en proceso')
 
   customer_logger.info("INFO: Envio id:#{params['id']} asignado a cadete con id:#{cadete.id_cadete}")
 
@@ -142,7 +142,7 @@ put '/envios/:id' do
   customer_logger.info("INFO: Petición put recibida en /envios/:id con cuerpo: #{@body}")
 
   envio = RepositorioEnvios.new.find(params['id'])
-  envio.con_estado(FabricaEstados.new.crear_estado(parametros_envio['estado']))
+  envio.estado = FabricaEstados.new.crear_estado(parametros_envio['estado'])
 
   customer_logger.info("INFO: Envio #{envio.id} se cambio a estado : #{envio.estado.estado}")
 

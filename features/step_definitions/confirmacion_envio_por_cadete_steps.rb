@@ -1,10 +1,10 @@
 Dado('estoy asignado al envio') do
-    @envio.asignar_cadete(@cadete)
+    @envio.cadete = @cadete
     RepositorioEnvios.new.save(@envio)
 end
 
 Dado('con estado {string}') do |estado|
-    @envio.con_estado(FabricaEstados.new.crear_estado(estado))
+    @envio.estado = FabricaEstados.new.crear_estado(estado)
     RepositorioEnvios.new.save(@envio)
 end
 

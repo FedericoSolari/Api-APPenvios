@@ -16,6 +16,6 @@ Cuando('envio el comando {string}') do |_comando|
 end
 
 Entonces('se me asigna un envio') do
-  @envio.asignar_cadete(@cadete)
+  @envio.cadete = @cadete
   RepositorioEnvios.new.save(@envio)
 end

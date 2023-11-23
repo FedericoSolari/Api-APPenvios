@@ -20,9 +20,13 @@ class RepositorioEnvios < AbstractRepository
   def load_object(a_hash)
     direccion = RepositorioDirecciones.new.find_by_id(a_hash[:id_direccion])
     cliente = RepositorioClientes.new.find_by_id(a_hash[:id_cliente])
-    cadete = a_hash[:id_cadete].nil? ? nil : RepositorioCadetes.new.find_by_id(a_hash[:id_cadete])
     tamanio = FabricaTamanios.new.crear_tamanio(a_hash[:tamanio])
-    Envio.new(tamanio, direccion, cliente, cadete, a_hash[:id], FabricaEstados.new.crear_estado(a_hash[:estado]))
+    envio = Envio.new(tamanio, direccion, cliente, a_hash[:id])
+    envio.estado = FabricaEstados.new.crear_estado(a_hash[:estado])
+    return envio if a_hash[:id_cadete].nil?
+
+    envio.cadete = RepositorioCadetes.new.find_by_id(a_hash[:id_cadete])
+    envio
   end
   # rubocop:enable Metrics/AbcSize
 

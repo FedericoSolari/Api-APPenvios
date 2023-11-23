@@ -12,7 +12,7 @@ describe RepositorioEnvios do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
     envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
-    envio.asignar_cadete(cadete)
+    envio.cadete = cadete
     described_class.new.save(envio)
     expect(envio.id).not_to be_nil
   end
@@ -25,8 +25,8 @@ describe RepositorioEnvios do
     repositorio.delete_all
 
     envio_asignado = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
-    envio_asignado.asignar_cadete(cadete)
-    envio_asignado.con_estado(FabricaEstados.new.crear_estado('en proceso'))
+    envio_asignado.cadete = cadete
+    envio_asignado.estado = FabricaEstados.new.crear_estado('en proceso')
     repositorio.save(envio_asignado)
 
     envio_sin_asignar = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
