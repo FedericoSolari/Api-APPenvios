@@ -19,3 +19,7 @@ Entonces('deberia ver un mensaje {string}') do |mensaje|
     parsed_response = JSON.parse(@response.body)
     expect(parsed_response['text'].gsub(/[\n*_]/, '')).to eq mensaje
 end
+
+Dado('que hay un cadete registrado con nombre {string}') do |nombre|
+  pending
+end
