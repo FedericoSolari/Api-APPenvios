@@ -11,6 +11,13 @@ class RepositorioCadetes < AbstractRepository
     load_object(cadete)
   end
 
+  def find_by_name(nombre)
+    cadete = dataset.where(nombre:).first
+    return nil if cadete.nil?
+
+    load_object(cadete)
+  end
+
   protected
 
   def load_object(a_hash)
