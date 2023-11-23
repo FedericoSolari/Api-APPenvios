@@ -25,7 +25,7 @@ class ParseadorSolicitudes
   private
 
   def generar_cuerpo_solicitud_cliente(parametros)
-    { comando: parametros[1], body: { nombre: parametros[2], direccion: parametros[3], codigo_postal: parametros[4], id_cliente: 8 } }
+    { comando: '/clientes', body: { nombre: parametros[2], direccion: parametros[3], codigo_postal: parametros[4], id_cliente: 8 } }
   end
 
   def generar_cuerpo_solicitud_cadete(parametros)
@@ -37,7 +37,7 @@ class ParseadorSolicitudes
   end
 
   def generar_cuerpo_solicitud_cliente_sin_codigo_postal(parametros)
-    { comando: '/registrar', body: { tamanio: parametros.split(',')[0].split(' ')[1], direccion: parametros.split(',')[1], codigo_postal: parametros.split(',')[2], id_cliente: 8 } }
+    { comando: '/clientes', body: { tamanio: parametros.split(',')[0].split(' ')[1], direccion: parametros.split(',')[1], codigo_postal: parametros.split(',')[2], id_cliente: 8 } }
   end
 
   def generar_cuerpo_solicitud_creacion_envio_sin_codigo_postal(parametros)

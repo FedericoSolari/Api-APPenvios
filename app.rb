@@ -31,7 +31,7 @@ post '/reset' do
   RepositorioCadetes.new.delete_all
 end
 
-post '/registrar' do
+post '/clientes' do
   @body ||= request.body.read
   parametros_cliente = JSON.parse(@body)
   customer_logger.info("INFO: Petición POST recibida en /registrar con cuerpo: #{@body}")
