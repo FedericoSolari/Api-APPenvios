@@ -54,7 +54,7 @@ post '/clientes' do
   end
 end
 
-post '/registrar_cadete' do
+post '/cadetes' do
   @body ||= request.body.read
   parametros_cadete = JSON.parse(@body)
 

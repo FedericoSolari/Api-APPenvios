@@ -35,21 +35,21 @@ describe ParseadorSolicitudes do
 
   it 'Debería retornar /registrar-cadete en el comando' do
     mensaje = '/registrar-cadete Juan, Moto'
-    parametros_esperados = { comando: '/registrar_cadete', body: { nombre: 'Juan', vehiculo: 'Moto' } }
+    parametros_esperados = { comando: '/cadetes', body: { nombre: 'Juan', vehiculo: 'Moto' } }
     parametros_obtenidos = described_class.new.parsear(mensaje)
     expect(parametros_obtenidos[:comando]).to eq parametros_esperados[:comando]
   end
 
   it 'Debería retornar Juan en el nombre del cadete' do
     mensaje = '/registrar-cadete Juan, Moto'
-    parametros_esperados = { comando: '/registrar_cadete', body: { nombre: 'Juan', vehiculo: 'Moto' } }
+    parametros_esperados = { comando: '/cadetes', body: { nombre: 'Juan', vehiculo: 'Moto' } }
     parametros_obtenidos = described_class.new.parsear(mensaje)
     expect(parametros_obtenidos[:body][:nombre]).to eq parametros_esperados[:body][:nombre]
   end
 
   it 'Debería retornar Moto en el vehiculo del cadete' do
     mensaje = '/registrar-cadete Juan, Moto'
-    parametros_esperados = { comando: '/registrar_cadete', body: { nombre: 'Juan', vehiculo: 'Moto' } }
+    parametros_esperados = { comando: '/cadetes', body: { nombre: 'Juan', vehiculo: 'Moto' } }
     parametros_obtenidos = described_class.new.parsear(mensaje)
     expect(parametros_obtenidos[:body][:vehiculo]).to eq parametros_esperados[:body][:vehiculo]
   end

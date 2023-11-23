@@ -29,7 +29,7 @@ class ParseadorSolicitudes
   end
 
   def generar_cuerpo_solicitud_cadete(parametros)
-    { comando: '/registrar_cadete', body: { nombre: parametros[2], vehiculo: parametros[3], id_cadete: 2 } }
+    { comando: '/cadetes', body: { nombre: parametros[2], vehiculo: parametros[3], id_cadete: 2 } }
   end
 
   def generar_cuerpo_solicitud_creacion_envio(parametros)
