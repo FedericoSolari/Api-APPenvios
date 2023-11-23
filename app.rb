@@ -8,6 +8,7 @@ require_relative './excepciones/ciudad_incorrecta_error'
 require_relative './excepciones/domicilio_inexistente_error'
 require_relative './excepciones/envio_no_encontrado_error'
 require_relative './excepciones/cliente_no_encontrado_error'
+require_relative './excepciones/usuario_duplicado_error'
 require_relative './fabricas/fabrica_tamanios'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
@@ -60,10 +61,15 @@ post '/cadetes' do
 
   begin
     if ValidadorParametros.new.validar_registro_cadete(parametros_cadete)
+      # esto va a ir en un servicio de cadetes luego
+      raise UsuarioDuplicadoError unless RepositorioCadetes.new.find_by_name(parametros_cadete['nombre']).nil?
+
       cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
       RepositorioCadetes.new.save(cadete)
       handle_response(201, "Bienvenid@ a la flota *#{cadete.nombre}*")
     end
+  rescue UsuarioDuplicadoError
+    handle_response(400, 'Ya hay un usuario registrado con ese nombre')
   rescue ParametrosInvalidosError
     handle_response(400,
                     'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Vehículo\>')

@@ -12,7 +12,7 @@ class RepositorioCadetes < AbstractRepository
   end
 
   def find_by_name(nombre)
-    cadete = dataset.where(nombre:).first
+    cadete = dataset.where(nombre: nombre.downcase).first
     return nil if cadete.nil?
 
     load_object(cadete)
@@ -26,7 +26,7 @@ class RepositorioCadetes < AbstractRepository
 
   def changeset(cadete)
     {
-      nombre: cadete.nombre,
+      nombre: cadete.nombre.downcase,
       vehiculo: cadete.vehiculo,
       id_cadete: cadete.id_cadete
     }
