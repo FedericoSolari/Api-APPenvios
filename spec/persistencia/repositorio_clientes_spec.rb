@@ -15,4 +15,11 @@ describe RepositorioClientes do
     repositorio.save(juan)
     expect(repositorio.find_by_id(juan.id_cliente)).not_to be_nil
   end
+
+  xit 'debería encontrar el registro según el nombre del cliente' do
+    pedro = Cliente.new('Pedro', Direccion.new('Av Las Heras 1232', 'CP: 1018'), 8)
+    repositorio = described_class.new
+    repositorio.save(pedro)
+    expect(repositorio.find_by_name(pedro.nombre)).not_to be_nil
+  end
 end
