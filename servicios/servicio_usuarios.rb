@@ -4,7 +4,10 @@ require_relative '../validadores/validador_parametros'
 
 class ServicioUsuarios
   def self.agregar_cliente(parametros_cliente)
+    raise UsuarioDuplicadoError unless RepositorioClientes.new.find_by_name(parametros_cliente['nombre']).nil?
+
     direccion = ServicioDireccion.obtener_direccion(parametros_cliente['direccion'], parametros_cliente['codigo_postal'])
+
     cliente = Cliente.new(parametros_cliente['nombre'], direccion, parametros_cliente['id_cliente'])
     RepositorioClientes.new.save(cliente)
     cliente

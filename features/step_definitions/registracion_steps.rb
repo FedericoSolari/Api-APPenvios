@@ -26,5 +26,6 @@ Dado('que hay un cadete registrado con nombre {string}') do |nombre|
 end
 
 Dado('que hay un cliente registrado con nombre {string}') do |nombre|
-  pending
+  @cliente = Cliente.new(nombre, Direccion.new('Av Las Heras 1232', 'CP: 1018'), 8)
+  RepositorioClientes.new.save(@cliente)
 end

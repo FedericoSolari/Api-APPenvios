@@ -43,6 +43,8 @@ post '/clientes' do
       handle_response(201, "Bienvenid@ *#{cliente.nombre}*. \nLas coordenadas de tu domicilio son: " \
       "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_")
     end
+  rescue UsuarioDuplicadoError
+    handle_response(400, 'Ya hay un usuario registrado con ese nombre')
   rescue CiudadIncorrectaError
     handle_response(400, "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}")
   rescue DomicilioInexistenteError
