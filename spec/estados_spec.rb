@@ -1,6 +1,7 @@
 require 'spec_helper'
 require_relative '../modelos/estados/pendiente'
 require_relative '../modelos/estados/asignado'
+require_relative '../modelos/estados/en_camino'
 require_relative '../modelos/estados/entregado'
 require_relative '../fabricas/fabrica_estados'
 
@@ -46,7 +47,7 @@ describe 'Estados' do
   end
 
   describe 'EnCamino' do
-    xit 'Estado EnCamino se encuentra asignado a un cadete' do
+    it 'Estado EnCamino se encuentra asignado a un cadete' do
       estado_envio = EnCamino.new
 
       expect(estado_envio.cadete_asignado?).to eq true
