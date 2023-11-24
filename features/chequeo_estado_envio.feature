@@ -18,7 +18,6 @@ Característica: Como cliente quiero ver el estado del envio
     Entonces deberia ver un mensaje que incluya "fue asignado a juan, ya está en camino!"
     Y deberia ver el id del envio
 
-  @wip
   Escenario: Obtener el estado de un envio que ya fue retirado por un cadete
     Dado que hay registrado un cadete
     Y que el envio esta "en camino"
