@@ -143,14 +143,10 @@ put '/envios/:id' do
 
   customer_logger.info("INFO: Petición put recibida en /envios/:id con cuerpo: #{@body}")
 
-  envio = RepositorioEnvios.new.find(params['id'])
-  envio.estado = FabricaEstados.new.crear_estado(parametros_envio['estado'])
+  envio = ServicioEnvio.actualizar_estado(params['id'], parametros_envio['estado'])
+  customer_logger.info("INFO: Se Actualiza el envio con id: #{envio.id} al estado : #{envio.estado.estado}")
 
-  customer_logger.info("INFO: Envio #{envio.id} se cambio a estado : #{envio.estado.estado}")
-
-  RepositorioEnvios.new.save(envio)
-
-  status 201
+  status 200
   { text: 'Gracias por entregar el envio!', cliente: envio.cliente.id_cliente,
     text_to_client: ParseadorEstado.new.obtener_mensaje(envio) }.to_json
 rescue StandardError => e
