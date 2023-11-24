@@ -106,6 +106,18 @@ describe ValidadorParametros do
 
       expect(described_class.new.validar_vehiculo(parametros['vehiculo'])).to eq true
     end
+
+    it 'Validador de vehiculos deberia devolver true cuando el vehiculo es Monopatin' do
+      parametros_enviados = { vehiculo: 'monopatin' }.to_json
+      parametros = JSON.parse(parametros_enviados)
+
+      expect do
+        described_class.new.validar_vehiculo(parametros['vehiculo'])
+      end.to raise_error(
+        ParametrosInvalidosError,
+        'Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son auto, moto o bicicleta'
+      )
+    end
   end
 
   describe 'Creación de envio' do
