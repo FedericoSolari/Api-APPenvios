@@ -40,5 +40,16 @@ describe 'Servicios' do
 
       expect(envio.valid?).to eq true
     end
+
+    xit 'Se crea exitosamente un envio al ingresar todos los datos correctamente' do
+      parametros_cadete = { 'nombre' => 'fede', 'vehiculo' => 'moto', 'id_cadete' => 8 }
+      cadete = ServicioUsuarios.agregar_cadete(parametros_cadete)
+      RepositorioCadetes.new.save(cadete)
+
+      parametros_envio = { 'id_cadete' => 8 }
+      envio = ServicioEnvio.asignar_envio(parametros_envio)
+
+      expect(envio.valid?).to eq true
+    end
   end
 end
