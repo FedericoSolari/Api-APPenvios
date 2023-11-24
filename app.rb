@@ -14,7 +14,7 @@ require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'modelos', '*.rb')].each { |file| require file }
-require_relative './servicios/servicio_cliente'
+require_relative './servicios/servicio_usuarios'
 require_relative './servicios/servicio_envio'
 
 customer_logger = Configuration.logger
@@ -38,7 +38,7 @@ post '/clientes' do
   customer_logger.info("INFO: Petición POST recibida en /registrar con cuerpo: #{@body}")
   begin
     if ValidadorParametros.new.validar_registro_cliente(parametros_cliente)
-      cliente = ServicioCliente.agregar_cliente(parametros_cliente)
+      cliente = ServicioUsuarios.agregar_cliente(parametros_cliente)
       customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
       handle_response(201, "Bienvenid@ *#{cliente.nombre}*. \nLas coordenadas de tu domicilio son: " \
         "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_")
