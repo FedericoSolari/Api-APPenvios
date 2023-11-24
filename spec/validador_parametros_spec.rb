@@ -86,7 +86,7 @@ describe ValidadorParametros do
       expect(described_class.new.validar_registro_cadete(parametros)).to eq true
     end
 
-    xit 'Validador de vehiculos deberia devolver true cuando el vehiculo es Moto' do
+    it 'Validador de vehiculos deberia devolver true cuando el vehiculo es Moto' do
       parametros_enviados = { vehiculo: 'moto' }.to_json
       parametros = JSON.parse(parametros_enviados)
 

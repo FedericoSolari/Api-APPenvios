@@ -22,4 +22,4 @@ Entonces  deberia ver un mensaje "Bienvenid@ a la flota Amancio"
 
 Escenario: Envio fallido con comando '/registrar-cadete Donald, camion'
 Cuando envio el mensaje '/registrar-cadete Donald, monopatin'
-Entonces deberia ver un mensaje que incluya "Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son auto, moto o bicicleta. "
+Entonces deberia ver un mensaje que incluya "Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son auto, moto o bicicleta."
