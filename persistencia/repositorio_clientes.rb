@@ -12,6 +12,13 @@ class RepositorioClientes < AbstractRepository
     load_object(cliente)
   end
 
+  def find_by_name(nombre)
+    cliente = dataset.where(nombre:).first
+    return nil if cliente.nil?
+
+    load_object(cliente)
+  end
+
   protected
 
   def load_object(a_hash)
