@@ -1,5 +1,6 @@
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
 require_relative './servicio_direccion'
+require_relative '../validadores/validador_parametros'
 
 class ServicioUsuarios
   def self.agregar_cliente(parametros_cliente)
@@ -10,6 +11,7 @@ class ServicioUsuarios
   end
 
   def self.agregar_cadete(parametros_cadete)
+    ValidadorParametros.new.validar_vehiculo(parametros_cadete['vehiculo'])
     cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
 
     RepositorioCadetes.new.save(cadete)

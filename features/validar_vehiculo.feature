@@ -1,5 +1,4 @@
 #language: es
-@wip
 Característica: Validar vehiculo en la creacion de un cadete
 
 Antecedentes:
@@ -20,6 +19,7 @@ Escenario: cadete registrado con exito con comando '/registrar-cadete Amancio, a
 Cuando envio el mensaje '/registrar-cadete Amancio, auto'
 Entonces  deberia ver un mensaje "Bienvenid@ a la flota Amancio"
 
+@wip
 Escenario: Envio fallido con comando '/registrar-cadete Donald, camion'
 Cuando envio el mensaje '/registrar-cadete Donald, monopatin'
 Entonces deberia ver un mensaje que incluya "Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son auto, moto o bicicleta."
