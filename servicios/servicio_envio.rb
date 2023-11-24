@@ -17,4 +17,9 @@ class ServicioEnvio
     envio.estado = FabricaEstados.new.crear_estado('en proceso')
     envio
   end
+
+  def self.consultar_estado(parametros_envio)
+    envio = RepositorioEnvios.new.find(parametros_envio['id'])
+    ParseadorEstado.new.obtener_mensaje(envio)
+  end
 end

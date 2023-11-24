@@ -57,17 +57,17 @@ describe 'Servicios' do
       expect(envio.id).to eq envio_asignado.id
     end
 
-    xit 'Se recibe correctamente el estado de un envio existente' do
+    it 'Se recibe correctamente el estado de un envio existente' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
       parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
-      parametros_envio = { 'id_cadete' => 1 }
-      envio_asignado = ServicioEnvio.consultar_estado(parametros_envio)
+      parametros_envio = { 'id' => envio.id }
+      estado_envio = ServicioEnvio.consultar_estado(parametros_envio)
 
-      expect(envio.id).to eq envio_asignado.id
+      expect(estado_envio).to eq "Tu envio (ID: *#{envio.id}*) se encuentra *pendiente de asignación*"
     end
   end
 end
