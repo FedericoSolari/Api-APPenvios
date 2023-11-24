@@ -5,8 +5,9 @@ class ParseadorEstado
       "Tu envio (ID: *#{envio.id}*) se encuentra *pendiente de asignación*"
     when 'asignado'
       "Tu envio (ID: *#{envio.id}*) fue asignado a *#{envio.cadete.nombre}*, ya está en camino!"
-      # "Tu envio (ID: *#{envio.id}*) se encuentra en *proceso de entrega*. " \
-      #  "\nTiempo estimado: *#{envio.tiempo_estimado} minutos*"
+    when 'en camino'
+      "Tu envio (ID: *#{envio.id}*) se encuentra en camino al domicilio #{envio.direccion.direccion}" \
+      ", CP: #{envio.direccion.codigo_postal}. \nTiempo estimado: *#{envio.tiempo_estimado} minutos*"
     when 'entregado'
       "Ya entregamos tu envio (ID: *#{envio.id}*)"
     else
