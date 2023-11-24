@@ -115,7 +115,7 @@ describe ValidadorParametros do
         described_class.new.validar_vehiculo(parametros['vehiculo'])
       end.to raise_error(
         ParametrosInvalidosError,
-        'Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son auto, moto o bicicleta'
+        'Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son auto, moto o bicicleta.'
       )
     end
   end

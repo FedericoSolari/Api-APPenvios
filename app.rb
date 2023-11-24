@@ -66,9 +66,8 @@ post '/cadetes' do
     end
   rescue UsuarioDuplicadoError
     handle_response(400, 'Ya hay un usuario registrado con ese nombre')
-  rescue ParametrosInvalidosError
-    handle_response(400,
-                    'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Nombre\>, \<Vehículo\>')
+  rescue ParametrosInvalidosError => e
+    handle_response(400, e.message)
   rescue StandardError => e
     customer_logger.error('Error inesperado', e.message)
     handle_response(500, 'Error interno del servidor')
