@@ -53,7 +53,7 @@ describe 'Estados' do
       expect(estado_envio.cadete_asignado?).to eq true
     end
 
-    xit 'Estado EnCamino fue retirado por el cadete' do
+    it 'Estado EnCamino fue retirado por el cadete' do
       estado_envio = EnCamino.new
 
       expect(estado_envio.se_retiro?).to eq true

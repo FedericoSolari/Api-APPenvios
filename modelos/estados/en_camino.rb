@@ -10,4 +10,8 @@ class EnCamino < Estado
   def cadete_asignado?
     true
   end
+
+  def se_retiro?
+    true
+  end
 end
