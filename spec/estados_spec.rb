@@ -45,6 +45,14 @@ describe 'Estados' do
     end
   end
 
+  describe 'EnCamino' do
+    xit 'Estado EnCamino se encuentra asignado a un cadete' do
+      estado_envio = EnCamino.new
+
+      expect(estado_envio.cadete_asignado?).to eq true
+    end
+  end
+
   describe 'Entregado' do
     it 'Estado Entregado se encuentra asignado a un cadete' do
       estado_envio = Entregado.new
