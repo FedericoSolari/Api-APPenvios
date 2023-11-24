@@ -109,10 +109,9 @@ end
 
 get '/envios/:id' do
   customer_logger.info("INFO: Petición get recibida en /envios/id con id: #{params['id']}")
-  envio = RepositorioEnvios.new.find(params['id'])
-  texto = ParseadorEstado.new.obtener_mensaje(envio)
-  customer_logger.info("INFO: Envio id:#{params['id']} con estado: #{envio.estado.estado}")
-  handle_response(200, texto)
+  estado = ServicioEnvio.consultar_estado(params)
+  customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
+  handle_response(200, estado)
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   handle_response(500, 'Error interno del servidor')
