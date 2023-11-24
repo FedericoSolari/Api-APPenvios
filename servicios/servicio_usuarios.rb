@@ -11,7 +11,10 @@ class ServicioUsuarios
   end
 
   def self.agregar_cadete(parametros_cadete)
+    raise UsuarioDuplicadoError unless RepositorioCadetes.new.find_by_name(parametros_cadete['nombre']).nil?
+
     ValidadorParametros.new.validar_vehiculo(parametros_cadete['vehiculo'])
+
     cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
 
     RepositorioCadetes.new.save(cadete)

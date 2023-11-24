@@ -41,7 +41,7 @@ post '/clientes' do
       cliente = ServicioUsuarios.agregar_cliente(parametros_cliente)
       customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
       handle_response(201, "Bienvenid@ *#{cliente.nombre}*. \nLas coordenadas de tu domicilio son: " \
-        "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_")
+      "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_")
     end
   rescue CiudadIncorrectaError
     handle_response(400, "La dirección que se proporcionó no se encuentra en #{ENV['CIUDAD']}")
@@ -61,11 +61,7 @@ post '/cadetes' do
 
   begin
     if ValidadorParametros.new.validar_registro_cadete(parametros_cadete)
-      # esto va a ir en un servicio de cadetes luego
-      raise UsuarioDuplicadoError unless RepositorioCadetes.new.find_by_name(parametros_cadete['nombre']).nil?
-
-      cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
-      RepositorioCadetes.new.save(cadete)
+      cadete = ServicioUsuarios.agregar_cadete(parametros_cadete)
       handle_response(201, "Bienvenid@ a la flota *#{cadete.nombre}*")
     end
   rescue UsuarioDuplicadoError
