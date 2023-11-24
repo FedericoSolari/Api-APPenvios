@@ -70,15 +70,15 @@ describe 'Servicios' do
       expect(estado_envio).to eq "Tu envio (ID: *#{envio.id}*) se encuentra *pendiente de asignación*"
     end
 
-    xit 'Se modifica el estado correctamente de un envio existente' do
+    it 'Se modifica el estado correctamente de un envio existente' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
       parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
-      parametros_envio = { 'id' => envio.id, 'estado' => envio.estado.estado }
-      envio_actualizado = ServicioEnvio.modificar_estado(parametros_envio)
+      parametros_envio = { 'id' => envio.id, 'estado' => 'en proceso' }
+      envio_actualizado = ServicioEnvio.actualizar_estado(parametros_envio)
 
       expect(envio_actualizado.estado.estado).to eq 'en proceso'
     end

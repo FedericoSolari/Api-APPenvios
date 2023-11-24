@@ -22,4 +22,11 @@ class ServicioEnvio
     envio = RepositorioEnvios.new.find(parametros_envio['id'])
     ParseadorEstado.new.obtener_mensaje(envio)
   end
+
+  def self.actualizar_estado(parametros_envio)
+    envio = RepositorioEnvios.new.find(parametros_envio['id'])
+    envio.estado = FabricaEstados.new.crear_estado(parametros_envio['estado'])
+    RepositorioEnvios.new.save(envio)
+    envio
+  end
 end
