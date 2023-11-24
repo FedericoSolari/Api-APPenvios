@@ -24,6 +24,17 @@ describe 'ParseadorEstados' do
     expect(mensaje_estado).to eq 'Tu envio (ID: 8) fue asignado a Pedro, ya está en camino!'
   end
 
+  # rubocop:disable Layout/LineLength
+  xit 'Devuelve mensaje "Tu envio (ID: 8) se encuentra en camino al domicilio Av Las Heras 1232, CP: 1018. Tiempo estimado: 2 minutos" con estado asignado' do
+    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, 8)
+    envio.cadete = cadete
+    envio.estado = EnCamino.new
+    mensaje_estado = ParseadorEstado.new.obtener_mensaje(envio).gsub(/[\n*_]/, '')
+
+    expect(mensaje_estado).to eq 'Tu envio (ID: 8) se encuentra en camino al domicilio Av Las Heras 1232, CP: 1018. Tiempo estimado: 2 minutos'
+  end
+  # rubocop:enable Layout/LineLength
+
   it 'Devuelve mensaje "Ya entregamos tu envio (ID: 8)" con estado entregado' do
     envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, 8)
     envio.cadete = cadete
