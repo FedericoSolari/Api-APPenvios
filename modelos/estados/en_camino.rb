@@ -14,4 +14,8 @@ class EnCamino < Estado
   def se_retiro?
     true
   end
+
+  def se_entrego?
+    false
+  end
 end

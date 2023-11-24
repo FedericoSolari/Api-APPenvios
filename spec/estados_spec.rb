@@ -59,7 +59,7 @@ describe 'Estados' do
       expect(estado_envio.se_retiro?).to eq true
     end
 
-    xit 'Estado EnCamino no se encuentra entregado' do
+    it 'Estado EnCamino no se encuentra entregado' do
       estado_envio = EnCamino.new
 
       expect(estado_envio.se_entrego?).to eq false
