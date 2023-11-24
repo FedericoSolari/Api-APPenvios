@@ -124,12 +124,9 @@ put '/envios/asignar' do
 
   customer_logger.info("INFO: Petición put recibida en /envios/asignar con cuerpo: #{@body}")
 
-  envio = RepositorioEnvios.new.find_by_state('pendiente de asignacion')
-  cadete = RepositorioCadetes.new.find_by_id(parametros_envio['id_cadete'])
-  envio.cadete = cadete
-  envio.estado = FabricaEstados.new.crear_estado('en proceso')
+  envio = ServicioEnvio.asignar_envio(parametros_envio)
 
-  customer_logger.info("INFO: Envio id:#{params['id']} asignado a cadete con id:#{cadete.id_cadete}")
+  customer_logger.info("INFO: Envio id:#{params['id']} asignado a cadete con id:#{envio.cadete.id_cadete}")
 
   RepositorioEnvios.new.save(envio)
 
