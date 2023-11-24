@@ -26,7 +26,7 @@ describe RepositorioEnvios do
 
     envio_asignado = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
     envio_asignado.cadete = cadete
-    envio_asignado.estado = FabricaEstados.new.crear_estado('en proceso')
+    envio_asignado.estado = FabricaEstados.new.crear_estado('asignado')
     repositorio.save(envio_asignado)
 
     envio_sin_asignar = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)

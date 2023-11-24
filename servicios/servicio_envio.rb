@@ -14,7 +14,7 @@ class ServicioEnvio
     envio = RepositorioEnvios.new.find_by_state('pendiente de asignacion')
     cadete = RepositorioCadetes.new.find_by_id(parametros_envio['id_cadete'])
     envio.cadete = cadete
-    envio.estado = FabricaEstados.new.crear_estado('en proceso')
+    envio.estado = FabricaEstados.new.crear_estado('asignado')
     envio
   end
 

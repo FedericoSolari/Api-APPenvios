@@ -77,9 +77,9 @@ describe 'Servicios' do
       parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
-      envio_actualizado = ServicioEnvio.actualizar_estado(envio.id, 'en proceso')
+      envio_actualizado = ServicioEnvio.actualizar_estado(envio.id, 'asignado')
 
-      expect(envio_actualizado.estado.estado).to eq 'en proceso'
+      expect(envio_actualizado.estado.estado).to eq 'asignado'
     end
   end
 end

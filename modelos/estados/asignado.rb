@@ -1,7 +1,7 @@
 require_relative './estado'
 
-class EnProceso < Estado
-  ESTADO = 'en proceso'.freeze
+class Asignado < Estado
+  ESTADO = 'asignado'.freeze
 
   def initialize
     super(ESTADO)

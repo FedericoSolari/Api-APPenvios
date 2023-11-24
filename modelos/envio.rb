@@ -2,7 +2,7 @@ require 'active_model'
 require_relative 'direccion'
 require_relative 'estados/pendiente'
 require_relative 'estados/entregado'
-require_relative 'estados/en_proceso'
+require_relative 'estados/asignado'
 require_relative '../fabricas/fabrica_conector_here_api_routes'
 
 class Envio

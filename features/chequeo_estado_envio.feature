@@ -32,5 +32,5 @@ Característica: Como cliente quiero ver el estado del envio
     Dado que hay registrado un cadete
     Y que el envio esta "entregado"
     Cuando mando el mensaje "/estado-envio ID"
-    Entonces deberia ver un mensaje que incluya "Ya entregamos tu envío"
+    Entonces deberia ver un mensaje que incluya "Ya entregamos tu envio"
     Y deberia ver el id del envio

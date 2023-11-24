@@ -1,6 +1,6 @@
 require 'spec_helper'
 require_relative '../modelos/estados/pendiente'
-require_relative '../modelos/estados/en_proceso'
+require_relative '../modelos/estados/asignado'
 require_relative '../modelos/estados/entregado'
 require_relative '../fabricas/fabrica_estados'
 
@@ -25,21 +25,21 @@ describe 'Estados' do
     end
   end
 
-  describe 'En Proceso' do
-    it 'Estado EnProceso se encuentra asignado a un cadete' do
-      estado_envio = EnProceso.new
+  describe 'Asignado' do
+    it 'Estado Asignado se encuentra asignado a un cadete' do
+      estado_envio = Asignado.new
 
       expect(estado_envio.cadete_asignado?).to eq true
     end
 
-    it 'Estado EnProceso no fue retirado por el cadete' do
-      estado_envio = EnProceso.new
+    it 'Estado Asignado no fue retirado por el cadete' do
+      estado_envio = Asignado.new
 
       expect(estado_envio.se_retiro?).to eq false
     end
 
-    it 'Estado EnProceso no se encuentra entregado' do
-      estado_envio = EnProceso.new
+    it 'Estado Asignado no se encuentra entregado' do
+      estado_envio = Asignado.new
 
       expect(estado_envio.se_entrego?).to eq false
     end
@@ -74,9 +74,9 @@ describe 'Estados' do
       expect(estado_creado.estado).to eq estado_a_crear
     end
 
-    it 'Fabrica crea correctamente un estado EnProceso' do
+    it 'Fabrica crea correctamente un estado Asignado' do
       fabrica = FabricaEstados.new
-      estado_a_crear = 'en proceso'
+      estado_a_crear = 'asignado'
       estado_creado = fabrica.crear_estado(estado_a_crear)
 
       expect(estado_creado.estado).to eq estado_a_crear

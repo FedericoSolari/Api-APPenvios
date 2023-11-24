@@ -16,13 +16,13 @@ describe 'ParseadorEstados' do
       expect(mensaje_estado).to eq 'Tu envio (ID: 8) se encuentra pendiente de asignación'
     end
 
-    it 'Devuelve mensaje "Tu envio (ID: 8) se encuentra en proceso de entrega" con estado en proceso' do
+    it 'Devuelve mensaje "Tu envio (ID: 8) fue asignado a Pedro, ya está en camino!" con estado asignado' do
       envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, 8)
       envio.cadete = cadete
-      envio.estado = EnProceso.new
+      envio.estado = Asignado.new
       mensaje_estado = ParseadorEstado.new.obtener_mensaje(envio).gsub(/[\n*_]/, '')
 
-      expect(mensaje_estado).to eq 'Tu envio (ID: 8) se encuentra en proceso de entrega. Tiempo estimado: 2 minutos'
+      expect(mensaje_estado).to eq 'Tu envio (ID: 8) fue asignado a Pedro, ya está en camino!'
     end
   end
 end
