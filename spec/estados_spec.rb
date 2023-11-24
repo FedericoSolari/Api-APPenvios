@@ -103,7 +103,7 @@ describe 'Estados' do
       expect(estado_creado.estado).to eq estado_a_crear
     end
 
-    xit 'Fabrica crea correctamente un estado EnCamino' do
+    it 'Fabrica crea correctamente un estado EnCamino' do
       fabrica = FabricaEstados.new
       estado_a_crear = 'en camino'
       estado_creado = fabrica.crear_estado(estado_a_crear)
