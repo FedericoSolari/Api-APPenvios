@@ -56,5 +56,18 @@ describe 'Servicios' do
 
       expect(envio.id).to eq envio_asignado.id
     end
+
+    xit 'Se recibe correctamente el estado de un envio existente' do
+      parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      ServicioUsuarios.agregar_cliente(parametros_cliente)
+
+      parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      envio = ServicioEnvio.agregar_envio(parametros_envio)
+
+      parametros_envio = { 'id_cadete' => 1 }
+      envio_asignado = ServicioEnvio.consultar_estado(parametros_envio)
+
+      expect(envio.id).to eq envio_asignado.id
+    end
   end
 end
