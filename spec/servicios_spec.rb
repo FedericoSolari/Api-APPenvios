@@ -33,23 +33,28 @@ describe 'Servicios' do
   describe 'ServicioEnvio' do
     it 'Se crea exitosamente un envio al ingresar todos los datos correctamente' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
-      cliente = ServicioUsuarios.agregar_cliente(parametros_cliente)
-      RepositorioClientes.new.save(cliente)
+      ServicioUsuarios.agregar_cliente(parametros_cliente)
+
       parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
       expect(envio.valid?).to eq true
     end
 
-    xit 'Se crea exitosamente un envio al ingresar todos los datos correctamente' do
-      parametros_cadete = { 'nombre' => 'fede', 'vehiculo' => 'moto', 'id_cadete' => 8 }
-      cadete = ServicioUsuarios.agregar_cadete(parametros_cadete)
-      RepositorioCadetes.new.save(cadete)
+    it 'Se crea exitosamente un envio al ingresar todos los datos correctamente' do
+      parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      ServicioUsuarios.agregar_cliente(parametros_cliente)
 
-      parametros_envio = { 'id_cadete' => 8 }
-      envio = ServicioEnvio.asignar_envio(parametros_envio)
+      parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      envio = ServicioEnvio.agregar_envio(parametros_envio)
 
-      expect(envio.valid?).to eq true
+      parametros_cadete = { 'nombre' => 'fede', 'vehiculo' => 'moto', 'id_cadete' => 1 }
+      ServicioUsuarios.agregar_cadete(parametros_cadete)
+
+      parametros_envio = { 'id_cadete' => 1 }
+      envio_asignado = ServicioEnvio.asignar_envio(parametros_envio)
+
+      expect(envio.id).to eq envio_asignado.id
     end
   end
 end
