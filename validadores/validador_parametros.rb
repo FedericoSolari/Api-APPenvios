@@ -27,7 +27,7 @@ class ValidadorParametros
   end
 
   def validar_vehiculo(vehiculo)
-    if vehiculo != 'moto'
+    if vehiculo != 'moto' && vehiculo != 'auto'
       raise ParametrosInvalidosError,
             'Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son auto, moto o bicicleta'
     end

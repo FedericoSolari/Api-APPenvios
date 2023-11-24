@@ -93,7 +93,7 @@ describe ValidadorParametros do
       expect(described_class.new.validar_vehiculo(parametros['vehiculo'])).to eq true
     end
 
-    xit 'Validador de vehiculos deberia devolver true cuando el vehiculo es Auto' do
+    it 'Validador de vehiculos deberia devolver true cuando el vehiculo es Auto' do
       parametros_enviados = { vehiculo: 'auto' }.to_json
       parametros = JSON.parse(parametros_enviados)
 
