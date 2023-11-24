@@ -12,7 +12,7 @@ describe 'Servicios' do
       expect(cliente.valid?).to eq true
     end
 
-    xit 'Se crea exitosamente un cadete al ingresar todos los datos correctamente' do
+    it 'Se crea exitosamente un cadete al ingresar todos los datos correctamente' do
       parametros_cadete = { 'nombre' => 'juan', 'vehiculo' => 'moto', 'id_cadete' => 8 }
       cadete = ServicioUsuarios.agregar_cadete(parametros_cadete)
       RepositorioCadetes.new.save(cadete)

@@ -8,4 +8,11 @@ class ServicioUsuarios
     RepositorioClientes.new.save(cliente)
     cliente
   end
+
+  def self.agregar_cadete(parametros_cadete)
+    cadete = Cadete.new(parametros_cadete['nombre'], parametros_cadete['vehiculo'], parametros_cadete['id_cadete'])
+
+    RepositorioCadetes.new.save(cadete)
+    cadete
+  end
 end
