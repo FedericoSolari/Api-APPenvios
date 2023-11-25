@@ -37,7 +37,7 @@ describe RepositorioEnvios do
     expect(envio_encontrado.id).to eq envio_sin_asignar.id
   end
 
-  xit 'Salta excepcion cuando se busca por ID un envio que no existe' do
+  it 'Salta excepcion cuando se busca por ID un envio que no existe' do
     repositorio = described_class.new
     repositorio.delete_all
 

@@ -1,4 +1,5 @@
 require 'sequel'
+require_relative '../excepciones/objeto_no_encontrado_error'
 
 class AbstractRepository
   def save(a_record)
@@ -25,7 +26,7 @@ class AbstractRepository
 
   def find(id)
     found_record = dataset.first(pk_column => id)
-    raise ObjectNotFound.new(self.class.model_class, id) if found_record.nil?
+    raise ObjetoNoEncontrado.new(self.class.model_class, id) if found_record.nil?
 
     load_object dataset.first(found_record)
   end

@@ -2,6 +2,7 @@ require_relative './abstract_repository'
 require_relative '../fabricas/fabrica_estados'
 require_relative '../fabricas/fabrica_tamanios'
 require_relative '../excepciones/envio_no_encontrado_error'
+require_relative '../excepciones/objeto_no_encontrado_error'
 
 class RepositorioEnvios < AbstractRepository
   self.table_name = :envios
@@ -12,6 +13,12 @@ class RepositorioEnvios < AbstractRepository
     raise EnvioNoEncontradoError, "No se encontraron envios con estado #{estado}" if envio.nil?
 
     load_object(envio)
+  end
+
+  def find(id)
+    super(id)
+  rescue ObjetoNoEncontrado
+    raise EnvioNoEncontradoError
   end
 
   protected
