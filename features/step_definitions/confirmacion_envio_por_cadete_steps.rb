@@ -13,8 +13,8 @@ Cuando('confirmo entrega con {string}') do |mensaje|
     @response = Faraday.put("/envios/#{@envio.id.to_s}", datos_solicitud.to_json, { 'Content-Type' => 'application/json' })
 end
 
-Dado('que el estado del envio se encuentra {string}') do |mensaje|
-    pending
+Dado('que el estado del envio se encuentra {string}') do |estado|
+    expect(@envio.estado.estado).to eq estado
   end
   
 Cuando('confirmo retiro con {string}') do |mensaje|

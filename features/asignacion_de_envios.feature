@@ -7,6 +7,7 @@ Característica: Como cadete quiero solicitar ser asignado a un envio
     Y hay un envio con direccion "Cerrito 628", "CP: 1049"
 
   Escenario: Asignación básica de cadete
+    Dado que el estado del envio se encuentra 'pendiente de asignacion'
     Cuando envio el comando "/asignar-envio"
     Entonces se me asigna un envio
     Y deberia ver el id del envio
