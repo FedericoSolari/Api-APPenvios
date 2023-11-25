@@ -21,6 +21,11 @@ class ServicioEnvio
   def self.consultar_estado(parametros_envio)
     envio = RepositorioEnvios.new.find(parametros_envio['id'])
     ParseadorEstado.new.obtener_mensaje(envio)
+    # if envio.cliente.id_cliente == id_solicitante
+    #   estado = ParseadorEstado.new.obtener_mensaje(envio)
+    # else
+    #   raise
+    # end
   end
 
   def self.actualizar_estado(id, estado)

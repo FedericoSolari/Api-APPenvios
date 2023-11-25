@@ -21,7 +21,8 @@ Dado('que el envio esta {string}') do |estado|
 end
 
 Cuando('mando el mensaje {string}') do |_comando|
-    @response = Faraday.get("/envios/#{@envio.id.to_s}", { 'Content-Type' => 'application/json' })
+  datos_solicitud = {body: { id_cliente: 8 } }
+  @response = Faraday.post("/envios/#{@envio.id.to_s}", datos_solicitud[:body].to_json, { 'Content-Type' => 'application/json' })
 end
 
 Entonces('deberia ver el id del envio') do

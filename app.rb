@@ -85,8 +85,8 @@ post '/envios' do
       envio = ServicioEnvio.agregar_envio(parametros_envio)
       customer_logger.info("INFO: Envio creado exitosamente: #{envio.id}")
       handle_response(201, "Se registró tu envio con el ID: *#{envio.id}*. " \
-        "\nLas coordenadas del domicilio de entrega son: "\
-        "\nLat: _#{envio.direccion.latitud}_ \nLng: _#{envio.direccion.longitud}_")
+      "\nLas coordenadas del domicilio de entrega son: "\
+      "\nLat: _#{envio.direccion.latitud}_ \nLng: _#{envio.direccion.longitud}_")
     end
   rescue ClienteNoEncontradoError
     handle_response(400, 'Para poder realizar un envio el usuario debe estar registrado')
@@ -104,8 +104,10 @@ post '/envios' do
   end
 end
 
-get '/envios/:id' do
-  customer_logger.info("INFO: Petición get recibida en /envios/id con id: #{params['id']}")
+post '/envios/:id' do
+  @body ||= request.body.read
+  # parametros_envio = JSON.parse(@body)
+  customer_logger.info("INFO: Petición POST recibida en /envios/id con id: #{params['id']} y cuerpo: #{@body}")
   estado = ServicioEnvio.consultar_estado(params)
   customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
   handle_response(200, estado)
@@ -115,6 +117,17 @@ rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   handle_response(500, 'Error interno del servidor')
 end
+# get '/envios/:id' do
+#   customer_logger.info("INFO: Petición get recibida en /envios/id con id: #{params['id']}")
+#   estado = ServicioEnvio.consultar_estado(params)
+#   customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
+#   handle_response(200, estado)
+# rescue EnvioNoEncontradoError
+#   handle_response(400, "No se encontró un envio con ID #{params['id']}")
+# rescue StandardError => e
+#   customer_logger.error('Error inesperado', e.message)
+#   handle_response(500, 'Error interno del servidor')
+# end
 
 put '/envios/asignar' do
   @body = request.body.read
