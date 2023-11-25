@@ -106,28 +106,19 @@ end
 
 post '/envios/:id' do
   @body ||= request.body.read
-  # parametros_envio = JSON.parse(@body)
+  parametros_envio = JSON.parse(@body)
   customer_logger.info("INFO: Petición POST recibida en /envios/id con id: #{params['id']} y cuerpo: #{@body}")
-  estado = ServicioEnvio.consultar_estado(params)
+  estado = ServicioEnvio.consultar_estado(params, parametros_envio['id_cliente'])
   customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
   handle_response(200, estado)
 rescue EnvioNoEncontradoError
   handle_response(400, "No se encontró un envio con ID #{params['id']}")
+rescue ParametrosInvalidosError => e
+  handle_response(500, e.message)
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   handle_response(500, 'Error interno del servidor')
 end
-# get '/envios/:id' do
-#   customer_logger.info("INFO: Petición get recibida en /envios/id con id: #{params['id']}")
-#   estado = ServicioEnvio.consultar_estado(params)
-#   customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
-#   handle_response(200, estado)
-# rescue EnvioNoEncontradoError
-#   handle_response(400, "No se encontró un envio con ID #{params['id']}")
-# rescue StandardError => e
-#   customer_logger.error('Error inesperado', e.message)
-#   handle_response(500, 'Error interno del servidor')
-# end
 
 put '/envios/asignar' do
   @body = request.body.read

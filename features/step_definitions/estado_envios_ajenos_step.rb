@@ -17,6 +17,7 @@ Dado('que hay un envio creado') do
   end
   
   Cuando('consulto el estado del envio que esta creado') do
-    @response = Faraday.get("/envios/#{@nuevo_envio.id.to_s}", { 'Content-Type' => 'application/json' })
+    datos_solicitud = {body: { id_cliente: @nuevo_cliente.id_cliente } }
+    @response = Faraday.post("/envios/#{@nuevo_envio.id.to_s}", datos_solicitud[:body].to_json, { 'Content-Type' => 'application/json' })
   end
   

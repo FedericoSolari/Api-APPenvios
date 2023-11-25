@@ -64,8 +64,8 @@ describe 'Servicios' do
       parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
-      parametros_envio = { 'id' => envio.id }
-      estado_envio = ServicioEnvio.consultar_estado(parametros_envio)
+      parametros_envio = { 'id' => envio.id, 'id_cliente' => 8 }
+      estado_envio = ServicioEnvio.consultar_estado(parametros_envio, parametros_envio['id_cliente'])
 
       expect(estado_envio).to eq "Tu envio (ID: *#{envio.id}*) se encuentra *pendiente de asignación*"
     end
