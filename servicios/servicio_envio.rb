@@ -29,8 +29,17 @@ class ServicioEnvio
     estado
   end
 
-  def self.actualizar_estado(id, estado)
-    envio = RepositorioEnvios.new.find(id)
+  def self.mensaje_confirmacion(id_envio)
+    envio = RepositorioEnvios.new.find(id_envio)
+    if envio.estado.estado == 'en camino'
+      'Gracias por retirar el envio!'
+    else
+      'Gracias por entregar el envio!'
+    end
+  end
+
+  def self.actualizar_estado(id_envio, estado)
+    envio = RepositorioEnvios.new.find(id_envio)
     envio.estado = FabricaEstados.new.crear_estado(estado)
     RepositorioEnvios.new.save(envio)
     envio

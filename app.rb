@@ -150,7 +150,7 @@ put '/envios/:id' do
   customer_logger.info("INFO: Se Actualiza el envio con id: #{envio.id} al estado : #{envio.estado.estado}")
 
   status 200
-  { text: 'Gracias por entregar el envio!', cliente: envio.cliente.id_cliente,
+  { text: ServicioEnvio.mensaje_confirmacion(params['id']), cliente: envio.cliente.id_cliente,
     text_to_client: ParseadorEstado.new.obtener_mensaje(envio) }.to_json
 rescue EnvioNoEncontradoError
   handle_response(400, "No se encontró un envio con ID #{params['id']}")
