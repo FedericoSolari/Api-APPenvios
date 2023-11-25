@@ -109,6 +109,8 @@ get '/envios/:id' do
   estado = ServicioEnvio.consultar_estado(params)
   customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
   handle_response(200, estado)
+rescue EnvioNoEncontradoError
+  handle_response(400, "No se encontró un envio con ID #{params['id']}")
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   handle_response(500, 'Error interno del servidor')
@@ -146,6 +148,8 @@ put '/envios/:id' do
   status 200
   { text: 'Gracias por entregar el envio!', cliente: envio.cliente.id_cliente,
     text_to_client: ParseadorEstado.new.obtener_mensaje(envio) }.to_json
+rescue EnvioNoEncontradoError
+  handle_response(400, "No se encontró un envio con ID #{params['id']}")
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   handle_response(500, 'Error interno del servidor')

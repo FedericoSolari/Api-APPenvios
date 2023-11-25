@@ -1,6 +1,5 @@
 #language: es
 
-@wip
 Característica: Validacion de existencia de ID de envio
 
 Escenario: Cuando no existe el envio en la consulta del estado
