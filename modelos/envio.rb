@@ -9,7 +9,7 @@ class Envio
   include ActiveModel::Validations
 
   attr_accessor :id, :cadete
-  attr_accessor :tamanio, :direccion, :cliente, :estado
+  attr_accessor :tamanio, :direccion, :cliente, :estado, :duenio
 
   validates :direccion, presence: true
   def initialize(tamanio, direccion, cliente, id = nil)
@@ -18,6 +18,7 @@ class Envio
     @cliente = cliente
     @id = id
     @estado = Pendiente.new
+    @duenio = cliente.nombre
   end
 
   def tiempo_estimado

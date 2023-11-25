@@ -26,7 +26,7 @@ class RepositorioEnvios < AbstractRepository
   # rubocop:disable Metrics/AbcSize
   def load_object(a_hash)
     direccion = RepositorioDirecciones.new.find_by_id(a_hash[:id_direccion])
-    cliente = RepositorioClientes.new.find_by_id(a_hash[:id_cliente])
+    cliente = RepositorioClientes.new.find_by_name(a_hash[:duenio])
     tamanio = FabricaTamanios.new.crear_tamanio(a_hash[:tamanio])
     envio = Envio.new(tamanio, direccion, cliente, a_hash[:id])
     envio.estado = FabricaEstados.new.crear_estado(a_hash[:estado])
@@ -43,7 +43,8 @@ class RepositorioEnvios < AbstractRepository
       id_direccion: envio.direccion.id,
       id_cliente: envio.cliente.id_cliente.to_i,
       id_cadete: envio.cadete&.id_cadete.to_i,
-      estado: envio.estado.estado
+      estado: envio.estado.estado,
+      duenio: envio.cliente.nombre
     }
   end
 end
