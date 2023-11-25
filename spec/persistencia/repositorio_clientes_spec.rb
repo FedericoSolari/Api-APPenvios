@@ -23,7 +23,7 @@ describe RepositorioClientes do
     expect(repositorio.find_by_name(pedro.nombre)).not_to be_nil
   end
 
-  xit 'debería encontrar el ultimo registro con el id del cliente' do
+  it 'debería encontrar el ultimo registro con el id del cliente' do
     # creo dos usuarios con el mismo id_cliente
     ladislao = Cliente.new('ladislao', Direccion.new('Av Las Heras 1232', 'CP: 1018'), 8)
     ricardo = Cliente.new('ricardo', Direccion.new('Av Las Heras 1232', 'CP: 1018'), 8)

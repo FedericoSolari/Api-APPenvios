@@ -12,6 +12,13 @@ class RepositorioClientes < AbstractRepository
     load_object(cliente)
   end
 
+  def find_last_created_with_id(id_cliente)
+    cliente = dataset.where(id_cliente:).order_append(Sequel.asc(:id)).last
+    raise ClienteNoEncontradoError, "No se encontró cliente con el id #{id_cliente}" if cliente.nil?
+
+    load_object(cliente)
+  end
+
   def find_by_name(nombre)
     cliente = dataset.where(nombre: nombre.downcase).first
     return nil if cliente.nil?
