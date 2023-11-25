@@ -20,7 +20,8 @@ class ServicioEnvio
 
   def self.consultar_estado(parametros_envio, id_solicitante)
     envio = RepositorioEnvios.new.find(parametros_envio['id'])
-    if envio.cliente.id_cliente == id_solicitante
+    solicitante = RepositorioClientes.new.find_last_created_with_id(id_solicitante)
+    if envio.cliente.nombre == solicitante.nombre
       estado = ParseadorEstado.new.obtener_mensaje(envio)
     else
       raise ParametrosInvalidosError, 'No tenes envios asociados con ese ID'
