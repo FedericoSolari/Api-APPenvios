@@ -12,9 +12,8 @@ Característica: Como cadete quiero actualizar el estado del envio
     Cuando confirmo entrega con "/confirmar-entrega ID"
     Entonces deberia ver un mensaje "Gracias por entregar el envio!"
 
-  @wip
   Escenario: Como cadete confirmo retiro del envio del domicilio de origen
-    Dado que el estado del envio se encuentra 'en proceso'
+    Dado que el estado del envio se encuentra 'asignado'
     Y estoy asignado al envio
     Cuando confirmo retiro con "/confirmar-retiro ID"
-    Entonces deberia ver un mensaje "Gracias por retirar el envío!"
+    Entonces deberia ver un mensaje "Gracias por retirar el envio!"

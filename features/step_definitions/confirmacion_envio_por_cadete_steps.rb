@@ -18,6 +18,7 @@ Dado('que el estado del envio se encuentra {string}') do |estado|
   end
   
 Cuando('confirmo retiro con {string}') do |mensaje|
-    pending
+    datos_solicitud = {estado: 'en camino'}
+    @response = Faraday.put("/envios/#{@envio.id.to_s}", datos_solicitud.to_json, { 'Content-Type' => 'application/json' })
 end
   
