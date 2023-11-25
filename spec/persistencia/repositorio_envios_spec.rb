@@ -2,6 +2,7 @@ require 'integration_helper'
 require_relative '../../modelos/envio'
 require_relative '../../persistencia/repositorio_envios'
 require_relative '../../persistencia/repositorio_clientes'
+require_relative '../../excepciones/envio_no_encontrado_error'
 
 describe RepositorioEnvios do
   let(:cliente) { Cliente.new('Juan', Direccion.new('Cerrito 628', 'CP:1010'), 8) }
@@ -34,5 +35,12 @@ describe RepositorioEnvios do
 
     envio_encontrado = repositorio.find_by_state('pendiente de asignacion')
     expect(envio_encontrado.id).to eq envio_sin_asignar.id
+  end
+
+  xit 'Salta excepcion cuando se busca por ID un envio que no existe' do
+    repositorio = described_class.new
+    repositorio.delete_all
+
+    expect { repositorio.find(1) }.to raise_error(EnvioNoEncontradoError)
   end
 end
