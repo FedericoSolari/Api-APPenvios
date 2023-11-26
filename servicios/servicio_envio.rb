@@ -44,4 +44,13 @@ class ServicioEnvio
     RepositorioEnvios.new.save(envio)
     envio
   end
+
+  def self.historial_de_envios(id_cliente)
+    cliente = RepositorioClientes.new.find_last_created_with_id(id_cliente)
+    envios = RepositorioEnvios.new.client_record(cliente.nombre)
+
+    raise ParametrosInvalidosError, 'Todavia no tenes envios asociados' if envios.nil?
+
+    envios
+  end
 end

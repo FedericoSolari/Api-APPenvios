@@ -82,7 +82,7 @@ describe 'Servicios' do
       expect(envio_actualizado.estado.estado).to eq 'asignado'
     end
 
-    xit 'Se obtiene el historial de envios del cliente' do
+    it 'Se obtiene el historial de envios del cliente' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
@@ -93,7 +93,7 @@ describe 'Servicios' do
       parametros_envio2 = { 'tamanio' => 'grande', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioEnvio.agregar_envio(parametros_envio2)
 
-      historial = ServicioEnvio.actualizar_estado(envio.id, 'asignado')
+      historial = ServicioEnvio.historial_de_envios(parametros_envio1['id_cliente'])
 
       expect(historial.size).to eq 2
     end
