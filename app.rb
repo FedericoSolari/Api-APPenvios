@@ -159,6 +159,21 @@ rescue StandardError => e
   handle_response(500, 'Error interno del servidor')
 end
 
+get '/clientes/:id' do
+  customer_logger.info("INFO: Petición GET recibida en /clientes/id con id: #{params['id']} ")
+  historial = ServicioEnvio.historial_de_envios(params['id'])
+
+  customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
+  handle_response(200, historial)
+rescue EnvioNoEncontradoError
+  handle_response(400, "No se encontró un envio con ID #{params['id']}")
+rescue ParametrosInvalidosError => e
+  handle_response(500, e.message)
+rescue StandardError => e
+  customer_logger.error('Error inesperado', e.message)
+  handle_response(500, 'Error interno del servidor')
+end
+
 def handle_response(status_code, message)
   status status_code
   { text: message }.to_json
