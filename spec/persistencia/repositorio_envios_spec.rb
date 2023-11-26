@@ -56,7 +56,6 @@ describe RepositorioEnvios do
     envio2 = Envio.new(Grande.new, Direccion.new('moreno 1248', '1088'), cliente)
     repositorio.save(envio2)
 
-    
     historial = repositorio.client_record(cliente.nombre)
     expect(historial.size).to eq 2
   end

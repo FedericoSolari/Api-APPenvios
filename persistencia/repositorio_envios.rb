@@ -16,12 +16,11 @@ class RepositorioEnvios < AbstractRepository
   end
 
   def client_record(duenio)
-    envios = dataset.where(duenio: duenio).limit(5)
+    envios = dataset.where(duenio:).limit(5)
     raise EnvioNoEncontradoError, "No se encontraron envíos para el dueño #{duenio}" if envios.empty?
-  
+
     load_collection(envios)
   end
-  
 
   def find(id)
     super(id)
