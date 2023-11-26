@@ -43,4 +43,20 @@ describe RepositorioEnvios do
 
     expect { repositorio.find(1) }.to raise_error(EnvioNoEncontradoError)
   end
+
+  xit 'deberia encontrar todos los envios de un cliente' do
+    RepositorioClientes.new.save(cliente)
+    RepositorioCadetes.new.save(cadete)
+
+    repositorio = described_class.new
+    repositorio.delete_all
+
+    envio1 = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    repositorio.save(envio1)
+    envio2 = Envio.new(Grande.new, Direccion.new('moreno 1248', '1088'), cliente)
+    repositorio.save(envio2)
+
+    historial = repositorio.client_record(cliente.id_cliente)
+    expect(historial.size).to eq 2
+  end
 end
