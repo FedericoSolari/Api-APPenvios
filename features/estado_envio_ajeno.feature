@@ -1,6 +1,5 @@
 #language: es
 
-# @wip
 Característica: Como cliente no puedo ver el estado de un envio agenoquiero ver el estado del envio
 Antecedentes:
 Dado que hay un envio creado
