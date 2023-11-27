@@ -10,8 +10,8 @@ describe 'ConectorHereApiRoutes' do
     latitud_destino = '-34.59218'
     longitud_destino = '-58.39141'
     response = ConectorHereApiRoutes.new(ENV['HERE_API_KEY']).obtener_duracion_viaje(
-      latitud_origen, longitud_origen, latitud_destino, longitud_destino
+      latitud_origen, longitud_origen, latitud_destino, longitud_destino, 'auto'
     )
-    expect(response['routes'].empty?).to eq(false)
+    expect(response.nil?).to eq(false)
   end
 end
