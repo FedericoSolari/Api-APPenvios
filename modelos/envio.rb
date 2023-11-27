@@ -12,11 +12,11 @@ class Envio
   attr_accessor :tamanio, :direccion, :cliente, :estado, :duenio
 
   validates :direccion, presence: true
-  def initialize(tamanio, direccion, cliente, id = nil, cadete = nil)
+  def initialize(tamanio, direccion, cliente, id = nil)
     @tamanio = tamanio
     @direccion = direccion
     @cliente = cliente
-    @cadete = cadete
+    @cadete = nil
     @id = id
     @estado = Pendiente.new
     @duenio = cliente.nombre
