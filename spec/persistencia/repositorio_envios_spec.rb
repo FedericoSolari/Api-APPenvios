@@ -6,7 +6,7 @@ require_relative '../../excepciones/envio_no_encontrado_error'
 
 describe RepositorioEnvios do
   let(:cliente) { Cliente.new('Juan', Direccion.new('Cerrito 628', 'CP:1010'), 8) }
-  let(:cadete) { Cadete.new('Pedro', 'Moto', 8) }
+  let(:cadete) { Cadete.new('Pedro', 'moto', 8) }
   let(:tamanio) { Chico.new }
 
   it 'deberia guardar y asignar id al envio' do

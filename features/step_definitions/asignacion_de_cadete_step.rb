@@ -6,7 +6,7 @@ Dado('que hay registrado un cliente con domicilio {string}, {string}') do |direc
 end
 
 Dado('que estoy registrado como cadete') do
-  @cadete = Cadete.new('Juan', 'Moto', 2)
+  @cadete = Cadete.new('Juan', 'moto', 2)
   RepositorioCadetes.new.save(@cadete)
 end
 

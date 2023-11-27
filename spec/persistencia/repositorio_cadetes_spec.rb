@@ -10,14 +10,14 @@ describe RepositorioCadetes do
   end
 
   it 'deberia encontrar el registro segun el id del cadete' do
-    juan = Cadete.new('Juan', 'Moto', 8)
+    juan = Cadete.new('Juan', 'moto', 8)
     repositorio = described_class.new
     repositorio.save(juan)
     expect(repositorio.find_by_id(juan.id_cadete)).not_to be_nil
   end
 
   it 'debería encontrar el registro según el nombre del cadete' do
-    juan = Cadete.new('Juan', 'Moto', 8)
+    juan = Cadete.new('Juan', 'moto', 8)
     repositorio = described_class.new
     repositorio.save(juan)
     expect(repositorio.find_by_name(juan.nombre)).not_to be_nil
