@@ -5,7 +5,7 @@ class RepositorioCadetes < AbstractRepository
   self.model_class = 'Cadete'
 
   def find_by_id(id_cadete)
-    cadete = dataset.where(id_cadete:).first
+    cadete = dataset.where(id_cadete:).order_append(Sequel.asc(:id)).last
     return nil if cadete.nil?
 
     load_object(cadete)
