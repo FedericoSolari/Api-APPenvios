@@ -1,7 +1,9 @@
-class Auto
+require_relative './vehiculo'
+
+class Auto < Vehiculo
   VEHICULO = 'auto'.freeze
 
-  def vehiculo
-    VEHICULO
+  def initialize
+    super(VEHICULO)
   end
 end
