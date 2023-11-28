@@ -58,14 +58,14 @@ describe 'Estados' do
       expect(estado.cambiar_pendiente.estado).to eq estado.estado
     end
 
-    xit 'Estado pendiente de asignación no puede cambiar a estado en camino' do
+    it 'Estado pendiente de asignación no puede cambiar a estado en camino' do
       estado = EnCamino.new
 
       expect do
         estado.cambiar_pendiente
       end.to raise_error(
-               CambioEstadoInvalidoError, 'No se puede confirmar el retiro. El envío aún no tiene un cadete asignado.'
-             )
+        CambioEstadoInvalidoError, 'No se puede confirmar el retiro. El envío aún no tiene un cadete asignado.'
+      )
     end
   end
 end
