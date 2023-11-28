@@ -40,33 +40,14 @@ describe 'Estados' do
     end
   end
 
-  describe 'Pendiente de asignacion' do
-    xit 'Estado pendiente de asignacion puede cambiar a estado Asignado' do
-      estado_inicial = Pendiente.new
-      estado_final = Asignado.new
-
-      expect(estado_inicial.cambiar_a_estado(estado_final).estado).to eq estado_final.estado
-    end
-
-    xit 'Estado pendiente de asignacion no puede cambiar a estado En camino' do
-      estado_inicial = Pendiente.new
-      estado_final = Asignado.new
+  describe 'Cambios de estados' do
+    xit 'Estado pendiente de asignación no deberia poder cambiar a estado pendiente de asignación ' do
+      estado = Pendiente.new
 
       expect do
-        estado_inicial.cambiar_a_estado(estado_final).estado
+        estado.cambiar_pendiente
       end.to raise_error(
-        CambioEstadoInvalidoError, 'El envio no se encuentra asignado.'
-      )
-    end
-
-    xit 'Estado pendiente de asignacion no puede cambiar a estado Entregado' do
-      estado_inicial = Pendiente.new
-      estado_final = Asignado.new
-
-      expect do
-        estado_inicial.cambiar_a_estado(estado_final).estado
-      end.to raise_error(
-        CambioEstadoInvalidoError, 'El envio no se encuentra asignado.'
+        CambioEstadoInvalidoError, 'El envio ya se encuentra en estado pendiente de asignación.'
       )
     end
   end
