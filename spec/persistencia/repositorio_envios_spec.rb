@@ -60,7 +60,7 @@ describe RepositorioEnvios do
     expect(historial.size).to eq 2
   end
 
-  it 'Se obtiene 1 envio filtrando por tamaño chico' do
+  it 'Se obtiene envio chico sin asignar correctamente' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
 
@@ -70,11 +70,11 @@ describe RepositorioEnvios do
     envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
     repositorio.save(envio)
 
-    envios = repositorio.find_by_size(['chico'])
+    envios = repositorio.find_by_state_and_size('pendiente de asignacion', ['chico'])
     expect(['chico']).to include(envios.tamanio.tamanio)
   end
 
-  it 'Se obtiene 2 envios filtrando por tamaño chico y mediano' do
+  it 'Se obtiene envio chico o mediano sin asignar correctamente' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
 
@@ -86,11 +86,11 @@ describe RepositorioEnvios do
     envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
     repositorio.save(envio2)
 
-    envios = repositorio.find_by_size(%w[chico mediano])
+    envios = repositorio.find_by_state_and_size('pendiente de asignacion', %w[chico mediano])
     expect(%w[chico mediano]).to include(envios.tamanio.tamanio)
   end
 
-  it 'Se obtiene 2 envios filtrando por tamaño mediano y grande' do
+  it 'Se obtiene envio grande o mediano sin asignar correctamente' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
 
@@ -102,7 +102,7 @@ describe RepositorioEnvios do
     envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
     repositorio.save(envio2)
 
-    envios = repositorio.find_by_size(%w[grande mediano])
+    envios = repositorio.find_by_state_and_size('pendiente de asignacion', %w[grande mediano])
     expect(%w[grande mediano]).to include(envios.tamanio.tamanio)
   end
 end

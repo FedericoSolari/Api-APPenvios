@@ -15,19 +15,18 @@ class RepositorioEnvios < AbstractRepository
     load_object(envio)
   end
 
+  def find_by_state_and_size(estado, tamanios)
+    envio = dataset.where(estado:, tamanio: tamanios).first
+    raise EnvioNoEncontradoError, "No se encontraron envios con estado #{estado} y tamanio/s #{tamanios}" if envio.nil?
+
+    load_object(envio)
+  end
+
   def client_record(duenio)
     envios = dataset.where(duenio:).limit(5)
     raise EnvioNoEncontradoError, "No se encontraron envíos para el dueño #{duenio}" if envios.empty?
 
     load_collection(envios)
-  end
-
-  def find_by_size(tamanios)
-    envio = dataset.where(tamanio: tamanios).first
-
-    raise EnvioNoEncontradoError, "No se encontraron envios con esos tamanios #{tamanios}" if envio.nil?
-
-    load_object(envio)
   end
 
   def find(id)
