@@ -7,6 +7,10 @@ class Asignado < Estado
     super(ESTADO)
   end
 
+  def cambiar_a_estado(estado)
+    estado.cambiar_asignado
+  end
+
   def cambiar_pendiente
     self
   end

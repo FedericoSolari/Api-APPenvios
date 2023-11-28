@@ -7,6 +7,10 @@ class Entregado < Estado
     super(ESTADO)
   end
 
+  def cambiar_a_estado(estado)
+    estado.cambiar_entregado
+  end
+
   def cambiar_pendiente
     raise CambioEstadoInvalidoError, 'No se puede confirmar la entrega. El envío aún no tiene un cadete asignado.'
   end

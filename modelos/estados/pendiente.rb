@@ -8,6 +8,10 @@ class Pendiente < Estado
     super(ESTADO)
   end
 
+  def cambiar_a_estado(estado)
+    estado.cambiar_pendiente
+  end
+
   def cambiar_pendiente
     raise CambioEstadoInvalidoError, 'El envio ya se encuentra en estado pendiente de asignación.'
   end

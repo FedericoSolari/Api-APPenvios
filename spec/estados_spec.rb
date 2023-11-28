@@ -42,7 +42,7 @@ describe 'Estados' do
   end
 
   describe 'Cambio de estado' do
-    xit 'Estado pendiente de asignación cambia a estado asignado correctamente' do
+    it 'Estado pendiente de asignación cambia a estado asignado correctamente' do
       estado_inicial = Pendiente.new
       estado_final = Asignado.new
 

@@ -7,6 +7,10 @@ class EnCamino < Estado
     super(ESTADO)
   end
 
+  def cambiar_a_estado(estado)
+    estado.cambiar_en_camino
+  end
+
   def cambiar_pendiente
     raise CambioEstadoInvalidoError, 'No se puede confirmar el retiro. El envío aún no tiene un cadete asignado.'
   end
