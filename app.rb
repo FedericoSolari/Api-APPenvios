@@ -167,8 +167,10 @@ get '/clientes/:id' do
   handle_record_response(200, historial)
 rescue EnvioNoEncontradoError
   handle_response(400, "No se encontró un envio con ID #{params['id']}")
+rescue ClienteNoEncontradoError
+  handle_response(400, 'Para poder obtener el historial el usuario debe estar registrado')
 rescue ParametrosInvalidosError => e
-  handle_response(500, e.message)
+  handle_response(400, e.message)
 rescue StandardError => e
   customer_logger.error('Error inesperado', e.message)
   handle_response(500, 'Error interno del servidor')
