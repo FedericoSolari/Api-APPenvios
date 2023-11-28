@@ -118,7 +118,7 @@ describe 'Estados' do
   end
 
   describe 'En Camino' do
-    xit 'Estado en camino no puede cambiar a estado pendiente de asignación' do
+    it 'Estado en camino no puede cambiar a estado pendiente de asignación' do
       estado = Pendiente.new
 
       expect do
