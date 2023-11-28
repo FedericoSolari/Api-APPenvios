@@ -97,5 +97,25 @@ describe 'Servicios' do
 
       expect(historial.size).to eq 2
     end
+
+    xit 'Cadete con bicicleta obtiene solo envio chico' do
+      parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      ServicioUsuarios.agregar_cliente(parametros_cliente)
+
+      # creo dos envios
+      parametros_envio2 = { 'tamanio' => 'grande', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      ServicioEnvio.agregar_envio(parametros_envio2)
+
+      parametros_envio1 = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      ServicioEnvio.agregar_envio(parametros_envio1)
+
+      parametros_cadete = { 'nombre' => 'fede', 'vehiculo' => 'bicicleta', 'id_cadete' => 1 }
+      ServicioUsuarios.agregar_cadete(parametros_cadete)
+
+      parametros_envio = { 'id_cadete' => 1 }
+      envio_asignado = ServicioEnvio.asignar_envio(parametros_envio)
+
+      expect(envio.id).to eq envio_asignado.id
+    end
   end
 end
