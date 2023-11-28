@@ -147,5 +147,11 @@ describe 'Estados' do
         CambioEstadoInvalidoError, 'El envio ya se encuentra en camino a la dirección de entrega.'
       )
     end
+
+    xit 'Estado en camino puede cambiar a estado entregado' do
+      estado = Entregado.new
+
+      expect(estado.cambiar_asignado.estado).to eq estado.estado
+    end
   end
 end
