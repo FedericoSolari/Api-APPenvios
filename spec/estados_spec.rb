@@ -68,7 +68,7 @@ describe 'Estados' do
       )
     end
 
-    xit 'Estado pendiente de asignación no puede cambiar a estado entregado' do
+    it 'Estado pendiente de asignación no puede cambiar a estado entregado' do
       estado = Entregado.new
 
       expect do
