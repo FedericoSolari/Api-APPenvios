@@ -22,6 +22,14 @@ class RepositorioEnvios < AbstractRepository
     load_collection(envios)
   end
 
+  def find_by_size(tamanios)
+    envio = dataset.where(tamanio: tamanios).first
+
+    raise EnvioNoEncontradoError, "No se encontraron envios con esos tamanios #{tamanios}" if envio.nil?
+
+    load_object(envio)
+  end
+
   def find(id)
     super(id)
   rescue ObjetoNoEncontrado

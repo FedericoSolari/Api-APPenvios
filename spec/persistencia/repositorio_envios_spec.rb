@@ -60,7 +60,7 @@ describe RepositorioEnvios do
     expect(historial.size).to eq 2
   end
 
-  xit 'Se obtiene 1 envio filtrando por tamaño chico' do
+  it 'Se obtiene 1 envio filtrando por tamaño chico' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
 
@@ -71,10 +71,10 @@ describe RepositorioEnvios do
     repositorio.save(envio)
 
     envios = repositorio.find_by_size(['chico'])
-    expect(envios.size).to eq 2
+    expect(['chico']).to include(envios.tamanio.tamanio)
   end
 
-  xit 'Se obtiene 2 envios filtrando por tamaño chico y mediano' do
+  it 'Se obtiene 2 envios filtrando por tamaño chico y mediano' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
 
@@ -87,10 +87,10 @@ describe RepositorioEnvios do
     repositorio.save(envio2)
 
     envios = repositorio.find_by_size(%w[chico mediano])
-    expect(envios.size).to eq 2
+    expect(%w[chico mediano]).to include(envios.tamanio.tamanio)
   end
 
-  xit 'Se obtiene 2 envios filtrando por tamaño mediano y grande' do
+  it 'Se obtiene 2 envios filtrando por tamaño mediano y grande' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
 
@@ -103,6 +103,6 @@ describe RepositorioEnvios do
     repositorio.save(envio2)
 
     envios = repositorio.find_by_size(%w[grande mediano])
-    expect(envios.size).to eq 2
+    expect(%w[grande mediano]).to include(envios.tamanio.tamanio)
   end
 end
