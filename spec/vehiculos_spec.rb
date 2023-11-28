@@ -1,5 +1,6 @@
 require_relative '../modelos/vehiculos/auto'
 require_relative '../modelos/vehiculos/moto'
+require_relative '../modelos/vehiculos/bicicleta'
 
 describe 'Vehiculos' do
   describe 'Auto' do
@@ -15,7 +16,7 @@ describe 'Vehiculos' do
       expect(vehiculo.vehiculo).to eq vehiculo_esperado
     end
 
-    xit 'Vehiculo bicicleta creado correctamente' do
+    it 'Vehiculo bicicleta creado correctamente' do
       vehiculo = Bicicleta.new
       vehiculo_esperado = 'bicicleta'
       expect(vehiculo.vehiculo).to eq vehiculo_esperado
