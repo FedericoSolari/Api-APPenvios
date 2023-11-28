@@ -39,4 +39,30 @@ describe 'Estados' do
       expect(estado_creado.estado).to eq estado_a_crear
     end
   end
+
+  describe 'Pendiente de asignacion' do
+    xit 'Estado pendiente de asignacion puede cambiar a estado Asignado' do
+      fabrica = FabricaEstados.new
+      estado_a_crear = 'entregado'
+      estado_creado = fabrica.crear_estado(estado_a_crear)
+
+      expect(estado_creado.estado).to eq estado_a_crear
+    end
+
+    xit 'Estado pendiente de asignacion no puede cambiar a estado En camino' do
+      fabrica = FabricaEstados.new
+      estado_a_crear = 'entregado'
+      estado_creado = fabrica.crear_estado(estado_a_crear)
+
+      expect(estado_creado.estado).to eq estado_a_crear
+    end
+
+    xit 'Estado pendiente de asignacion no puede cambiar a estado Entregado' do
+      fabrica = FabricaEstados.new
+      estado_a_crear = 'entregado'
+      estado_creado = fabrica.crear_estado(estado_a_crear)
+
+      expect(estado_creado.estado).to eq estado_a_crear
+    end
+  end
 end
