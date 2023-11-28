@@ -42,27 +42,32 @@ describe 'Estados' do
 
   describe 'Pendiente de asignacion' do
     xit 'Estado pendiente de asignacion puede cambiar a estado Asignado' do
-      fabrica = FabricaEstados.new
-      estado_a_crear = 'entregado'
-      estado_creado = fabrica.crear_estado(estado_a_crear)
+      estado_inicial = Pendiente.new
+      estado_final = Asignado.new
 
-      expect(estado_creado.estado).to eq estado_a_crear
+      expect(estado_inicial.cambiar_a_estado(estado_final).estado).to eq estado_final.estado
     end
 
     xit 'Estado pendiente de asignacion no puede cambiar a estado En camino' do
-      fabrica = FabricaEstados.new
-      estado_a_crear = 'entregado'
-      estado_creado = fabrica.crear_estado(estado_a_crear)
+      estado_inicial = Pendiente.new
+      estado_final = Asignado.new
 
-      expect(estado_creado.estado).to eq estado_a_crear
+      expect do
+        estado_inicial.cambiar_a_estado(estado_final).estado
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'El envio no se encuentra asignado.'
+      )
     end
 
     xit 'Estado pendiente de asignacion no puede cambiar a estado Entregado' do
-      fabrica = FabricaEstados.new
-      estado_a_crear = 'entregado'
-      estado_creado = fabrica.crear_estado(estado_a_crear)
+      estado_inicial = Pendiente.new
+      estado_final = Asignado.new
 
-      expect(estado_creado.estado).to eq estado_a_crear
+      expect do
+        estado_inicial.cambiar_a_estado(estado_final).estado
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'El envio no se encuentra asignado.'
+      )
     end
   end
 end
