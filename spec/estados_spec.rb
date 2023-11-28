@@ -176,7 +176,7 @@ describe 'Estados' do
       )
     end
 
-    xit 'Estado entregado no puede cambiar a estado en camino' do
+    it 'Estado entregado no puede cambiar a estado en camino' do
       estado = EnCamino.new
 
       expect do
