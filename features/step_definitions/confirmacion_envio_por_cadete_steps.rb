@@ -14,7 +14,8 @@ Cuando('confirmo entrega con {string}') do |mensaje|
 end
 
 Dado('que el estado del envio se encuentra {string}') do |estado|
-    expect(@envio.estado.estado).to eq estado
+  @envio.estado = FabricaEstados.new.crear_estado(estado)
+  RepositorioEnvios.new.save(@envio)
   end
   
 Cuando('confirmo retiro con {string}') do |mensaje|

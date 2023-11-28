@@ -16,7 +16,7 @@ class ServicioEnvio
     tamanios_permitidos = tamanios_permitidos_por_vehiculo(cadete.vehiculo)
     envio = RepositorioEnvios.new.find_by_state_and_size('pendiente de asignacion', tamanios_permitidos)
     envio.cadete = cadete
-    envio.estado = FabricaEstados.new.crear_estado('asignado')
+    envio.estado = envio.estado.cambiar_a_estado(FabricaEstados.new.crear_estado('asignado'))
     envio
   end
 
@@ -42,7 +42,7 @@ class ServicioEnvio
 
   def self.actualizar_estado(id_envio, estado)
     envio = RepositorioEnvios.new.find(id_envio)
-    envio.estado = FabricaEstados.new.crear_estado(estado)
+    envio.estado = envio.estado.cambiar_a_estado(FabricaEstados.new.crear_estado(estado))
     RepositorioEnvios.new.save(envio)
     envio
   end
