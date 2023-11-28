@@ -185,5 +185,15 @@ describe 'Estados' do
         CambioEstadoInvalidoError, 'El envio ya ha sido entregado.'
       )
     end
+
+    it 'Estado entregado no puede cambiar a estado entregado' do
+      estado = Entregado.new
+
+      expect do
+        estado.cambiar_entregado
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'El envio ya ha sido entregado.'
+      )
+    end
   end
 end
