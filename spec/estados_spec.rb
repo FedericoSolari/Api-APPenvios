@@ -78,4 +78,16 @@ describe 'Estados' do
       )
     end
   end
+
+  describe 'Pendiente de asignación' do
+    xit 'Estado asignado no puede cambiar a estado pendiente de asignación' do
+      estado = Pendiente.new
+
+      expect do
+        estado.cambiar_asignado
+      end.to raise_error(
+               CambioEstadoInvalidoError, 'El envio ya se encuentra asignado.'
+             )
+    end
+  end
 end
