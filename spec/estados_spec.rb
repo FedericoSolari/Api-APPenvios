@@ -105,5 +105,15 @@ describe 'Estados' do
 
       expect(estado.cambiar_asignado.estado).to eq estado.estado
     end
+
+    xit 'Estado asignado no puede cambiar a estado entregado' do
+      estado = Entregado.new
+
+      expect do
+        estado.cambiar_asignado
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'No se puede confirmar la entrega. El envío no ha sido retirado.'
+      )
+    end
   end
 end
