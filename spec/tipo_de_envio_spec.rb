@@ -9,4 +9,12 @@ describe 'Tipo de envio' do
       expect(tipo.tipo).to eq tipo_esperado
     end
   end
+
+  describe 'Express' do
+    xit 'Envio express creado correctamente' do
+      tipo = Express.new
+      tipo_esperado = 'express'
+      expect(tipo.tipo).to eq tipo_esperado
+    end
+  end
 end
