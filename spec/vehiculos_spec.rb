@@ -14,5 +14,11 @@ describe 'Vehiculos' do
       vehiculo_esperado = 'moto'
       expect(vehiculo.vehiculo).to eq vehiculo_esperado
     end
+
+    xit 'Vehiculo bicicleta creado correctamente' do
+      vehiculo = Bicicleta.new
+      vehiculo_esperado = 'bicicleta'
+      expect(vehiculo.vehiculo).to eq vehiculo_esperado
+    end
   end
 end
