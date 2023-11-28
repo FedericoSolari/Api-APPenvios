@@ -18,4 +18,14 @@ describe 'Tipo de envio' do
       expect(tipo.tipo).to eq tipo_esperado
     end
   end
+
+  describe 'Fabrica de tipos de envio' do
+    xit 'Fabrica crea correctamente un tipo de envio clasico' do
+      fabrica = FabricaTipos.new
+      tipo_a_crear = 'clasico'
+      tipo_creado = fabrica.crear_tipo_de_envio(tipo_a_crear)
+
+      expect(tipo_creado.tipo).to eq tipo_a_crear
+    end
+  end
 end
