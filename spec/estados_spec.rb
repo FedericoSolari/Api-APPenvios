@@ -42,7 +42,7 @@ describe 'Estados' do
   end
 
   describe 'Pendiente de asignación' do
-    it 'Estado pendiente de asignación no deberia poder cambiar a estado pendiente de asignación ' do
+    it 'Estado pendiente de asignación no puede cambiar a estado pendiente de asignación' do
       estado = Pendiente.new
 
       expect do
@@ -50,6 +50,12 @@ describe 'Estados' do
       end.to raise_error(
         CambioEstadoInvalidoError, 'El envio ya se encuentra en estado pendiente de asignación.'
       )
+    end
+
+    xit 'Estado pendiente de asignación puede cambiar a estado asignado' do
+      estado = Asignado.new
+
+      expect(estado.cambiar_pendiente.estado).to eq estado.estado
     end
   end
 end
