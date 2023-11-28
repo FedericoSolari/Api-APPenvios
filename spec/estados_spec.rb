@@ -175,5 +175,15 @@ describe 'Estados' do
         CambioEstadoInvalidoError, 'El envio ya ha sido entregado.'
       )
     end
+
+    xit 'Estado entregado no puede cambiar a estado en camino' do
+      estado = EnCamino.new
+
+      expect do
+        estado.cambiar_entregado
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'El envio ya ha sido entregado.'
+      )
+    end
   end
 end
