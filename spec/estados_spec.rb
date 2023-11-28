@@ -127,5 +127,15 @@ describe 'Estados' do
         CambioEstadoInvalidoError, 'El envio ya se encuentra en camino a la dirección de entrega.'
       )
     end
+
+    xit 'Estado en camino no puede cambiar a estado asignado' do
+      estado = Asignado.new
+
+      expect do
+        estado.cambiar_en_camino
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'El envio ya se encuentra en camino a la dirección de entrega.'
+      )
+    end
   end
 end
