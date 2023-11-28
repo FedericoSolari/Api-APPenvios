@@ -6,16 +6,4 @@ class Entregado < Estado
   def initialize
     super(ESTADO)
   end
-
-  def cadete_asignado?
-    true
-  end
-
-  def se_retiro?
-    true
-  end
-
-  def se_entrego?
-    true
-  end
 end
