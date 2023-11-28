@@ -90,14 +90,14 @@ describe 'Estados' do
       )
     end
 
-    xit 'Estado asignado no puede cambiar a estado asignado' do
+    it 'Estado asignado no puede cambiar a estado asignado' do
       estado = Asignado.new
 
       expect do
         estado.cambiar_asignado
       end.to raise_error(
-               CambioEstadoInvalidoError, 'El envio ya se encuentra asignado.'
-             )
+        CambioEstadoInvalidoError, 'El envio ya se encuentra asignado.'
+      )
     end
   end
 end
