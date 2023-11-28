@@ -11,4 +11,8 @@ class Pendiente < Estado
   def cambiar_pendiente
     raise CambioEstadoInvalidoError, 'El envio ya se encuentra en estado pendiente de asignación.'
   end
+
+  def cambiar_asignado
+    raise CambioEstadoInvalidoError, 'El envio ya se encuentra asignado.'
+  end
 end
