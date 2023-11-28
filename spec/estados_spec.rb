@@ -99,5 +99,11 @@ describe 'Estados' do
         CambioEstadoInvalidoError, 'El envio ya se encuentra asignado.'
       )
     end
+
+    xit 'Estado asignado puede cambiar a estado en camino' do
+      estado = EnCamino.new
+
+      expect(estado.cambiar_pendiente.estado).to eq estado.estado
+    end
   end
 end
