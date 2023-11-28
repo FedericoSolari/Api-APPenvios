@@ -45,7 +45,7 @@ describe 'Vehiculos' do
       expect(vehiculo_creado.vehiculo).to eq vehiculo_a_crear
     end
 
-    xit 'Fabrica crea correctamente un vehiculo bicicleta' do
+    it 'Fabrica crea correctamente un vehiculo bicicleta' do
       fabrica = FabricaVehiculos.new
       vehiculo_a_crear = 'bicicleta'
       vehiculo_creado = fabrica.crear_vehiculo(vehiculo_a_crear)
