@@ -148,10 +148,10 @@ describe 'Estados' do
       )
     end
 
-    xit 'Estado en camino puede cambiar a estado entregado' do
+    it 'Estado en camino puede cambiar a estado entregado' do
       estado = Entregado.new
 
-      expect(estado.cambiar_asignado.estado).to eq estado.estado
+      expect(estado.cambiar_en_camino.estado).to eq estado.estado
     end
   end
 end

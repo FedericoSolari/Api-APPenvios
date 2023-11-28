@@ -14,4 +14,8 @@ class Entregado < Estado
   def cambiar_asignado
     raise CambioEstadoInvalidoError, 'No se puede confirmar la entrega. El envío no ha sido retirado.'
   end
+
+  def cambiar_en_camino
+    self
+  end
 end
