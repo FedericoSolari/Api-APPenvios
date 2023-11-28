@@ -1,6 +1,7 @@
 require_relative '../modelos/vehiculos/auto'
 require_relative '../modelos/vehiculos/moto'
 require_relative '../modelos/vehiculos/bicicleta'
+require_relative '../fabricas/fabrica_vehiculos'
 
 describe 'Vehiculos' do
   describe 'Auto' do
@@ -28,7 +29,7 @@ describe 'Vehiculos' do
   end
 
   describe 'Fabrica de vehiculos' do
-    xit 'Fabrica crea correctamente un vehiculo auto' do
+    it 'Fabrica crea correctamente un vehiculo auto' do
       fabrica = FabricaVehiculos.new
       vehiculo_a_crear = 'auto'
       vehiculo_creado = fabrica.crear_vehiculo(vehiculo_a_crear)
