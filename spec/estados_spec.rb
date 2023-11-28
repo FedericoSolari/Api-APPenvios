@@ -116,4 +116,16 @@ describe 'Estados' do
       )
     end
   end
+
+  describe 'En Camino' do
+    xit 'Estado en camino no puede cambiar a estado pendiente de asignación' do
+      estado = Pendiente.new
+
+      expect do
+        estado.cambiar_en_camino
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'El envio ya se encuentra en camino a la dirección de entrega.'
+      )
+    end
+  end
 end
