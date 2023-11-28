@@ -25,7 +25,6 @@ class RepositorioEnvios < AbstractRepository
 
   def client_record(duenio)
     envios = dataset.where(duenio: duenio.downcase).reverse_order(:id).limit(5)
-    puts "ENVIOS: #{envios}"
     raise EnviosNoEncontradosError, "No se encontraron envíos para el dueño #{duenio}" if envios.empty?
 
     load_collection(envios)

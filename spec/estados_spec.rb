@@ -4,6 +4,7 @@ require_relative '../modelos/estados/asignado'
 require_relative '../modelos/estados/en_camino'
 require_relative '../modelos/estados/entregado'
 require_relative '../fabricas/fabrica_estados'
+require_relative '../excepciones/cambio_estado_invalido_error'
 
 describe 'Estados' do
   describe 'Fabrica de estados' do
@@ -40,8 +41,8 @@ describe 'Estados' do
     end
   end
 
-  describe 'Cambios de estados' do
-    xit 'Estado pendiente de asignación no deberia poder cambiar a estado pendiente de asignación ' do
+  describe 'Pendiente de asignación' do
+    it 'Estado pendiente de asignación no deberia poder cambiar a estado pendiente de asignación ' do
       estado = Pendiente.new
 
       expect do
