@@ -89,5 +89,15 @@ describe 'Estados' do
         CambioEstadoInvalidoError, 'El envio ya se encuentra asignado.'
       )
     end
+
+    xit 'Estado asignado no puede cambiar a estado asignado' do
+      estado = Asignado.new
+
+      expect do
+        estado.cambiar_asignado
+      end.to raise_error(
+               CambioEstadoInvalidoError, 'El envio ya se encuentra asignado.'
+             )
+    end
   end
 end
