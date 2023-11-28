@@ -79,7 +79,7 @@ describe 'Estados' do
     end
   end
 
-  describe 'Pendiente de asignación' do
+  describe 'Asignado' do
     it 'Estado asignado no puede cambiar a estado pendiente de asignación' do
       estado = Pendiente.new
 
@@ -100,10 +100,10 @@ describe 'Estados' do
       )
     end
 
-    xit 'Estado asignado puede cambiar a estado en camino' do
+    it 'Estado asignado puede cambiar a estado en camino' do
       estado = EnCamino.new
 
-      expect(estado.cambiar_pendiente.estado).to eq estado.estado
+      expect(estado.cambiar_asignado.estado).to eq estado.estado
     end
   end
 end
