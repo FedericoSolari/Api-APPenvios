@@ -9,6 +9,7 @@ require_relative './excepciones/domicilio_inexistente_error'
 require_relative './excepciones/envio_no_encontrado_error'
 require_relative './excepciones/cliente_no_encontrado_error'
 require_relative './excepciones/usuario_duplicado_error'
+require_relative './excepciones/envios_no_encontrados_error'
 require_relative './fabricas/fabrica_tamanios'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
@@ -167,6 +168,8 @@ get '/clientes/:id' do
   handle_record_response(200, historial)
 rescue EnvioNoEncontradoError
   handle_response(400, "No se encontró un envio con ID #{params['id']}")
+rescue EnviosNoEncontradosError => e
+  handle_response(400, e.message)
 rescue ClienteNoEncontradoError
   handle_response(400, 'Para poder obtener el historial el usuario debe estar registrado')
 rescue ParametrosInvalidosError => e

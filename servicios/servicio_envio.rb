@@ -1,4 +1,5 @@
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
+require_relative '../excepciones/envios_no_encontrados_error'
 require_relative './servicio_direccion'
 
 class ServicioEnvio
@@ -50,17 +51,15 @@ class ServicioEnvio
     cliente = RepositorioClientes.new.find_last_created_with_id(id_cliente)
     envios = RepositorioEnvios.new.client_record(cliente.nombre)
 
-    raise ParametrosInvalidosError, 'Todavia no tenes envios asociados' if envios.nil?
-
     formatear_historial(envios)
   end
 
   def self.formatear_historial(envios)
     historial = []
     envios.each do |e|
-      informacion_envio = { 'text': "Envio: *#{e.id}*,\n Tamaño: *#{e.tamanio.tamanio}*,\n" \
-      "Direccion destino: *#{e.direccion.direccion}*,\n" \
-       "Cadete asignado: *#{e.cadete.nil? ? '-' : e.cadete.nombre}*,\n Estado: *#{e.estado.estado}*\n" }
+      informacion_envio = { 'text': "Envio: *ID #{e.id}*, \nTamaño: *#{e.tamanio.tamanio}*, \n" \
+      "Direccion destino: *#{e.direccion.direccion}*, \n" \
+       "Cadete asignado: *#{e.cadete.nil? ? '-' : e.cadete.nombre}*, \nEstado: *#{e.estado.estado}*\n" }
       historial << informacion_envio
     end
     historial

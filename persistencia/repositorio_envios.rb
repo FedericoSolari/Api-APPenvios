@@ -2,6 +2,7 @@ require_relative './abstract_repository'
 require_relative '../fabricas/fabrica_estados'
 require_relative '../fabricas/fabrica_tamanios'
 require_relative '../excepciones/envio_no_encontrado_error'
+require_relative '../excepciones/envios_no_encontrados_error'
 require_relative '../excepciones/objeto_no_encontrado_error'
 
 class RepositorioEnvios < AbstractRepository
@@ -23,8 +24,9 @@ class RepositorioEnvios < AbstractRepository
   end
 
   def client_record(duenio)
-    envios = dataset.where(duenio: duenio.downcase).limit(5)
-    raise EnvioNoEncontradoError, "No se encontraron envíos para el dueño #{duenio}" if envios.empty?
+    envios = dataset.where(duenio: duenio.downcase).reverse_order(:id).limit(5)
+    puts "ENVIOS: #{envios}"
+    raise EnviosNoEncontradosError, "No se encontraron envíos para el dueño #{duenio}" if envios.empty?
 
     load_collection(envios)
   end
