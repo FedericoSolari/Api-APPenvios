@@ -1,6 +1,7 @@
 require_relative '../modelos/tipo_de_envio/tipo_envio'
 require_relative '../modelos/tipo_de_envio/clasico'
 require_relative '../modelos/tipo_de_envio/express'
+require_relative '../fabricas/fabrica_de_tipos'
 
 describe 'Tipo de envio' do
   describe 'Clasico' do
@@ -20,8 +21,8 @@ describe 'Tipo de envio' do
   end
 
   describe 'Fabrica de tipos de envio' do
-    xit 'Fabrica crea correctamente un tipo de envio clasico' do
-      fabrica = FabricaTipos.new
+    it 'Fabrica crea correctamente un tipo de envio clasico' do
+      fabrica = FabricaTipoEnvios.new
       tipo_a_crear = 'clasico'
       tipo_creado = fabrica.crear_tipo_de_envio(tipo_a_crear)
 
