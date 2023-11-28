@@ -41,6 +41,15 @@ describe 'Estados' do
     end
   end
 
+  describe 'Cambio de estado' do
+    xit 'Estado pendiente de asignación cambia a estado asignado correctamente' do
+      estado_inicial = Pendiente.new
+      estado_final = Asignado.new
+
+      expect(estado_inicial.cambiar_a_estado(estado_final).estado).to eq estado_final.estado
+    end
+  end
+
   describe 'Pendiente de asignación' do
     it 'Estado pendiente de asignación no puede cambiar a estado pendiente de asignación' do
       estado = Pendiente.new
