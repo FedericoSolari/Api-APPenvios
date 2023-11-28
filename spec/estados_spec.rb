@@ -154,4 +154,16 @@ describe 'Estados' do
       expect(estado.cambiar_en_camino.estado).to eq estado.estado
     end
   end
+
+  describe 'Entregado' do
+    xit 'Estado entregado no puede cambiar a estado pendiente de asignación' do
+      estado = Pendiente.new
+
+      expect do
+        estado.cambiar_entregado
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'El envio ya ha sido entregado.'
+      )
+    end
+  end
 end
