@@ -67,5 +67,15 @@ describe 'Estados' do
         CambioEstadoInvalidoError, 'No se puede confirmar el retiro. El envío aún no tiene un cadete asignado.'
       )
     end
+
+    xit 'Estado pendiente de asignación no puede cambiar a estado entregado' do
+      estado = Entregado.new
+
+      expect do
+        estado.cambiar_pendiente
+      end.to raise_error(
+        CambioEstadoInvalidoError, 'No se puede confirmar la entrega. El envío aún no tiene un cadete asignado.'
+      )
+    end
   end
 end
