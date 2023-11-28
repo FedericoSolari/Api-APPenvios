@@ -52,7 +52,7 @@ describe 'Estados' do
       )
     end
 
-    xit 'Estado pendiente de asignación puede cambiar a estado asignado' do
+    it 'Estado pendiente de asignación puede cambiar a estado asignado' do
       estado = Asignado.new
 
       expect(estado.cambiar_pendiente.estado).to eq estado.estado

@@ -6,4 +6,8 @@ class Asignado < Estado
   def initialize
     super(ESTADO)
   end
+
+  def cambiar_pendiente
+    self
+  end
 end
