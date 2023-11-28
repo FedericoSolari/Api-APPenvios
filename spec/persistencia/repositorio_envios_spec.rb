@@ -59,4 +59,50 @@ describe RepositorioEnvios do
     historial = repositorio.client_record(cliente.nombre)
     expect(historial.size).to eq 2
   end
+
+  xit 'Se obtiene 1 envio filtrando por tamaño chico' do
+    RepositorioClientes.new.save(cliente)
+    RepositorioCadetes.new.save(cadete)
+
+    repositorio = described_class.new
+    repositorio.delete_all
+
+    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    repositorio.save(envio)
+
+    envios = repositorio.find_by_size(['chico'])
+    expect(envios.size).to eq 2
+  end
+
+  xit 'Se obtiene 2 envios filtrando por tamaño chico y mediano' do
+    RepositorioClientes.new.save(cliente)
+    RepositorioCadetes.new.save(cadete)
+
+    repositorio = described_class.new
+    repositorio.delete_all
+
+    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    repositorio.save(envio)
+    envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    repositorio.save(envio2)
+
+    envios = repositorio.find_by_size(%w[chico mediano])
+    expect(envios.size).to eq 2
+  end
+
+  xit 'Se obtiene 2 envios filtrando por tamaño mediano y grande' do
+    RepositorioClientes.new.save(cliente)
+    RepositorioCadetes.new.save(cadete)
+
+    repositorio = described_class.new
+    repositorio.delete_all
+
+    envio = Envio.new(Grande.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    repositorio.save(envio)
+    envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    repositorio.save(envio2)
+
+    envios = repositorio.find_by_size(%w[grande mediano])
+    expect(envios.size).to eq 2
+  end
 end
