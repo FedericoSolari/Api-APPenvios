@@ -106,7 +106,7 @@ describe 'Estados' do
       expect(estado.cambiar_asignado.estado).to eq estado.estado
     end
 
-    xit 'Estado asignado no puede cambiar a estado entregado' do
+    it 'Estado asignado no puede cambiar a estado entregado' do
       estado = Entregado.new
 
       expect do

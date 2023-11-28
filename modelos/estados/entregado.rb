@@ -10,4 +10,8 @@ class Entregado < Estado
   def cambiar_pendiente
     raise CambioEstadoInvalidoError, 'No se puede confirmar la entrega. El envío aún no tiene un cadete asignado.'
   end
+
+  def cambiar_asignado
+    raise CambioEstadoInvalidoError, 'No se puede confirmar la entrega. El envío no ha sido retirado.'
+  end
 end
