@@ -28,5 +28,13 @@ describe 'Tipo de envio' do
 
       expect(tipo_creado.tipo).to eq tipo_a_crear
     end
+
+    xit 'Fabrica crea correctamente un tipo de envio express' do
+      fabrica = FabricaTipoEnvios.new
+      tipo_a_crear = 'express'
+      tipo_creado = fabrica.crear_tipo_de_envio(tipo_a_crear)
+
+      expect(tipo_creado.tipo).to eq tipo_a_crear
+    end
   end
 end
