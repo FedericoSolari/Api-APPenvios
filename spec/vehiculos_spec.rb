@@ -9,17 +9,31 @@ describe 'Vehiculos' do
       vehiculo_esperado = 'auto'
       expect(vehiculo.vehiculo).to eq vehiculo_esperado
     end
+  end
 
+  describe 'Moto' do
     it 'Vehiculo moto creado correctamente' do
       vehiculo = Moto.new
       vehiculo_esperado = 'moto'
       expect(vehiculo.vehiculo).to eq vehiculo_esperado
     end
+  end
 
+  describe 'Bicicleta' do
     it 'Vehiculo bicicleta creado correctamente' do
       vehiculo = Bicicleta.new
       vehiculo_esperado = 'bicicleta'
       expect(vehiculo.vehiculo).to eq vehiculo_esperado
+    end
+  end
+
+  describe 'Fabrica de vehiculos' do
+    xit 'Fabrica crea correctamente un vehiculo auto' do
+      fabrica = FabricaVehiculos.new
+      vehiculo_a_crear = 'auto'
+      vehiculo_creado = fabrica.crear_vehiculo(vehiculo_a_crear)
+
+      expect(vehiculo_creado.vehiculo).to eq vehiculo_a_crear
     end
   end
 end
