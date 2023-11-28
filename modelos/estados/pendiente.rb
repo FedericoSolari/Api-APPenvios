@@ -19,4 +19,8 @@ class Pendiente < Estado
   def cambiar_en_camino
     raise CambioEstadoInvalidoError, 'El envio ya se encuentra en camino a la dirección de entrega.'
   end
+
+  def cambiar_entregado
+    raise CambioEstadoInvalidoError, 'El envio ya ha sido entregado.'
+  end
 end
