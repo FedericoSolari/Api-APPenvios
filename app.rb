@@ -164,7 +164,7 @@ get '/clientes/:id' do
   historial = ServicioEnvio.historial_de_envios(params['id'])
 
   customer_logger.info("INFO: Respuesta del estado de envio con id:#{params['id']}")
-  handle_response(200, historial)
+  handle_record_response(200, historial)
 rescue EnvioNoEncontradoError
   handle_response(400, "No se encontró un envio con ID #{params['id']}")
 rescue ParametrosInvalidosError => e
@@ -177,4 +177,9 @@ end
 def handle_response(status_code, message)
   status status_code
   { text: message }.to_json
+end
+
+def handle_record_response(status_code, message)
+  status status_code
+  { texts: message }.to_json
 end

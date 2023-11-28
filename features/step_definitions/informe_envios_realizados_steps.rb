@@ -14,8 +14,7 @@ end
 
 Entonces('deberia ver mensajes que incluyan {string}') do |mensaje|
     parsed_historial = JSON.parse(@historial.body)
-    
-    parsed_historial['text'].each do |registro|
-        expect(registro.gsub(/[\n*_]/, '').include?(mensaje)).to eq true
+    parsed_historial['texts'].each do |registro|
+        expect(registro['text'].gsub(/[\n*_]/, '').include?(mensaje)).to eq true
     end    
   end

@@ -58,10 +58,11 @@ class ServicioEnvio
   def self.formatear_historial(envios)
     historial = []
     envios.each do |e|
-      informacion_envio = "Envio: #{e.id}, Tamaño: #{e.tamanio}, Direccion destino: #{e.direccion.direccion},
-       Cadete asignado: #{e.cadete.nil? ? '-' : e.cadete.nombre}, Estado: #{e.estado.estado}"
+      informacion_envio = { 'text': "Envio: #{e.id}, Tamaño: #{e.tamanio}, Direccion destino: #{e.direccion.direccion},
+       Cadete asignado: #{e.cadete.nil? ? '-' : e.cadete.nombre}, Estado: #{e.estado.estado}" }
       historial << informacion_envio
     end
+    # {'texts': historial}
     historial
   end
 
