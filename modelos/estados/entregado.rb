@@ -18,4 +18,8 @@ class Entregado < Estado
   def cambiar_en_camino
     self
   end
+
+  def cambiar_entregado
+    raise CambioEstadoInvalidoError, 'El envio ya ha sido entregado.'
+  end
 end
