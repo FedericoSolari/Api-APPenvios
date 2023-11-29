@@ -66,5 +66,11 @@ describe 'Vehiculos' do
       tamanio_esperado = %w[chico mediano]
       expect(vehiculo.tamanios_permitidos).to eq(tamanio_esperado)
     end
+
+    xit 'Vehiculo auto puede cargar todos los tamanios' do
+      vehiculo = Auto.new
+      tamanio_esperado = %w[chico mediano grande]
+      expect(vehiculo.tamanios_permitidos).to eq(tamanio_esperado)
+    end
   end
 end
