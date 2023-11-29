@@ -6,4 +6,8 @@ class Moto < Vehiculo
   def initialize
     super(VEHICULO)
   end
+
+  def tamanios_permitidos
+    %w[chico mediano]
+  end
 end
