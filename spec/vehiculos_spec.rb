@@ -53,4 +53,12 @@ describe 'Vehiculos' do
       expect(vehiculo_creado.vehiculo).to eq vehiculo_a_crear
     end
   end
+
+  describe 'Tamanios permitidos ' do
+    xit 'Vehiculo bicicleta solamente puede cargar tamanio chico' do
+      vehiculo = Bicicleta.new
+      tamanio_esperado = ['chico']
+      expect(vehiculo.tamanios_permitidos).to eq tamanio_esperado
+    end
+  end
 end
