@@ -9,20 +9,20 @@ describe 'envio' do
 
   describe 'valido?' do
     it 'Se crea exitosamente un envio al ingresar todos los datos correctamente' do
-      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, Clasico.new)
+      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', 'CP: 1018'), cliente, Clasico.new)
 
       expect(envio.valid?).to eq true
     end
 
     it 'Se crea exitosamente un envio al ingresarle un cadete' do
-      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, Clasico.new)
+      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', 'CP: 1018'), cliente, Clasico.new)
       envio.cadete = cadete
 
       expect(envio.valid?).to eq true
     end
 
     it 'Se obtiene correctamente el tiempo estimado del envio' do
-      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1018'), cliente, Clasico.new)
+      envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', 'CP: 1018'), cliente, Clasico.new)
       envio.cadete = cadete
 
       expect(envio.tiempo_estimado >= 0).to eq true
