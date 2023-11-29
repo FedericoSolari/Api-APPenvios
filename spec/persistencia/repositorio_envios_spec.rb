@@ -106,4 +106,18 @@ describe RepositorioEnvios do
     envios = repositorio.find_by_state_and_size('pendiente de asignacion', %w[grande mediano])
     expect(%w[grande mediano]).to include(envios.tamanio.tamanio)
   end
+
+  xit 'Se obtiene envio clasico buscando por su tipo' do
+    RepositorioClientes.new.save(cliente)
+    RepositorioCadetes.new.save(cadete)
+
+    repositorio = described_class.new
+    repositorio.delete_all
+
+    envio = Envio.new(Grande.new, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
+    repositorio.save(envio)
+
+    envio_esperado = repositorio.find_by_type('clasico')
+    expect(envio_esperado.nil?).to eq true
+  end
 end
