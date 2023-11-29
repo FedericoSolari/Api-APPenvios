@@ -6,4 +6,8 @@ class Bicicleta < Vehiculo
   def initialize
     super(VEHICULO)
   end
+
+  def tamanios_permitidos
+    %w[chico]
+  end
 end

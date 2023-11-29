@@ -4,4 +4,8 @@ class Vehiculo
   def initialize(vehiculo)
     @vehiculo = vehiculo
   end
+
+  def tamanios_permitidos
+    raise NotImplementedError, 'Debería ser implementado por una clase hija'
+  end
 end
