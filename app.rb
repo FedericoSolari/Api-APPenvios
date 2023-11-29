@@ -29,9 +29,12 @@ get '/version' do
 end
 
 post '/reset' do
-  RepositorioEnvios.new.delete_all
-  RepositorioClientes.new.delete_all
-  RepositorioCadetes.new.delete_all
+  if ENV['APP_ENV'] == 'test'
+    RepositorioEnvios.new.delete_all
+    RepositorioClientes.new.delete_all
+    RepositorioCadetes.new.delete_all
+    RepositorioDirecciones.new.delete_all
+  end
 end
 
 post '/clientes' do

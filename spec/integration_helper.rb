@@ -19,5 +19,6 @@ RSpec.configure do |config|
     RepositorioEnvios.new.delete_all
     RepositorioClientes.new.delete_all
     RepositorioCadetes.new.delete_all
+    RepositorioDirecciones.new.delete_all
   end
 end
