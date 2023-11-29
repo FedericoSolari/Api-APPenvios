@@ -1,7 +1,7 @@
 Dado('que tengo {string}') do |string|
-  @cadete.vehiculo = string
+  @cadete.vehiculo = FabricaVehiculos.new.crear_vehiculo(string)
   RepositorioCadetes.new.save(@cadete)
-  @envio.cadete.vehiculo = string
+  @envio.cadete.vehiculo = FabricaVehiculos.new.crear_vehiculo(string)
   RepositorioEnvios.new.save(@envio)
 end
 

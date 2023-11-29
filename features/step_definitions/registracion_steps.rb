@@ -21,7 +21,7 @@ Entonces('deberia ver un mensaje {string}') do |mensaje|
 end
 
 Dado('que hay un cadete registrado con nombre {string}') do |nombre|
-  @cadete = Cadete.new(nombre, 'moto', 2)
+  @cadete = Cadete.new(nombre, Moto.new, 2)
   RepositorioCadetes.new.save(@cadete)
 end
 

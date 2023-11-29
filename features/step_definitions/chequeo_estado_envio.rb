@@ -8,7 +8,7 @@ Y('hay un envio con direccion {string}, {string}') do |direccion, codigo_postal|
 end
 
 Dado('que hay registrado un cadete') do
-  @cadete = Cadete.new('Juan', 'moto', 2)
+  @cadete = Cadete.new('Juan', Moto.new, 2)
   RepositorioCadetes.new.save(@cadete)
 end
 

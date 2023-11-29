@@ -25,7 +25,7 @@ class Envio
   def tiempo_estimado
     conector = FabricaConectorHereApiRoutes.crear_conector_here_api_routes(ENV['HERE_API_KEY'])
     duracion = conector.obtener_duracion_viaje(@cliente.direccion.latitud, @cliente.direccion.longitud,
-                                               @direccion.latitud, @direccion.longitud, @cadete.vehiculo)
+                                               @direccion.latitud, @direccion.longitud, @cadete.vehiculo.vehiculo)
     duracion.minutos
   end
 end

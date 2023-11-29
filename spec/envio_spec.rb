@@ -1,9 +1,10 @@
 require 'spec_helper'
 require_relative '../modelos/envio'
+require_relative '../modelos/vehiculos/moto'
 
 describe 'envio' do
   let(:cliente) { Cliente.new('Juan', Direccion.new('Av Las Heras 1232', 'CP: 1018'), 8) }
-  let(:cadete) { Cadete.new('Pedro', 'moto', 8) }
+  let(:cadete) { Cadete.new('Pedro', Moto.new, 8) }
   let(:tamanio) { Chico.new }
 
   describe 'valido?' do

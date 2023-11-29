@@ -3,10 +3,11 @@ require_relative '../../modelos/envio'
 require_relative '../../persistencia/repositorio_envios'
 require_relative '../../persistencia/repositorio_clientes'
 require_relative '../../excepciones/envio_no_encontrado_error'
+require_relative '../../modelos/vehiculos/moto'
 
 describe RepositorioEnvios do
   let(:cliente) { Cliente.new('Juan', Direccion.new('Cerrito 628', 'CP:1010'), 8) }
-  let(:cadete) { Cadete.new('Pedro', 'moto', 8) }
+  let(:cadete) { Cadete.new('Pedro', Moto.new, 8) }
   let(:tamanio) { Chico.new }
 
   it 'deberia guardar y asignar id al envio' do

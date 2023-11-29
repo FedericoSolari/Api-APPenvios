@@ -1,9 +1,10 @@
 require 'spec_helper'
 require_relative '../ayudantes/parseador_estado'
+require_relative '../modelos/vehiculos/moto'
 
 describe 'ParseadorEstados' do
   let(:cliente) { Cliente.new('Juan', Direccion.new('Av Las Heras 1232', 'CP: 1018'), 8) }
-  let(:cadete) { Cadete.new('Pedro', 'moto', 8) }
+  let(:cadete) { Cadete.new('Pedro', Moto.new, 8) }
   let(:tamanio) { Chico.new }
 
   it 'Devuelve mensaje "Tu envio (ID: 8) se encuentra pendiente de asignación" con estado pendiente de asignacion' do
