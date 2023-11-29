@@ -3,7 +3,7 @@ class Cadete
   include ActiveModel::Validations
 
   attr_accessor :id
-  attr_accessor :id_cadete, :nombre, :vehiculo
+  attr_accessor :id_cadete, :nombre, :vehiculo, :fecha_creacion, :fecha_actualizacion
 
   validates :nombre, :vehiculo, :id_cadete, presence: true
 

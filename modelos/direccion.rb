@@ -6,7 +6,7 @@ require_relative '../excepciones/ciudad_incorrecta_error'
 class Direccion
   include ActiveModel::Validations
 
-  attr_accessor :direccion, :codigo_postal, :latitud, :longitud, :id
+  attr_accessor :direccion, :codigo_postal, :latitud, :longitud, :id, :fecha_creacion, :fecha_actualizacion
 
   validates :direccion, :codigo_postal, presence: true
   validate :validar_direccion

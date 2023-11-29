@@ -3,7 +3,7 @@ class Cliente
   include ActiveModel::Validations
 
   attr_accessor :id
-  attr_accessor :id_cliente, :nombre, :direccion
+  attr_accessor :id_cliente, :nombre, :direccion, :fecha_creacion, :fecha_actualizacion
 
   validates :nombre, :direccion, :id_cliente, presence: true
 

@@ -72,21 +72,26 @@ class AbstractRepository
     raise 'Subclass must implement'
   end
 
+  # def insert_changeset(a_record)
+  #   changeset(a_record)
+  # end
+
   def insert_changeset(a_record)
-    changeset(a_record)
+    changeset_with_timestamps(a_record).merge(fecha_creacion: Date.today)
   end
 
-  # def insert_changeset(a_record)
-  #   changeset_with_timestamps(a_record).merge(created_on: Date.today)
+  # def update_changeset(a_record)
+  #   changeset(a_record)
   # end
-  #
+
   def update_changeset(a_record)
-    changeset(a_record)
+    changeset_with_timestamps(a_record).merge(fecha_actualizacion: Date.today)
   end
-  #
-  # def changeset_with_timestamps(a_record)
-  #   changeset(a_record).merge(created_on: a_record.created_on, updated_on: a_record.updated_on)
-  # end
+
+  def changeset_with_timestamps(a_record)
+    changeset(a_record).merge(fecha_creacion: a_record.fecha_creacion,
+                              fecha_actualizacion: a_record.fecha_actualizacion)
+  end
 
   def class_name
     self.class.model_class
