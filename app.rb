@@ -11,6 +11,7 @@ require_relative './excepciones/cliente_no_encontrado_error'
 require_relative './excepciones/usuario_duplicado_error'
 require_relative './excepciones/envios_no_encontrados_error'
 require_relative './excepciones/cambio_estado_invalido_error'
+require_relative './excepciones/cadete_no_encontrado_error'
 require_relative './fabricas/fabrica_tamanios'
 require_relative './lib/version'
 Dir[File.join(__dir__, 'dominio', '*.rb')].each { |file| require file }
@@ -142,6 +143,8 @@ put '/envios/asignar' do
   handle_response(200, "Te asignamos el siguiente envio con ID *#{envio.id}*. \nRetirar el envio en *_#{envio.cliente.direccion.direccion}, #{envio.cliente.direccion.codigo_postal}_*. \nEntregar el envio en *_#{envio.direccion.direccion}, #{envio.direccion.codigo_postal}_*")
 rescue EnvioNoEncontradoError
   handle_response(400, 'No hay envios disponibles')
+rescue CadeteNoEncontradoError => e
+  handle_response(404, e.message)
 rescue CambioEstadoInvalidoError => e
   handle_response(400, e.message)
 rescue StandardError => e

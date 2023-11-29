@@ -65,7 +65,8 @@ class ServicioEnvio
     envios.each do |e|
       informacion_envio = { 'text': "Envio: *ID #{e.id}*, \nTamaño: *#{e.tamanio.tamanio}*, \n" \
       "Direccion destino: *#{e.direccion.direccion}*, \n" \
-       "Cadete asignado: *#{e.cadete.nil? ? '-' : e.cadete.nombre}*, \nEstado: *#{e.estado.estado}*\n" }
+       "Cadete asignado: *#{e.cadete.nil? ? '-' : e.cadete.nombre}*, \nEstado: *#{e.estado.estado}*, \n" \
+        "Tipo: *#{e.tipo.tipo}*" }
       historial << informacion_envio
     end
     historial
