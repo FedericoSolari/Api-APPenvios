@@ -14,19 +14,19 @@ describe 'cadete' do
   end
 
   describe 'Envios que puede aceptar el cadete' do
-    xit 'Cadete con moto retorna los envios que puede aceptar' do
+    it 'Cadete con moto retorna los envios que puede aceptar' do
       cadete = Cadete.new('Pedro', Moto.new, 8)
       tamanios_esperado = %w[chico mediano]
       expect(cadete.tamanios_aceptados).to eq tamanios_esperado
     end
 
-    xit 'Cadete con auto retorna los envios que puede aceptar' do
+    it 'Cadete con auto retorna los envios que puede aceptar' do
       cadete = Cadete.new('Pedro', Auto.new, 8)
       tamanios_esperado = %w[chico mediano grande]
       expect(cadete.tamanios_aceptados).to eq tamanios_esperado
     end
 
-    xit 'Cadete con bicicleta retorna los envios que puede aceptar' do
+    it 'Cadete con bicicleta retorna los envios que puede aceptar' do
       cadete = Cadete.new('Pedro', Bicicleta.new, 8)
       tamanios_esperado = %w[chico]
       expect(cadete.tamanios_aceptados).to eq tamanios_esperado

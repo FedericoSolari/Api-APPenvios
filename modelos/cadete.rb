@@ -13,4 +13,8 @@ class Cadete
     @id_cadete = id_cadete
     @id = id
   end
+
+  def tamanios_aceptados
+    @vehiculo.tamanios_permitidos
+  end
 end
