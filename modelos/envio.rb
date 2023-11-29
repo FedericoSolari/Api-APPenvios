@@ -11,7 +11,7 @@ class Envio
   attr_accessor :id, :cadete
   attr_accessor :tamanio, :direccion, :cliente, :estado, :duenio, :tipo
 
-  validates :direccion, presence: true
+  validates :direccion, :tamanio, :tipo, :cliente, presence: true
   def initialize(tamanio, direccion, cliente, tipo, id = nil)
     @tamanio = tamanio
     @direccion = direccion

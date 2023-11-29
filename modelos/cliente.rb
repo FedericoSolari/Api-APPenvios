@@ -5,7 +5,7 @@ class Cliente
   attr_accessor :id
   attr_accessor :id_cliente, :nombre, :direccion
 
-  validates :nombre, presence: true
+  validates :nombre, :direccion, :id_cliente, presence: true
 
   def initialize(nombre, direccion, id_cliente, id = nil)
     @nombre = nombre

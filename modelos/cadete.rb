@@ -5,7 +5,7 @@ class Cadete
   attr_accessor :id
   attr_accessor :id_cadete, :nombre, :vehiculo
 
-  validates :nombre, presence: true
+  validates :nombre, :vehiculo, :id_cadete, presence: true
 
   def initialize(nombre, vehiculo, id_cadete, id = nil)
     @nombre = nombre
