@@ -121,43 +121,43 @@ describe ValidadorParametros do
   end
 
   describe 'Creación de envio' do
-    xit 'Debería lanzar excepción de parametros invalidos cuando falta el tipo' do
+    it 'Debería lanzar excepción de parametros invalidos cuando falta el tipo' do
       parametros_enviados = { tamanio: 'chico', direccion: 'Cerrito 628', codigo_postal: 'CP: 1010', id_cliente: 8 }.to_json
       parametros = JSON.parse(parametros_enviados)
 
-      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
+      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tipo\>, \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
     end
 
     it 'Debería lanzar excepción de parametros invalidos cuando falta el tamaño' do
       parametros_enviados = { tipo: 'clasico', direccion: 'Cerrito 628', codigo_postal: 'CP: 1010', id_cliente: 8 }.to_json
       parametros = JSON.parse(parametros_enviados)
 
-      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
+      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tipo\>, \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
     end
 
     it 'Debería lanzar excepción de parametros invalidos cuando falta la direccion' do
       parametros_enviados = { tipo: 'clasico', tamanio: 'chico', codigo_postal: 'CP: 1010', id_cliente: 8 }.to_json
       parametros = JSON.parse(parametros_enviados)
 
-      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
+      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tipo\>, \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
     end
 
     it 'Debería lanzar excepción de parametros invalidos cuando falta el código postal' do
       parametros_enviados = { tipo: 'clasico', tamanio: 'chico', direccion: 'Cerrito 628', id_cliente: 8 }.to_json
       parametros = JSON.parse(parametros_enviados)
 
-      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
+      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tipo\>, \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
     end
 
     it 'Debería lanzar excepción de parametros invalidos cuando falta el id del cliente' do
       parametros_enviados = { tipo: 'clasico', tamanio: 'chico', direccion: 'Cerrito 628', codigo_postal: 'CP: 1010' }.to_json
       parametros = JSON.parse(parametros_enviados)
 
-      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
+      expect { described_class.new.validar_creacion_envio(parametros) }.to raise_error(ParametrosInvalidosError, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tipo\>, \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
     end
 
     it 'Debería devolver true cuando estan todos los parametros correctamente' do
-      parametros_enviados = { tamanio: 'chico', direccion: 'Cerrito 628', codigo_postal: 'CP: 1010', id_cliente: 8 }.to_json
+      parametros_enviados = { tipo: 'clasico', tamanio: 'chico', direccion: 'Cerrito 628', codigo_postal: 'CP: 1010', id_cliente: 8 }.to_json
       parametros = JSON.parse(parametros_enviados)
 
       expect(described_class.new.validar_creacion_envio(parametros)).to eq true

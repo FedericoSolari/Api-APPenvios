@@ -35,7 +35,7 @@ describe 'Servicios' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
-      parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio = { 'tipo' => 'clasico', 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
       expect(envio.valid?).to eq true
@@ -45,7 +45,7 @@ describe 'Servicios' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
-      parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio = { 'tipo' => 'clasico', 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
       parametros_cadete = { 'nombre' => 'fede', 'vehiculo' => 'moto', 'id_cadete' => 1 }
@@ -61,7 +61,7 @@ describe 'Servicios' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
-      parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio = { 'tipo' => 'clasico', 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
       parametros_envio = { 'id' => envio.id, 'id_cliente' => 8 }
@@ -74,7 +74,7 @@ describe 'Servicios' do
       parametros_cliente = { 'nombre' => 'juan', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
-      parametros_envio = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio = { 'tipo' => 'clasico', 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio = ServicioEnvio.agregar_envio(parametros_envio)
 
       envio_actualizado = ServicioEnvio.actualizar_estado(envio.id, 'asignado')
@@ -87,10 +87,10 @@ describe 'Servicios' do
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
       # creo dos envios
-      parametros_envio1 = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio1 = { 'tipo' => 'clasico', 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioEnvio.agregar_envio(parametros_envio1)
 
-      parametros_envio2 = { 'tamanio' => 'grande', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio2 = { 'tipo' => 'clasico', 'tamanio' => 'grande', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioEnvio.agregar_envio(parametros_envio2)
 
       historial = ServicioEnvio.historial_de_envios(parametros_envio1['id_cliente'])
@@ -103,10 +103,10 @@ describe 'Servicios' do
       ServicioUsuarios.agregar_cliente(parametros_cliente)
 
       # creo dos envios
-      parametros_envio1 = { 'tamanio' => 'grande', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio1 = { 'tipo' => 'clasico', 'tamanio' => 'grande', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       ServicioEnvio.agregar_envio(parametros_envio1)
 
-      parametros_envio2 = { 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
+      parametros_envio2 = { 'tipo' => 'clasico', 'tamanio' => 'chico', 'direccion' => 'Av Las Heras 1232', 'codigo_postal' => 'CP: 1018', 'id_cliente' => 8 }
       envio2 = ServicioEnvio.agregar_envio(parametros_envio2)
 
       parametros_cadete = { 'nombre' => 'fede', 'vehiculo' => 'bicicleta', 'id_cadete' => 1 }

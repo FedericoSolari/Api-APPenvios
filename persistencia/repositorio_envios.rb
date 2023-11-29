@@ -43,7 +43,7 @@ class RepositorioEnvios < AbstractRepository
     direccion = RepositorioDirecciones.new.find_by_id(a_hash[:id_direccion])
     cliente = RepositorioClientes.new.find_by_name(a_hash[:duenio])
     tamanio = FabricaTamanios.new.crear_tamanio(a_hash[:tamanio])
-    envio = Envio.new(tamanio, direccion, cliente, a_hash[:id])
+    envio = Envio.new(tamanio, direccion, cliente, Clasico.new, a_hash[:id])
     envio.estado = FabricaEstados.new.crear_estado(a_hash[:estado])
     return envio if a_hash[:id_cadete].nil?
 

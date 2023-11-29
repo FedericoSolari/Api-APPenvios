@@ -7,6 +7,6 @@ Característica: Como cliente quiero realizar envios
       Dado que estoy registrado como cliente
       Y que no hay envios creados
 
-    Escenario: Envio creado con exito con comando '/nuevo-envio Cerrito 628, CP:1049'
-      Cuando envio el mensaje '/nuevo-envio Chico, Cerrito 628, CP: 1049'
+    Escenario: Envio creado con exito con comando '/nuevo-envio Clasico, Cerrito 628, CP:1049'
+      Cuando envio el mensaje '/nuevo-envio Clasico, Chico, Cerrito 628, CP: 1049'
       Entonces deberia ver un mensaje que incluya "Se registró tu envio con el ID"

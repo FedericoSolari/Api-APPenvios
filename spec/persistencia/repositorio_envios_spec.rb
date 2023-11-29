@@ -13,7 +13,7 @@ describe RepositorioEnvios do
   it 'deberia guardar y asignar id al envio' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
-    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     envio.cadete = cadete
     described_class.new.save(envio)
     expect(envio.id).not_to be_nil
@@ -26,12 +26,12 @@ describe RepositorioEnvios do
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio_asignado = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio_asignado = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     envio_asignado.cadete = cadete
     envio_asignado.estado = FabricaEstados.new.crear_estado('asignado')
     repositorio.save(envio_asignado)
 
-    envio_sin_asignar = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio_sin_asignar = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio_sin_asignar)
 
     envio_encontrado = repositorio.find_by_state('pendiente de asignacion')
@@ -52,9 +52,9 @@ describe RepositorioEnvios do
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio1 = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio1 = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio1)
-    envio2 = Envio.new(Grande.new, Direccion.new('moreno 1248', '1088'), cliente)
+    envio2 = Envio.new(Grande.new, Direccion.new('moreno 1248', '1088'), cliente, Clasico.new)
     repositorio.save(envio2)
 
     historial = repositorio.client_record(cliente.nombre)
@@ -68,7 +68,7 @@ describe RepositorioEnvios do
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio)
 
     envios = repositorio.find_by_state_and_size('pendiente de asignacion', ['chico'])
@@ -82,9 +82,9 @@ describe RepositorioEnvios do
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio)
-    envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio2)
 
     envios = repositorio.find_by_state_and_size('pendiente de asignacion', %w[chico mediano])
@@ -98,9 +98,9 @@ describe RepositorioEnvios do
     repositorio = described_class.new
     repositorio.delete_all
 
-    envio = Envio.new(Grande.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio = Envio.new(Grande.new, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio)
-    envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente)
+    envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio2)
 
     envios = repositorio.find_by_state_and_size('pendiente de asignacion', %w[grande mediano])

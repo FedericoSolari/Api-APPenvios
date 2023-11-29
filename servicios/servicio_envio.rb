@@ -1,12 +1,14 @@
 Dir[File.join(__dir__, 'persistencia', '*.rb')].each { |file| require file }
 require_relative '../excepciones/envios_no_encontrados_error'
 require_relative './servicio_direccion'
+require_relative '../fabricas/fabrica_de_tipos'
 
 class ServicioEnvio
   def self.agregar_envio(parametros_envio)
+    tipo_de_envio = FabricaTipoEnvios.new.crear_tipo_de_envio(parametros_envio['tipo'])
     direccion = ServicioDireccion.obtener_direccion(parametros_envio['direccion'], parametros_envio['codigo_postal'])
     envio = Envio.new(FabricaTamanios.new.crear_tamanio(parametros_envio['tamanio']), direccion,
-                      RepositorioClientes.new.find_last_created_with_id(parametros_envio['id_cliente']))
+                      RepositorioClientes.new.find_last_created_with_id(parametros_envio['id_cliente']), tipo_de_envio)
     RepositorioEnvios.new.save(envio)
     envio
   end

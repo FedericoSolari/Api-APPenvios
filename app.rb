@@ -99,7 +99,7 @@ post '/envios' do
   rescue TamanioIncorrectoError
     handle_response(400, 'Tamaño indicado incorrecto, los tamaños validos son: Chico, Mediano o Grande')
   rescue ParametrosInvalidosError
-    handle_response(400, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
+    handle_response(400, 'Verifique haber ingresado los datos necesarios, el formato correcto es: \<Tipo\>, \<Tamaño\>, \<Domicilio\> \<Altura\>, CP: \<codigo postal\>')
   rescue StandardError => e
     customer_logger.error('Error inesperado', e.message)
     handle_response(500, 'Error interno del servidor')
