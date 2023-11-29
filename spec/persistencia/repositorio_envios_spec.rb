@@ -50,7 +50,7 @@ describe RepositorioEnvios do
     RepositorioCadetes.new.save(cadete)
 
     repositorio = described_class.new
-    repositorio.delete_all
+    # repositorio.delete_all
 
     envio1 = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio1)

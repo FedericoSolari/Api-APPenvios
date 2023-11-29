@@ -29,7 +29,7 @@ class ValidadorParametros
   end
 
   def validar_vehiculo(vehiculo)
-    unless VEHICULOS_VALIDOS.include?(vehiculo)
+    unless VEHICULOS_VALIDOS.include?(vehiculo.downcase)
       raise ParametrosInvalidosError,
             'Nuestra flota no acepta ese tipo de vehiculo, los vehiculos permitidos son *auto*, *moto* o *bicicleta*.'
     end

@@ -46,6 +46,7 @@ class RepositorioEnvios < AbstractRepository
 
   protected
 
+  # No encontramos manera de reducir la complejidad algoritmica
   # rubocop:disable Metrics/AbcSize
   def load_object(a_hash)
     direccion = RepositorioDirecciones.new.find_by_id(a_hash[:id_direccion])
@@ -59,17 +60,17 @@ class RepositorioEnvios < AbstractRepository
     envio.cadete = RepositorioCadetes.new.find_by_id(a_hash[:id_cadete])
     envio
   end
+  # rubocop:enable Metrics/AbcSize
 
   def changeset(envio)
     {
       tamanio: envio.tamanio.tamanio,
       id_direccion: envio.direccion.id,
-      id_cliente: envio.cliente.id_cliente.to_i,
-      id_cadete: envio.cadete&.id_cadete.to_i,
+      id_cliente: envio.cliente.id_cliente,
+      id_cadete: envio.cadete&.id_cadete,
       estado: envio.estado.estado,
       duenio: envio.cliente.nombre.downcase,
-      tipo: envio.tipo.tipo.downcase
+      tipo: envio.tipo.tipo
     }
   end
-  # rubocop:enable Metrics/AbcSize
 end

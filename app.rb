@@ -41,8 +41,8 @@ post '/clientes' do
   begin
     if ValidadorParametros.new.validar_registro_cliente(parametros_cliente)
       cliente = ServicioUsuarios.agregar_cliente(parametros_cliente)
-      customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre}")
-      handle_response(201, "Bienvenid@ *#{cliente.nombre}*. \nLas coordenadas de tu domicilio son: " \
+      customer_logger.info("Cliente registrado exitosamente: #{cliente.nombre.capitalize}")
+      handle_response(201, "Bienvenid@ *#{cliente.nombre.capitalize}*. \nLas coordenadas de tu domicilio son: " \
       "\nLat: _#{cliente.direccion.latitud}_ \nLng: _#{cliente.direccion.longitud}_")
     end
   rescue UsuarioDuplicadoError
@@ -66,7 +66,7 @@ post '/cadetes' do
   begin
     if ValidadorParametros.new.validar_registro_cadete(parametros_cadete)
       cadete = ServicioUsuarios.agregar_cadete(parametros_cadete)
-      handle_response(201, "Bienvenid@ a la flota *#{cadete.nombre}*")
+      handle_response(201, "Bienvenid@ a la flota *#{cadete.nombre.capitalize}*")
     end
   rescue UsuarioDuplicadoError
     handle_response(400, 'Ya hay un usuario registrado con ese nombre')
