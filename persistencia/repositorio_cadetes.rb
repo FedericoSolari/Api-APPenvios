@@ -8,7 +8,7 @@ class RepositorioCadetes < AbstractRepository
 
   def find_by_id(id_cadete)
     cadete = dataset.where(id_cadete:).order_append(Sequel.asc(:id)).last
-    raise CadeteNoEncontradoError, "No se encontró cadete registrado" if cadete.nil?
+    raise CadeteNoEncontradoError, 'No se encontró cadete registrado' if cadete.nil?
 
     load_object(cadete)
   end
