@@ -9,7 +9,7 @@ class Envio
   include ActiveModel::Validations
 
   attr_accessor :id, :cadete
-  attr_accessor :tamanio, :direccion, :cliente, :estado, :duenio
+  attr_accessor :tamanio, :direccion, :cliente, :estado, :duenio, :tipo
 
   validates :direccion, presence: true
   def initialize(tamanio, direccion, cliente, tipo, id = nil)

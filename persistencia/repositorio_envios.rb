@@ -1,6 +1,7 @@
 require_relative './abstract_repository'
 require_relative '../fabricas/fabrica_estados'
 require_relative '../fabricas/fabrica_tamanios'
+require_relative '../fabricas/fabrica_de_tipos'
 require_relative '../excepciones/envio_no_encontrado_error'
 require_relative '../excepciones/envios_no_encontrados_error'
 require_relative '../excepciones/objeto_no_encontrado_error'
@@ -30,6 +31,13 @@ class RepositorioEnvios < AbstractRepository
     load_collection(envios)
   end
 
+  def find_by_type(tipo)
+    envio = dataset.where(tipo:).first
+    raise EnviosNoEncontradosError, "No se encontraron envíos con el tipo #{tipo}" if envio.nil?
+
+    load_object(envio)
+  end
+
   def find(id)
     super(id)
   rescue ObjetoNoEncontrado
@@ -43,14 +51,14 @@ class RepositorioEnvios < AbstractRepository
     direccion = RepositorioDirecciones.new.find_by_id(a_hash[:id_direccion])
     cliente = RepositorioClientes.new.find_by_name(a_hash[:duenio])
     tamanio = FabricaTamanios.new.crear_tamanio(a_hash[:tamanio])
-    envio = Envio.new(tamanio, direccion, cliente, Clasico.new, a_hash[:id])
+    tipo_de_envio = FabricaTipoEnvios.new.crear_tipo_de_envio(a_hash[:tipo])
+    envio = Envio.new(tamanio, direccion, cliente, tipo_de_envio, a_hash[:id])
     envio.estado = FabricaEstados.new.crear_estado(a_hash[:estado])
     return envio if a_hash[:id_cadete].nil?
 
     envio.cadete = RepositorioCadetes.new.find_by_id(a_hash[:id_cadete])
     envio
   end
-  # rubocop:enable Metrics/AbcSize
 
   def changeset(envio)
     {
@@ -59,7 +67,9 @@ class RepositorioEnvios < AbstractRepository
       id_cliente: envio.cliente.id_cliente.to_i,
       id_cadete: envio.cadete&.id_cadete.to_i,
       estado: envio.estado.estado,
-      duenio: envio.cliente.nombre.downcase
+      duenio: envio.cliente.nombre.downcase,
+      tipo: envio.tipo.tipo.downcase
     }
   end
+  # rubocop:enable Metrics/AbcSize
 end

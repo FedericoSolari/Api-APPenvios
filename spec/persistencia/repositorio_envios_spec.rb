@@ -107,7 +107,7 @@ describe RepositorioEnvios do
     expect(%w[grande mediano]).to include(envios.tamanio.tamanio)
   end
 
-  xit 'Se obtiene envio clasico buscando por su tipo' do
+  it 'Se obtiene envio clasico buscando por su tipo' do
     RepositorioClientes.new.save(cliente)
     RepositorioCadetes.new.save(cadete)
 
@@ -118,6 +118,6 @@ describe RepositorioEnvios do
     repositorio.save(envio)
 
     envio_esperado = repositorio.find_by_type('clasico')
-    expect(envio_esperado.nil?).to eq true
+    expect(envio_esperado.nil?).to eq false
   end
 end
