@@ -67,7 +67,7 @@ describe 'Vehiculos' do
       expect(vehiculo.tamanios_permitidos).to eq(tamanio_esperado)
     end
 
-    xit 'Vehiculo auto puede cargar todos los tamanios' do
+    it 'Vehiculo auto puede cargar todos los tamanios' do
       vehiculo = Auto.new
       tamanio_esperado = %w[chico mediano grande]
       expect(vehiculo.tamanios_permitidos).to eq(tamanio_esperado)

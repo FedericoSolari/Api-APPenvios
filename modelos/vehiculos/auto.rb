@@ -6,4 +6,8 @@ class Auto < Vehiculo
   def initialize
     super(VEHICULO)
   end
+
+  def tamanios_permitidos
+    %w[chico mediano grande]
+  end
 end
