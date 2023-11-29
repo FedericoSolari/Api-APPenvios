@@ -71,7 +71,7 @@ describe RepositorioEnvios do
     envio = Envio.new(tamanio, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio)
 
-    envios = repositorio.find_by_state_and_size('pendiente de asignacion', ['chico'])
+    envios = repositorio.find_with_filter('pendiente de asignacion', ['chico'], 'clasico')
     expect(['chico']).to include(envios.tamanio.tamanio)
   end
 
@@ -87,7 +87,7 @@ describe RepositorioEnvios do
     envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio2)
 
-    envios = repositorio.find_by_state_and_size('pendiente de asignacion', %w[chico mediano])
+    envios = repositorio.find_with_filter('pendiente de asignacion', %w[chico mediano], 'clasico')
     expect(%w[chico mediano]).to include(envios.tamanio.tamanio)
   end
 
@@ -103,7 +103,7 @@ describe RepositorioEnvios do
     envio2 = Envio.new(Mediano.new, Direccion.new('Av Las Heras 1232', '1425'), cliente, Clasico.new)
     repositorio.save(envio2)
 
-    envios = repositorio.find_by_state_and_size('pendiente de asignacion', %w[grande mediano])
+    envios = repositorio.find_with_filter('pendiente de asignacion', %w[grande mediano], 'clasico')
     expect(%w[grande mediano]).to include(envios.tamanio.tamanio)
   end
 

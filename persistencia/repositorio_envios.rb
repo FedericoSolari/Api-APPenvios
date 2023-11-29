@@ -17,8 +17,8 @@ class RepositorioEnvios < AbstractRepository
     load_object(envio)
   end
 
-  def find_by_state_and_size(estado, tamanios)
-    envio = dataset.where(estado:, tamanio: tamanios).first
+  def find_with_filter(estado, tamanios, tipo)
+    envio = dataset.where(estado:, tamanio: tamanios, tipo:).first
     raise EnvioNoEncontradoError, "No se encontraron envios con estado #{estado} y tamanio/s #{tamanios}" if envio.nil?
 
     load_object(envio)
