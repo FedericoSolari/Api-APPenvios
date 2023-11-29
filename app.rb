@@ -34,6 +34,8 @@ post '/reset' do
     RepositorioClientes.new.delete_all
     RepositorioCadetes.new.delete_all
     RepositorioDirecciones.new.delete_all
+  else
+    handle_response(401, 'No estas autorizado para realizar esta accion')
   end
 end
 
